@@ -4,6 +4,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import FeaturesSection from './components/FeaturesSection'
 import Devices from './components/Devices'
+import DownloadLinksSection from './components/DownloadLinksSection'
 import PricingCTA from './components/PricingCTA'
 import FAQ from './components/FAQ'
 import Footer from './components/Footer'
@@ -114,6 +115,7 @@ export default function App() {
         <Header ref={headerRef} />
         <main>
           <Hero ref={heroRef} />
+          <DownloadLinksSection />
           <FeaturesSection ref={featuresRef} />
           <Devices ref={devicesRef} />
           <PricingCTA ref={pricingRef} />
