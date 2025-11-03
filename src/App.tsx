@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import FeaturesSection from './components/FeaturesSection'
@@ -9,6 +10,8 @@ import PricingCTA from './components/PricingCTA'
 import FAQ from './components/FAQ'
 import Footer from './components/Footer'
 import { ThemeProvider } from './theme'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
   const headerRef = useRef<HTMLElement>(null)
@@ -20,92 +23,148 @@ export default function App() {
   const footerRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    // Header animation
+    const animations: gsap.core.Tween[] = []
+
     if (headerRef.current) {
-      gsap.fromTo(headerRef.current.children, 
-        { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out', scrollTrigger: { trigger: headerRef.current, start: 'top 80%' } }
-      )
+      const headerChildren = Array.from(headerRef.current.children)
+      if (headerChildren.length) {
+        animations.push(
+          gsap.fromTo(
+            headerChildren,
+            { opacity: 0, y: -20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: headerRef.current, start: 'top 80%' },
+            }
+          )
+        )
+      }
     }
 
-    // Hero animation
     if (heroRef.current) {
-      gsap.fromTo(heroRef.current.querySelector('h1'), 
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power2.out', scrollTrigger: { trigger: heroRef.current, start: 'top 80%' } }
-      )
-      gsap.fromTo(heroRef.current.querySelector('p'), 
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.2, ease: 'power2.out', scrollTrigger: { trigger: heroRef.current, start: 'top 80%' } }
-      )
-      gsap.fromTo(heroRef.current.querySelector('form'), 
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 1, delay: 0.4, ease: 'power2.out', scrollTrigger: { trigger: heroRef.current, start: 'top 80%' } }
-      )
+      const heroHeadline = heroRef.current.querySelector('h1')
+      if (heroHeadline) {
+        animations.push(
+          gsap.fromTo(heroHeadline, { opacity: 0, y: 50 }, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: heroRef.current, start: 'top 80%' },
+          })
+        )
+      }
+
+      const heroParagraph = heroRef.current.querySelector('p')
+      if (heroParagraph) {
+        animations.push(
+          gsap.fromTo(heroParagraph, { opacity: 0, y: 30 }, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.2,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: heroRef.current, start: 'top 80%' },
+          })
+        )
+      }
+
+      const heroButtons = heroRef.current.querySelectorAll('a')
+      if (heroButtons.length) {
+        animations.push(
+          gsap.fromTo(heroButtons, { opacity: 0, y: 20 }, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.3,
+            stagger: 0.15,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: heroRef.current, start: 'top 80%' },
+          })
+        )
+      }
     }
 
-    // Features animation
-    if (featuresRef.current) {
-      gsap.fromTo(featuresRef.current.querySelector('h2'), 
-        { opacity: 0, x: -50 },
-        { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: featuresRef.current, start: 'top 80%' } }
-      )
-      gsap.fromTo(featuresRef.current.querySelector('p'), 
-        { opacity: 0, x: -30 },
-        { opacity: 1, x: 0, duration: 0.8, delay: 0.1, ease: 'power2.out', scrollTrigger: { trigger: featuresRef.current, start: 'top 80%' } }
-      )
-      gsap.fromTo(featuresRef.current.querySelectorAll('.feature-item'), 
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', scrollTrigger: { trigger: featuresRef.current, start: 'top 80%' } }
-      )
-    }
-
-    // Devices animation
-    if (devicesRef.current) {
-      gsap.fromTo(devicesRef.current.querySelector('h2'), 
-        { opacity: 0, x: 50 },
-        { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: devicesRef.current, start: 'top 80%' } }
-      )
-      gsap.fromTo(devicesRef.current.querySelector('p'), 
-        { opacity: 0, x: 30 },
-        { opacity: 1, x: 0, duration: 0.8, delay: 0.1, ease: 'power2.out', scrollTrigger: { trigger: devicesRef.current, start: 'top 80%' } }
-      )
-      gsap.fromTo(devicesRef.current.querySelectorAll('.device-item'), 
-        { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1, ease: 'back.out(1.7)', scrollTrigger: { trigger: devicesRef.current, start: 'top 80%' } }
-      )
-    }
-
-    // Pricing animation
     if (pricingRef.current) {
-      gsap.fromTo(pricingRef.current.querySelector('h2'), 
-        { opacity: 0, y: -30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: pricingRef.current, start: 'top 80%' } }
-      )
-      gsap.fromTo(pricingRef.current.querySelectorAll('.pricing-card'), 
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power2.out', scrollTrigger: { trigger: pricingRef.current, start: 'top 80%' } }
-      )
+      const pricingHeading = pricingRef.current.querySelector('h2')
+      if (pricingHeading) {
+        animations.push(
+          gsap.fromTo(pricingHeading, { opacity: 0, y: -30 }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: pricingRef.current, start: 'top 80%' },
+          })
+        )
+      }
+
+      const pricingCards = pricingRef.current.querySelectorAll('.pricing-card')
+      if (pricingCards.length) {
+        animations.push(
+          gsap.fromTo(pricingCards, { opacity: 0, y: 50 }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: pricingRef.current, start: 'top 80%' },
+          })
+        )
+      }
     }
 
-    // FAQ animation
     if (faqRef.current) {
-      gsap.fromTo(faqRef.current.querySelector('h2'), 
-        { opacity: 0, scale: 0.9 },
-        { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: faqRef.current, start: 'top 80%' } }
-      )
-      gsap.fromTo(faqRef.current.querySelectorAll('details'), 
-        { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out', scrollTrigger: { trigger: faqRef.current, start: 'top 80%' } }
-      )
+      const faqHeading = faqRef.current.querySelector('h2')
+      if (faqHeading) {
+        animations.push(
+          gsap.fromTo(faqHeading, { opacity: 0, scale: 0.9 }, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: faqRef.current, start: 'top 80%' },
+          })
+        )
+      }
+
+      const faqDetails = faqRef.current.querySelectorAll('details')
+      if (faqDetails.length) {
+        animations.push(
+          gsap.fromTo(faqDetails, { opacity: 0, x: -20 }, {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: faqRef.current, start: 'top 80%' },
+          })
+        )
+      }
     }
 
-    // Footer animation
     if (footerRef.current) {
-      gsap.fromTo(footerRef.current.children, 
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out', scrollTrigger: { trigger: footerRef.current, start: 'top 90%' } }
-      )
+      const footerChildren = Array.from(footerRef.current.children)
+      if (footerChildren.length) {
+        animations.push(
+          gsap.fromTo(footerChildren, { opacity: 0, y: 20 }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: footerRef.current, start: 'top 90%' },
+          })
+        )
+      }
+    }
+
+    return () => {
+      animations.forEach((anim) => anim.kill())
     }
   }, [])
 
