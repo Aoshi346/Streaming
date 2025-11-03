@@ -44,6 +44,25 @@ Ejecuta pruebas:
 npm test
 ```
 
+## Despliegue en GitHub Pages
+
+Este proyecto está configurado para desplegarse automáticamente en GitHub Pages cuando se hace push a la rama `main`.
+
+Para desplegar manualmente:
+
+```
+npm run deploy
+```
+
+El sitio estará disponible en: `https://Aoshi346.github.io/Streaming/`
+
+### Configuración de GitHub Pages
+
+1. Ve a la configuración del repositorio en GitHub
+2. Navega a Settings > Pages
+3. En "Source", selecciona "GitHub Actions"
+4. El workflow desplegará automáticamente los cambios cuando se haga push a `main`
+
 ## Notas
 
 - La marca, copia e imágenes son marcadores de posición—reemplaza con tus propios activos.
