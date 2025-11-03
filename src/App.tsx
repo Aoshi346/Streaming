@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import Features from './components/Features'
+import FeaturesSection from './components/FeaturesSection'
 import Devices from './components/Devices'
 import PricingCTA from './components/PricingCTA'
 import FAQ from './components/FAQ'
@@ -114,7 +114,7 @@ export default function App() {
         <Header ref={headerRef} />
         <main>
           <Hero ref={heroRef} />
-          <Features ref={featuresRef} />
+          <FeaturesSection ref={featuresRef} />
           <Devices ref={devicesRef} />
           <PricingCTA ref={pricingRef} />
           <FAQ ref={faqRef} />
