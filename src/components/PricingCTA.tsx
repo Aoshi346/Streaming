@@ -14,8 +14,8 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
       <div className="container-wrapper">
   <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-black/60 shadow-theme-strong">
           <div className="px-6 py-8 sm:px-10">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Elige un plan y comienza</h2>
-            <p className="mt-2 text-text-secondary">Todos los planes incluyen nuestro catálogo completo y recomendaciones personalizadas.</p>
+            <h2 className="gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl">Elige un plan y comienza</h2>
+            <p className="gsap-section-subtitle mt-2 text-text-secondary">Todos los planes incluyen nuestro catálogo completo y recomendaciones personalizadas.</p>
 
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               <div className="pricing-card rounded-xl border border-white/10 bg-white/[0.03] p-5 shadow-theme-soft transition-transform duration-200 hover:-translate-y-1 hover:border-brand/40">

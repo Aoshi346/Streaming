@@ -24,10 +24,10 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
       <div className="container-wrapper relative">
         <div className="py-20 md:py-28 lg:py-36">
           <div className="max-w-3xl text-center mx-auto">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-white">
+            <h1 className="gsap-section-title text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-white">
               Películas, series y más ilimitadas
             </h1>
-            <p className="mt-4 text-lg text-gray-300">
+            <p className="gsap-section-subtitle mt-4 text-lg text-gray-300">
               Mira en cualquier lugar. Cancela en cualquier momento.
             </p>
 

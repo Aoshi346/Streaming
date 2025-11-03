@@ -85,7 +85,6 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
     const prevID = prevIDRef.current
     if (prevID === currentID) return
 
-    const prevSpec = DEVICE_SPECS.find((d) => d.id === prevID)!
     const nextSpec = DEVICE_SPECS.find((d) => d.id === currentID)!
     const box = ratioBoxRef.current
     const outer = previewOuterRef.current
@@ -96,9 +95,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
       return
     }
 
-    const w = box.clientWidth || outer.clientWidth
-    const prevPad = 100 / parseAspect(prevSpec.aspectRatio)
-    const nextPad = 100 / parseAspect(nextSpec.aspectRatio)
+  // compute next paddingTop from aspect ratio; previous values not needed for animation start state
+  const nextPad = 100 / parseAspect(nextSpec.aspectRatio)
 
     if (prefersReducedMotion) {
       box.style.paddingTop = `${nextPad}%`
@@ -175,8 +173,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
         <div className="grid items-center gap-10 lg:grid-cols-2">
           {/* Left column: copy + tabs */}
           <div>
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Mira en cualquier dispositivo</h2>
-            <p className="mt-3 text-text-secondary/90">
+            <h2 className="gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl">Mira en cualquier dispositivo</h2>
+            <p className="gsap-section-subtitle mt-3 text-text-secondary/90">
               Transmite en tu smartphone, tablet, laptop y TV sin perder el ritmo. Cambia de dispositivos sin problemas y continúa justo donde lo dejaste.
             </p>
 

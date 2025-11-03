@@ -24,7 +24,7 @@ const FAQ = forwardRef<HTMLElement>((_, ref) => {
     <section ref={ref} id="faq" className="relative border-t border-white/10 py-16 sm:py-20">
       <div className="absolute inset-0 bg-section-spotlight opacity-80" aria-hidden />
       <div className="container-wrapper relative">
-        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Preguntas frecuentes</h2>
+  <h2 className="gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl">Preguntas frecuentes</h2>
         <div className="mt-6 space-y-3 text-text-secondary">
           {faqs.map(({ q, a }) => (
             <details key={q} className="group rounded-lg border border-white/10 bg-white/[0.05] p-4 transition duration-200 open:border-brand/40 open:bg-white/[0.09]">

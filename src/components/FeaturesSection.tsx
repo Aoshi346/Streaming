@@ -51,19 +51,16 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
     const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const ctx = gsap.context(() => {
-      const title = el.querySelector('.feature-title') as HTMLElement | null
-      const subtitle = el.querySelector('.feature-subtitle') as HTMLElement | null
-      const cardsNodeList = el.querySelectorAll('.feature-card')
-      const titleEls = [title, subtitle].filter(Boolean) as HTMLElement[]
-      const cards = Array.from(cardsNodeList) as HTMLElement[]
+    const cardsNodeList = el.querySelectorAll('.feature-card')
+    // Title and subtitle are handled globally by SectionTitleAnimator; animate cards only here
+    const cards = Array.from(cardsNodeList) as HTMLElement[]
 
       if (prefersReduced) {
-        if (titleEls.length) gsap.set(titleEls, { opacity: 1, y: 0 })
         if (cards.length) gsap.set(cards, { opacity: 1, y: 0 })
         return
       }
 
-      if (!titleEls.length && !cards.length) return
+      if (!cards.length) return
 
       ScrollTrigger.matchMedia({
         // mobile
@@ -74,8 +71,7 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
               start: 'top 80%',
             },
           })
-          if (titleEls.length) tl.from(titleEls, { opacity: 0, y: 16, duration: 0.4, ease: 'power2.out', stagger: 0.05 })
-          if (cards.length) tl.from(cards, { opacity: 0, y: 20, duration: 0.35, ease: 'power2.out', stagger: 0.08 }, '-=0.1')
+          if (cards.length) tl.from(cards, { opacity: 0, y: 20, duration: 0.35, ease: 'power2.out', stagger: 0.08 })
         },
         // tablet and up
         '(min-width: 768px)': function () {
@@ -85,8 +81,7 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
               start: 'top 80%',
             },
           })
-          if (titleEls.length) tl.from(titleEls, { opacity: 0, y: 18, duration: 0.5, ease: 'power2.out', stagger: 0.07 })
-          if (cards.length) tl.from(cards, { opacity: 0, y: 24, duration: 0.45, ease: 'power2.out', stagger: 0.15 }, '-=0.1')
+          if (cards.length) tl.from(cards, { opacity: 0, y: 24, duration: 0.45, ease: 'power2.out', stagger: 0.15 })
         },
       })
     }, sectionRef)
@@ -98,8 +93,8 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
     <section ref={sectionRef} id="features" className="relative border-t border-white/10 py-16 sm:py-20">
       <div className="absolute inset-0 bg-section-spotlight opacity-70" aria-hidden />
       <div className="container-wrapper relative">
-        <h2 className="feature-title text-2xl font-bold tracking-tight sm:text-3xl">Todo lo que necesitas para transmitir</h2>
-        <p className="feature-subtitle mt-2 max-w-2xl text-text-secondary/90">
+  <h2 className="feature-title gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl">Todo lo que necesitas para transmitir</h2>
+        <p className="feature-subtitle gsap-section-subtitle mt-2 max-w-2xl text-text-secondary/90">
           Desde tu sala de estar hasta en movimiento, FullVision mantiene tu entretenimiento fluyendo con poderosas
           características diseñadas para todos.
         </p>

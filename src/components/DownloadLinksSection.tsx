@@ -54,7 +54,7 @@ const DownloadLinksSection: React.FC = () => {
     const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (prefersReducedMotion) {
-      const targets = section.querySelectorAll('.gsap-title, .gsap-title-char, .gsap-description, .gsap-card, .label-char, .store-char')
+      const targets = section.querySelectorAll('.gsap-section-title, .gsap-section-subtitle, .gsap-card, .label-char, .store-char')
       if (targets.length) {
         gsap.set(targets, { opacity: 1, y: 0 })
       }
@@ -72,22 +72,9 @@ const DownloadLinksSection: React.FC = () => {
         },
       })
 
-      // Animate title with a creative character stagger
-      // Title characters: wave entrance with skew and subtle rotation for a flowing headline
-      tl.from('.gsap-title-char', {
-        opacity: 0,
-        y: 30,
-        skewX: 12,
-        rotation: 6,
-        scale: 0.96,
-        duration: 0.6,
-        stagger: { each: 0.06, from: 'center' },
-        ease: 'back.out(1.4)',
-      })
-        // Description fades/slides in a bit slower
-        .from('.gsap-description', { opacity: 0, y: -14, duration: 0.7, ease: 'power2.out' }, '-=0.45')
-        // Cards come in with a slightly slower timing for a more deliberate feel
-        .from('.gsap-card', {
+      // Title/subtitle are handled globally by SectionTitleAnimator
+      // Cards come in with a slightly slower timing for a more deliberate feel
+      tl.from('.gsap-card', {
           opacity: 0,
           y: 40,
           scale: 0.96,
@@ -95,8 +82,8 @@ const DownloadLinksSection: React.FC = () => {
           duration: 0.7,
           ease: 'power3.out',
         }, '-=0.35')
-        // Animate label characters with a gentle stagger
-        .from('.gsap-card .label-char', { opacity: 0, y: 10, stagger: 0.02, duration: 0.6, ease: 'power2.out' }, '-=0.45')
+  // Animate label characters with a gentle stagger
+  .from('.gsap-card .label-char', { opacity: 0, y: 10, stagger: 0.02, duration: 0.6, ease: 'power2.out' }, '-=0.45')
         // Animate store name characters slightly after labels
         .from('.gsap-card .store-char', { opacity: 0, y: 8, stagger: 0.03, duration: 0.45, ease: 'power2.out' }, '-=0.42')
     }, section)
@@ -117,12 +104,27 @@ const DownloadLinksSection: React.FC = () => {
 
     cards.forEach((card) => {
       const icon = card.querySelector<HTMLElement>('.platform-icon')
+      const labelChars = Array.from(card.querySelectorAll<HTMLElement>('.label-char'))
+      const storeChars = Array.from(card.querySelectorAll<HTMLElement>('.store-char'))
+      // prepare text animation timeline (paused) for hover — performs a subtle pop/bounce
+      let textTl: gsap.core.Timeline | null = null
+      if (labelChars.length || storeChars.length) {
+        textTl = gsap.timeline({ paused: true })
+        if (labelChars.length)
+          textTl.to(labelChars, { y: -6, scale: 1.02, stagger: 0.02, duration: 0.22, yoyo: true, repeat: 1, ease: 'power2.out' }, 0)
+        if (storeChars.length)
+          textTl.to(storeChars, { y: -4, scale: 1.01, stagger: 0.025, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.out' }, 0.04)
+      }
       const onEnter = () => {
         gsap.killTweensOf(card)
         gsap.to(card, { y: -8, scale: 1.03, duration: 0.3, ease: 'power2.out' })
         if (icon) {
           gsap.killTweensOf(icon)
           gsap.fromTo(icon, { y: -4 }, { y: 4, duration: 0.4, yoyo: true, repeat: 1, ease: 'power2.inOut' })
+        }
+        // play hover text animation (subtle pop) — don't hide text on leave
+        if (textTl) {
+          textTl.restart()
         }
       }
       const onLeave = () => {
@@ -131,6 +133,11 @@ const DownloadLinksSection: React.FC = () => {
         if (icon) {
           gsap.killTweensOf(icon)
           gsap.to(icon, { y: 0, scale: 1, duration: 0.18, ease: 'power2.out' })
+        }
+        // let the hover text animation finish naturally; ensure chars remain visible
+        if (textTl) {
+          // fast-forward to end to ensure they settle back to original
+          textTl.progress(1)
         }
       }
       card.addEventListener('mouseenter', onEnter)
@@ -147,12 +154,8 @@ const DownloadLinksSection: React.FC = () => {
   return (
     <section id="downloads" ref={sectionRef} className="border-t border-white/10 py-14 sm:py-18">
       <div className="container-wrapper">
-        <h2 className="gsap-title text-2xl font-bold tracking-tight sm:text-3xl mb-3">
-          {'Descarga la app'.split('').map((char, index) => (
-            <span key={index} className="gsap-title-char inline-block" style={{ whiteSpace: 'pre' }}>{char}</span>
-          ))}
-        </h2>
-        <p className="gsap-description mb-8 text-text-secondary/90">
+        <h2 className="gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl mb-3">Descarga la app</h2>
+        <p className="gsap-section-subtitle mb-8 text-text-secondary/90">
           Obtén FullVision en tu dispositivo favorito. Elige tu plataforma y descarga la aplicación oficial.
         </p>
         <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-4">

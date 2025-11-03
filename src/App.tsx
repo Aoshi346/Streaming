@@ -10,6 +10,7 @@ import PricingCTA from './components/PricingCTA'
 import FAQ from './components/FAQ'
 import Footer from './components/Footer'
 import { ThemeProvider } from './theme'
+import SectionTitleAnimator from './components/SectionTitleAnimator'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -46,33 +47,6 @@ export default function App() {
     }
 
     if (heroRef.current) {
-      const heroHeadline = heroRef.current.querySelector('h1')
-      if (heroHeadline) {
-        animations.push(
-          gsap.fromTo(heroHeadline, { opacity: 0, y: 50 }, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: heroRef.current, start: 'top 80%' },
-          })
-        )
-      }
-
-      const heroParagraph = heroRef.current.querySelector('p')
-      if (heroParagraph) {
-        animations.push(
-          gsap.fromTo(heroParagraph, { opacity: 0, y: 30 }, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.2,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: heroRef.current, start: 'top 80%' },
-          })
-        )
-      }
-
       const heroButtons = heroRef.current.querySelectorAll('a')
       if (heroButtons.length) {
         animations.push(
@@ -90,19 +64,6 @@ export default function App() {
     }
 
     if (pricingRef.current) {
-      const pricingHeading = pricingRef.current.querySelector('h2')
-      if (pricingHeading) {
-        animations.push(
-          gsap.fromTo(pricingHeading, { opacity: 0, y: -30 }, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: pricingRef.current, start: 'top 80%' },
-          })
-        )
-      }
-
       const pricingCards = pricingRef.current.querySelectorAll('.pricing-card')
       if (pricingCards.length) {
         animations.push(
@@ -119,19 +80,6 @@ export default function App() {
     }
 
     if (faqRef.current) {
-      const faqHeading = faqRef.current.querySelector('h2')
-      if (faqHeading) {
-        animations.push(
-          gsap.fromTo(faqHeading, { opacity: 0, scale: 0.9 }, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: faqRef.current, start: 'top 80%' },
-          })
-        )
-      }
-
       const faqDetails = faqRef.current.querySelectorAll('details')
       if (faqDetails.length) {
         animations.push(
@@ -171,6 +119,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <div className="min-h-full bg-[color:var(--color-background)] bg-page-gradient">
+        <SectionTitleAnimator />
         <Header ref={headerRef} />
         <main>
           <Hero ref={heroRef} />
