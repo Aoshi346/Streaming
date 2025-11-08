@@ -28,11 +28,11 @@ interface DeviceContent {
 }
 
 const DEVICE_SPECS: DeviceSpec[] = [
-  { id: 'tv', label: 'TV', icon: <FaTv className="h-5 w-5" />, aspectRatio: '2544/1647', radius: 12 },
+  { id: 'tv', label: 'TV', icon: <FaTv className="h-4 w-4 sm:h-5 sm:w-5" />, aspectRatio: '2544/1647', radius: 12 },
   // Match the actual SVG's intrinsic aspect ratio to avoid odd spacing
-  { id: 'mobile', label: 'Móvil', icon: <FaMobileAlt className="h-5 w-5" />, aspectRatio: '783/1024', radius: 28 },
-  { id: 'tablet', label: 'Tablet', icon: <FaTabletAlt className="h-5 w-5" />, aspectRatio: '1920/1080', radius: 20 },
-  { id: 'laptop', label: 'Laptop', icon: <FaLaptop className="h-5 w-5" />, aspectRatio: '3834/2256', radius: 14 },
+  { id: 'mobile', label: 'Móvil', icon: <FaMobileAlt className="h-4 w-4 sm:h-5 sm:w-5" />, aspectRatio: '783/1024', radius: 28 },
+  { id: 'tablet', label: 'Tablet', icon: <FaTabletAlt className="h-4 w-4 sm:h-5 sm:w-5" />, aspectRatio: '1920/1080', radius: 20 },
+  { id: 'laptop', label: 'Laptop', icon: <FaLaptop className="h-4 w-4 sm:h-5 sm:w-5" />, aspectRatio: '3834/2256', radius: 14 },
 ]
 
 const DEVICE_CONTENT: Record<DeviceID, DeviceContent> = {
@@ -88,41 +88,90 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
     []
   )
 
-  // Move animated pill
+  // Move animated pill (responsive + performant)
   useLayoutEffect(() => {
     const tabs = tabsRef.current
-    const pill = pillRef.current
+      const pill = pillRef.current
     if (!tabs || !pill) return
 
-    const activeBtn = tabs.querySelector<HTMLButtonElement>(`[data-device="${activeDeviceID}"]`)
-    if (!activeBtn) return
+    const getIsNarrow = () => (typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(max-width: 640px)').matches : false)
+    const isNarrow = getIsNarrow()
 
-    // Calculate position relative to parent container
-    const rect = activeBtn.getBoundingClientRect()
-    const parentRect = tabs.getBoundingClientRect()
-    const left = rect.left - parentRect.left
-    const top = rect.top - parentRect.top
+    const positionPill = () => {
+      const activeBtn = tabs.querySelector<HTMLButtonElement>(`[data-device="${activeDeviceID}"]`)
+      if (!activeBtn) return
 
-    if (prefersReducedMotion) {
-      Object.assign(pill.style, {
-        width: `${rect.width}px`,
-        height: `${rect.height}px`,
-        left: `${left}px`,
-        top: `${top}px`,
-        transform: 'none',
-      })
-      return
+      // Use offsetLeft/Top relative to the scrolling container for more reliable positioning
+      const left = (activeBtn as HTMLElement).offsetLeft - (tabs.scrollLeft || 0)
+      const top = (activeBtn as HTMLElement).offsetTop - (tabs.scrollTop || 0)
+      const width = (activeBtn as HTMLElement).offsetWidth
+      const height = (activeBtn as HTMLElement).offsetHeight
+
+      // If user requested reduced motion or we are on a narrow viewport, avoid Flip (performance)
+      if (prefersReducedMotion || isNarrow) {
+        const shrink = isNarrow ? 0.78 : 1
+        const w2 = Math.round(width * shrink)
+        const h2 = Math.round(height * shrink)
+        const leftAdj = left + Math.round((width - w2) / 2)
+        const topAdj = top + Math.round((height - h2) / 2)
+        Object.assign(pill.style, {
+          width: `${w2}px`,
+          height: `${h2}px`,
+          left: `${leftAdj}px`,
+          top: `${topAdj}px`,
+          transform: 'none',
+        })
+        return
+      }
+
+      // Desktop: use Flip for a smooth pill transition
+      try {
+        const state = Flip.getState(pill)
+        Object.assign(pill.style, {
+          width: `${width}px`,
+          height: `${height}px`,
+          left: `${left}px`,
+          top: `${top}px`,
+          transform: 'none',
+        })
+        Flip.from(state, { duration: 0.45, ease: 'power4.inOut' })
+      } catch (err) {
+        // Fallback to direct assignment if Flip fails
+        Object.assign(pill.style, {
+          width: `${width}px`,
+          height: `${height}px`,
+          left: `${left}px`,
+          top: `${top}px`,
+          transform: 'none',
+        })
+      }
     }
 
-    const state = Flip.getState(pill)
-    Object.assign(pill.style, {
-      width: `${rect.width}px`,
-      height: `${rect.height}px`,
-      left: `${left}px`,
-      top: `${top}px`,
-      transform: 'none',
-    })
-    Flip.from(state, { duration: 0.5, ease: 'power4.inOut' })
+    // Initial position
+    positionPill()
+
+    // Reposition on window resize and when the tabs scroll (for horizontal scrolling on mobile)
+    const onResize = () => requestAnimationFrame(positionPill)
+    const onTabsScroll = () => requestAnimationFrame(positionPill)
+    window.addEventListener('resize', onResize)
+    tabs.addEventListener('scroll', onTabsScroll, { passive: true })
+
+    // Observe size changes in case labels wrap or button sizes change
+    let ro: ResizeObserver | null = null
+    if (typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(() => requestAnimationFrame(positionPill))
+      ro.observe(tabs)
+      tabs.querySelectorAll('button[data-device]').forEach((b) => ro!.observe(b))
+    }
+
+    return () => {
+      window.removeEventListener('resize', onResize)
+      tabs.removeEventListener('scroll', onTabsScroll)
+      if (ro) {
+        ro.disconnect()
+        ro = null
+      }
+    }
   }, [activeDeviceID, prefersReducedMotion])
 
   // Animate preview and content with creative transitions
@@ -144,8 +193,12 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
 
     const nextPad = 100 / parseAspect(nextSpec.aspectRatio)
 
-    if (prefersReducedMotion) {
-      box.style.paddingTop = `${nextPad}%`
+    const isNarrow = typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(max-width: 640px)').matches : false
+    const adjPad = isNarrow ? nextPad * 0.68 : nextPad
+
+    // On reduced motion or narrow screens prefer simple direct style changes for performance
+    if (prefersReducedMotion || isNarrow) {
+      box.style.paddingTop = `${adjPad}%`
       outer.style.borderRadius = `${nextSpec.radius}px`
       if (prevFrame) prevFrame.style.opacity = '0'
       nextFrame.style.opacity = '1'
@@ -155,15 +208,15 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
     }
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } })
-    
+
     // Animate container shape and size
-    tl.to(box, { paddingTop: `${nextPad}%`, duration: 0.7 }, 0)
+    tl.to(box, { paddingTop: `${adjPad}%`, duration: 0.7 }, 0)
       .to(outer, { 
         borderRadius: nextSpec.radius, 
         duration: 0.7,
         ease: 'power2.inOut'
       }, 0)
-    
+
     // Previous frame exits with 3D rotation and fade
     if (prevFrame) {
       tl.to(prevFrame, { 
@@ -174,7 +227,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
         ease: 'power2.in'
       }, 0)
     }
-    
+
     // Next frame enters with 3D rotation, scale, and float
     tl.fromTo(nextFrame, 
       { 
@@ -191,7 +244,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
         duration: 0.65,
         ease: 'power2.out'
       }, 0.2)
-    
+
     // Content fades in with slight upward motion
     if (content) {
       tl.to(content, { 
@@ -201,7 +254,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
         ease: 'power2.out'
       }, 0.25)
     }
-    
+
     prevIDRef.current = currentID
   }, [activeDeviceID, prefersReducedMotion])
 
@@ -292,8 +345,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
     if (!first) return
     const rect = first.getBoundingClientRect()
     const parentRect = tabs.getBoundingClientRect()
-    const left = rect.left - parentRect.left
-    const top = rect.top - parentRect.top
+    const left = rect.left - parentRect.left + (tabs.scrollLeft || 0)
+    const top = rect.top - parentRect.top + (tabs.scrollTop || 0)
     Object.assign(pill.style, {
       width: `${rect.width}px`,
       height: `${rect.height}px`,
@@ -306,6 +359,9 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
   const activeSpec = DEVICE_SPECS.find((d) => d.id === activeDeviceID)!
   const activeContent = DEVICE_CONTENT[activeDeviceID]
   const padTop = 100 / parseAspect(activeSpec.aspectRatio)
+  const isNarrowScreen = typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(max-width: 640px)').matches : false
+  // Reduce the displayed padding-top on narrow screens so the preview height is not excessively tall
+  const displayPadTop = isNarrowScreen ? padTop * 0.6 : padTop
 
   return (
     <section ref={ref} id="devices" className="relative py-16 sm:py-20 md:py-24 border-t border-border-subtle overflow-hidden">
@@ -326,11 +382,11 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
             </div>
 
             {/* Device Tabs */}
-            <div ref={tabsRef} className="relative inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface-muted/50 p-1.5 backdrop-blur-md">
+            <div ref={tabsRef} className="relative flex flex-nowrap items-center gap-2 rounded-full border border-border-subtle bg-surface-muted/50 p-1.5 backdrop-blur-md overflow-x-auto touch-pan-x whitespace-nowrap">
               {/* Animated pill */}
               <div
                 ref={pillRef}
-                className="pointer-events-none absolute rounded-full bg-text-primary/10 border border-brand/30 shadow-lg"
+                className="pointer-events-none absolute rounded-full bg-text-primary/10 border border-brand/30 shadow-md sm:shadow-lg transition-all duration-200"
                 style={{ width: 0, height: 0, left: 0, top: 0 }}
               />
               {DEVICE_SPECS.map((d) => (
@@ -342,7 +398,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                     prevIDRef.current = activeDeviceID
                     setActiveDeviceID(d.id)
                   }}
-                  className={`relative z-10 flex items-center gap-2.5 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  className={`relative z-10 flex items-center gap-2 px-3 py-2 rounded-full text-xs sm:gap-2.5 sm:px-4 sm:py-2.5 sm:text-sm font-medium transition-all duration-200 ${
                     activeDeviceID === d.id
                       ? 'text-text-primary'
                       : 'text-text-secondary hover:text-text-primary/80'
@@ -384,7 +440,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
           <div className="flex justify-center lg:justify-end">
             <div
               ref={previewOuterRef}
-              className="relative w-full max-w-sm overflow-visible perspective-1000"
+              className="relative w-full max-w-[320px] sm:max-w-sm overflow-visible perspective-1000"
               style={{ perspective: '1200px' }}
             >
               {/* Animated glow background */}
@@ -414,7 +470,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                 }}
               >
                 {/* Ratio box for aspect ratio */}
-                <div ref={ratioBoxRef} className="w-full" style={{ paddingTop: `${padTop}%` }} />
+                <div ref={ratioBoxRef} className="w-full" style={{ paddingTop: `${displayPadTop}%` }} />
 
                 {/* Animated gradient overlay for depth */}
                 <div 
@@ -444,15 +500,15 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                       // Render the matching SVG asset for each device. Use <img> so the SVG stays sandboxed
                       // and responsive. Keep sizes a little smaller than the container to avoid overlap.
                       d.id === 'mobile' ? (
-                        <img src={mobileDeviceSvg} alt={`${d.label} frame`} className="h-[88%] w-[88%] object-contain drop-shadow-2xl" draggable={false} />
+                        <img src={mobileDeviceSvg} alt={`${d.label} frame`} className="max-h-[88%] max-w-[88%] object-contain drop-shadow-2xl" draggable={false} />
                       ) : d.id === 'tv' ? (
-                        <img src={tvDeviceSvg} alt={`${d.label} frame`} className="h-[92%] w-[92%] object-contain drop-shadow-2xl" draggable={false} />
+                        <img src={tvDeviceSvg} alt={`${d.label} frame`} className="max-h-[92%] max-w-[92%] object-contain drop-shadow-2xl" draggable={false} />
                       ) : d.id === 'tablet' ? (
-                        <img src={tabletDeviceSvg} alt={`${d.label} frame`} className="h-[90%] w-[90%] object-contain drop-shadow-2xl" draggable={false} />
+                        <img src={tabletDeviceSvg} alt={`${d.label} frame`} className="max-h-[90%] max-w-[90%] object-contain drop-shadow-2xl" draggable={false} />
                       ) : d.id === 'laptop' ? (
-                        <img src={laptopDeviceSvg} alt={`${d.label} frame`} className="h-[92%] w-[92%] object-contain drop-shadow-2xl" draggable={false} />
+                        <img src={laptopDeviceSvg} alt={`${d.label} frame`} className="max-h-[92%] max-w-[92%] object-contain drop-shadow-2xl" draggable={false} />
                       ) : (
-                        <svg className="h-[95%] w-[95%]" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true" />
+                        <svg className="max-h-[95%] max-w-[95%]" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true" />
                       )
                     }
                   </div>
