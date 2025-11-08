@@ -3,6 +3,10 @@ import React, { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useStat
 import { FaTv, FaMobileAlt, FaTabletAlt, FaLaptop } from 'react-icons/fa'
 import { gsap } from 'gsap'
 import { Flip } from 'gsap/Flip'
+import mobileDeviceSvg from '../assets/mobile_device.svg'
+import tvDeviceSvg from '../assets/tv_device.svg'
+import tabletDeviceSvg from '../assets/tablet_device.svg'
+import laptopDeviceSvg from '../assets/laptop_device.svg'
 
 gsap.registerPlugin(Flip)
 
@@ -24,10 +28,11 @@ interface DeviceContent {
 }
 
 const DEVICE_SPECS: DeviceSpec[] = [
-  { id: 'tv', label: 'TV', icon: <FaTv className="h-5 w-5" />, aspectRatio: '16/9', radius: 12 },
-  { id: 'mobile', label: 'Móvil', icon: <FaMobileAlt className="h-5 w-5" />, aspectRatio: '9/16', radius: 28 },
-  { id: 'tablet', label: 'Tablet', icon: <FaTabletAlt className="h-5 w-5" />, aspectRatio: '3/4', radius: 20 },
-  { id: 'laptop', label: 'Laptop', icon: <FaLaptop className="h-5 w-5" />, aspectRatio: '16/10', radius: 14 },
+  { id: 'tv', label: 'TV', icon: <FaTv className="h-5 w-5" />, aspectRatio: '2544/1647', radius: 12 },
+  // Match the actual SVG's intrinsic aspect ratio to avoid odd spacing
+  { id: 'mobile', label: 'Móvil', icon: <FaMobileAlt className="h-5 w-5" />, aspectRatio: '783/1024', radius: 28 },
+  { id: 'tablet', label: 'Tablet', icon: <FaTabletAlt className="h-5 w-5" />, aspectRatio: '1920/1080', radius: 20 },
+  { id: 'laptop', label: 'Laptop', icon: <FaLaptop className="h-5 w-5" />, aspectRatio: '3834/2256', radius: 14 },
 ]
 
 const DEVICE_CONTENT: Record<DeviceID, DeviceContent> = {
@@ -120,7 +125,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
     Flip.from(state, { duration: 0.5, ease: 'power4.inOut' })
   }, [activeDeviceID, prefersReducedMotion])
 
-  // Animate preview and content
+  // Animate preview and content with creative transitions
   useLayoutEffect(() => {
     const currentID = activeDeviceID
     const prevID = prevIDRef.current
@@ -150,13 +155,101 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
     }
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } })
-    tl.to(box, { paddingTop: `${nextPad}%`, duration: 0.6 }, 0)
-      .to(outer, { borderRadius: nextSpec.radius, duration: 0.6 }, 0)
-      .to(prevFrame, { opacity: 0, duration: 0.4 }, 0)
-      .fromTo(nextFrame, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.5 }, 0.15)
-      .to(content, { opacity: 1, y: 0, duration: 0.5 }, 0.2)
+    
+    // Animate container shape and size
+    tl.to(box, { paddingTop: `${nextPad}%`, duration: 0.7 }, 0)
+      .to(outer, { 
+        borderRadius: nextSpec.radius, 
+        duration: 0.7,
+        ease: 'power2.inOut'
+      }, 0)
+    
+    // Previous frame exits with 3D rotation and fade
+    if (prevFrame) {
+      tl.to(prevFrame, { 
+        opacity: 0, 
+        rotateY: -15,
+        scale: 0.92,
+        duration: 0.45,
+        ease: 'power2.in'
+      }, 0)
+    }
+    
+    // Next frame enters with 3D rotation, scale, and float
+    tl.fromTo(nextFrame, 
+      { 
+        opacity: 0, 
+        scale: 0.88,
+        rotateY: 15,
+        y: 20
+      }, 
+      { 
+        opacity: 1, 
+        scale: 1,
+        rotateY: 0,
+        y: 0,
+        duration: 0.65,
+        ease: 'power2.out'
+      }, 0.2)
+    
+    // Content fades in with slight upward motion
+    if (content) {
+      tl.to(content, { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.55,
+        ease: 'power2.out'
+      }, 0.25)
+    }
+    
     prevIDRef.current = currentID
   }, [activeDeviceID, prefersReducedMotion])
+
+  // (floating animation removed per request)
+
+  // Parallax effect on mouse move
+  useEffect(() => {
+    if (!hoverCapable || prefersReducedMotion) return
+    
+    const outer = previewOuterRef.current
+    if (!outer) return
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = outer.getBoundingClientRect()
+      const x = (e.clientX - rect.left) / rect.width - 0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5
+      
+      const activeFrame = framesRef.current[activeDeviceID]
+      if (activeFrame) {
+        gsap.to(activeFrame, {
+          rotateY: x * 8,
+          rotateX: -y * 8,
+          duration: 0.5,
+          ease: 'power2.out'
+        })
+      }
+    }
+
+    const handleMouseLeave = () => {
+      const activeFrame = framesRef.current[activeDeviceID]
+      if (activeFrame) {
+        gsap.to(activeFrame, {
+          rotateY: 0,
+          rotateX: 0,
+          duration: 0.8,
+          ease: 'power2.out'
+        })
+      }
+    }
+
+    outer.addEventListener('mousemove', handleMouseMove)
+    outer.addEventListener('mouseleave', handleMouseLeave)
+
+    return () => {
+      outer.removeEventListener('mousemove', handleMouseMove)
+      outer.removeEventListener('mouseleave', handleMouseLeave)
+    }
+  }, [activeDeviceID, hoverCapable, prefersReducedMotion])
 
   // Hover animations
   useEffect(() => {
@@ -291,58 +384,90 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
           <div className="flex justify-center lg:justify-end">
             <div
               ref={previewOuterRef}
-              className="relative w-full max-w-sm overflow-hidden border border-border-subtle bg-gradient-to-br from-surface-muted/50 to-surface-base/20 shadow-2xl backdrop-blur-sm"
-              style={{ borderRadius: `${activeSpec.radius}px` }}
+              className="relative w-full max-w-sm overflow-visible perspective-1000"
+              style={{ perspective: '1200px' }}
             >
-              {/* Ratio box for aspect ratio */}
-              <div ref={ratioBoxRef} className="w-full" style={{ paddingTop: `${padTop}%` }} />
+              {/* Animated glow background */}
+              <div 
+                className="absolute inset-0 -z-10 rounded-[inherit] blur-3xl opacity-30 transition-all duration-700"
+                style={{
+                  background: `radial-gradient(circle at center, ${
+                    activeDeviceID === 'tv' ? 'rgb(37, 99, 235)' :
+                    activeDeviceID === 'mobile' ? 'rgb(147, 51, 234)' :
+                    activeDeviceID === 'tablet' ? 'rgb(236, 72, 153)' :
+                    'rgb(6, 182, 212)'
+                  } 0%, transparent 70%)`,
+                  transform: 'scale(1.1)'
+                }}
+              />
+              
+              <div
+                className="relative overflow-hidden border border-border-subtle bg-gradient-to-br from-surface-muted/50 to-surface-base/20 shadow-2xl backdrop-blur-sm transition-all duration-700"
+                style={{ 
+                  borderRadius: `${activeSpec.radius}px`,
+                  boxShadow: `0 20px 60px -15px ${
+                    activeDeviceID === 'tv' ? 'rgba(37, 99, 235, 0.3)' :
+                    activeDeviceID === 'mobile' ? 'rgba(147, 51, 234, 0.3)' :
+                    activeDeviceID === 'tablet' ? 'rgba(236, 72, 153, 0.3)' :
+                    'rgba(6, 182, 212, 0.3)'
+                  }`,
+                }}
+              >
+                {/* Ratio box for aspect ratio */}
+                <div ref={ratioBoxRef} className="w-full" style={{ paddingTop: `${padTop}%` }} />
 
-              {/* Content background */}
-              <div className="absolute inset-0 bg-[color:var(--color-background)]/80 flex items-center justify-center">
-                <div className={`absolute inset-0 bg-gradient-to-br ${activeContent.color} animate-pulse`} />
-                <div className="relative text-text-muted text-center px-6">
-                  <div className="text-sm font-medium">{activeDeviceID.toUpperCase()}</div>
-                  <div className="text-xs opacity-70 mt-1">Contenido optimizado</div>
-                </div>
+                {/* Animated gradient overlay for depth */}
+                <div 
+                  className="absolute inset-0 opacity-40 pointer-events-none transition-opacity duration-700"
+                  style={{
+                    background: `linear-gradient(135deg, ${
+                      activeDeviceID === 'tv' ? 'rgba(37, 99, 235, 0.1)' :
+                      activeDeviceID === 'mobile' ? 'rgba(147, 51, 234, 0.1)' :
+                      activeDeviceID === 'tablet' ? 'rgba(236, 72, 153, 0.1)' :
+                      'rgba(6, 182, 212, 0.1)'
+                    } 0%, transparent 60%)`
+                  }}
+                />
+
+                {/* Device frames */}
+                {DEVICE_SPECS.map((d) => (
+                  <div
+                    key={d.id}
+                    ref={(el) => (framesRef.current[d.id] = el)}
+                    className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-300`}
+                    style={{
+                      opacity: activeDeviceID === d.id ? 1 : 0,
+                      transformStyle: 'preserve-3d',
+                    }}
+                  >
+                    {
+                      // Render the matching SVG asset for each device. Use <img> so the SVG stays sandboxed
+                      // and responsive. Keep sizes a little smaller than the container to avoid overlap.
+                      d.id === 'mobile' ? (
+                        <img src={mobileDeviceSvg} alt={`${d.label} frame`} className="h-[88%] w-[88%] object-contain drop-shadow-2xl" draggable={false} />
+                      ) : d.id === 'tv' ? (
+                        <img src={tvDeviceSvg} alt={`${d.label} frame`} className="h-[92%] w-[92%] object-contain drop-shadow-2xl" draggable={false} />
+                      ) : d.id === 'tablet' ? (
+                        <img src={tabletDeviceSvg} alt={`${d.label} frame`} className="h-[90%] w-[90%] object-contain drop-shadow-2xl" draggable={false} />
+                      ) : d.id === 'laptop' ? (
+                        <img src={laptopDeviceSvg} alt={`${d.label} frame`} className="h-[92%] w-[92%] object-contain drop-shadow-2xl" draggable={false} />
+                      ) : (
+                        <svg className="h-[95%] w-[95%]" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true" />
+                      )
+                    }
+                  </div>
+                ))}
+
+                {/* Shine effect on hover */}
+                <div 
+                  className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)',
+                    transform: 'translateX(-100%)',
+                    animation: 'shine 3s ease-in-out infinite'
+                  }}
+                />
               </div>
-
-              {/* Device frames */}
-              {DEVICE_SPECS.map((d) => (
-                <div
-                  key={d.id}
-                  ref={(el) => (framesRef.current[d.id] = el)}
-                  className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity ${
-                    activeDeviceID === d.id ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  <svg className="h-[95%] w-[95%]" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-                    <defs>
-                      <mask id={`hole-${d.id}`}>
-                        <rect x="0" y="0" width="100" height="100" fill="white" />
-                        <rect
-                          x="8"
-                          y="8"
-                          width="84"
-                          height="84"
-                          rx={d.id === 'mobile' ? 12 : d.id === 'tablet' ? 10 : d.id === 'laptop' ? 5 : 3}
-                          fill="black"
-                        />
-                      </mask>
-                    </defs>
-                    <rect
-                      x="0"
-                      y="0"
-                      width="100"
-                      height="100"
-                      rx={d.id === 'mobile' ? 14 : d.id === 'tablet' ? 12 : d.id === 'laptop' ? 6 : 4}
-                      fill="rgb(var(--color-background-rgb) / 0.9)"
-                      stroke="rgb(var(--color-border-subtle-rgb) / 0.3)"
-                      strokeWidth="1"
-                      mask={`url(#hole-${d.id})`}
-                    />
-                  </svg>
-                </div>
-              ))}
             </div>
           </div>
         </div>
