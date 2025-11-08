@@ -54,7 +54,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
   const closeMenu = useCallback(() => setMenuOpen(false), [])
 
   return (
-    <header ref={ref} className="sticky top-0 z-50 border-b border-white/5 bg-black/40 backdrop-blur">
+    <header ref={ref} className="sticky top-0 z-50 border-b border-border-subtle bg-[color:var(--color-background)]/60 backdrop-blur">
       <div className="container-wrapper relative grid h-16 grid-cols-[auto_1fr_auto] items-center gap-4 px-4 sm:px-6">
         <Logo className="relative overflow-visible flex items-center rounded focus:outline-none focus-visible:ring focus-visible:ring-brand-light/60" />
         <nav role="navigation" aria-label="Principal" className="hidden md:flex justify-center items-center gap-6 text-sm font-medium text-text-secondary">
@@ -78,7 +78,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
   <div className="flex items-center justify-end gap-2 sm:gap-3">
           <Button
             onClick={() => console.log('click')}
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-button-gradient px-5 py-2.5 text-sm font-semibold text-white shadow-theme-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-theme-strong focus:outline-none focus-visible:ring focus-visible:ring-brand-light/60"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-button-gradient px-5 py-2.5 text-sm font-semibold text-text-primary shadow-theme-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-theme-strong focus:outline-none focus-visible:ring focus-visible:ring-brand-light/60"
           >
             Comenzar
           </Button>
@@ -87,7 +87,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
             onClick={() => setMenuOpen((s) => !s)}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            className="inline-flex items-center justify-center rounded-md p-2 md:hidden bg-white/5 text-text-secondary shadow-theme-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/10 focus:outline-none focus-visible:ring focus-visible:ring-brand-light/40"
+            className="inline-flex items-center justify-center rounded-md p-2 md:hidden bg-surface-muted/30 text-text-secondary shadow-theme-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface-muted/50 focus:outline-none focus-visible:ring focus-visible:ring-brand-light/40"
           >
             <span className="sr-only">{menuOpen ? 'Cerrar menú' : 'Abrir menú'}</span>
             <div className="h-5 w-5">
@@ -108,7 +108,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
         </div>
         {/* Mobile overlay */}
         <div
-          className={`md:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-200 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+          className={`md:hidden fixed inset-0 z-40 bg-[color:var(--color-background)]/80 backdrop-blur-sm transition-opacity duration-200 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
           onClick={() => setMenuOpen(false)}
         />
         {/* Mobile menu panel */}
@@ -116,7 +116,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
           id="mobile-menu"
           className={`md:hidden absolute left-0 right-0 top-full z-50 mt-2 px-4 pb-4 transition-all duration-200 ease-out ${menuOpen ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 -translate-y-2'}`}
         >
-          <div className="rounded-2xl border border-white/10 bg-black/80 p-4 shadow-xl backdrop-blur">
+          <div className="rounded-2xl border border-border-subtle bg-surface-base/95 p-4 shadow-xl backdrop-blur">
             <div className="flex flex-col items-stretch gap-1 text-base font-medium text-text-secondary">
               {links.map((link) => (
                 <a
@@ -126,7 +126,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                     onNavClick(e)
                     closeMenu()
                   }}
-                  className="flex items-center rounded-xl px-3 py-2 transition-colors duration-200 hover:bg-white/10 hover:text-text-primary"
+                  className="flex items-center rounded-xl px-3 py-2 transition-colors duration-200 hover:bg-surface-muted/40 hover:text-text-primary"
                 >
                   {link.label}
                 </a>
@@ -137,7 +137,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                 console.log('click')
                 closeMenu()
               }}
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-button-gradient px-4 py-2.5 text-sm font-semibold text-white shadow-theme-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-theme-strong focus:outline-none focus-visible:ring focus-visible:ring-brand-light/60"
+              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-button-gradient px-4 py-2.5 text-sm font-semibold text-text-primary shadow-theme-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-theme-strong focus:outline-none focus-visible:ring focus-visible:ring-brand-light/60"
             >
               Comenzar
             </Button>

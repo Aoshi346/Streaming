@@ -54,8 +54,8 @@ const applyPalette = (themePalette: ThemePalette) => {
 	setColorVariable(root, 'text-secondary', themePalette.text.secondary)
 	setColorVariable(root, 'text-muted', themePalette.text.muted)
 
-	root.style.setProperty('--color-border-subtle', themePalette.border.subtle)
-	root.style.setProperty('--color-border-strong', themePalette.border.strong)
+	setColorVariable(root, 'border-subtle', themePalette.border.subtle)
+	setColorVariable(root, 'border-strong', themePalette.border.strong)
 
 	root.style.setProperty('--gradient-page', themePalette.gradients.page)
 	root.style.setProperty('--gradient-hero', themePalette.gradients.hero)

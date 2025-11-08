@@ -94,11 +94,11 @@ const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
     return (
       <div
         ref={setRefs}
-        className="feature-card group relative rounded-xl border border-white/[0.08] bg-white/[0.03] p-6 shadow-theme-soft will-change-transform"
+        className="feature-card group relative rounded-xl border border-border-subtle bg-surface-muted/20 p-6 shadow-theme-soft will-change-transform"
       >
         {/* spotlight */}
         <div ref={spotRef} className="pointer-events-none absolute inset-0 opacity-0">
-          <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15),rgba(255,255,255,0)_60%)]" />
+          <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgb(var(--color-brand-base-rgb)_/_0.2),transparent_60%)]" />
         </div>
         <div ref={iconRef} className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand/40 via-brand-light/40 to-brand-dark/60 text-accent">
           {icon}

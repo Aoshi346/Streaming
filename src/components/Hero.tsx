@@ -78,7 +78,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
       <div className="container-wrapper relative">
         <div className="py-20 md:py-28 lg:py-36">
           <div className="max-w-3xl text-center mx-auto">
-            <h1 ref={titleRef} aria-label="Películas, series y más ilimitadas" className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-white">
+            <h1 ref={titleRef} aria-label="Películas, series y más ilimitadas" className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-text-primary">
               {(() => {
                 const title = 'Películas, series y más ilimitadas'
                 const words = title.split(' ')
@@ -92,20 +92,20 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                 ))
               })()}
             </h1>
-            <p ref={subtitleRef} className="gsap-hero-subtitle mt-4 text-lg text-gray-300">
+            <p ref={subtitleRef} className="gsap-hero-subtitle mt-4 text-lg text-text-secondary">
               Mira en cualquier lugar. Cancela en cualquier momento.
             </p>
 
             <div className="mt-8 flex justify-center gap-4">
               <a
                 href="#pricing"
-                className="shrink-0 rounded-md bg-purple-600 px-8 py-3 text-base font-semibold text-white shadow-lg transition-transform duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/80 hover:-translate-y-0.5 hover:shadow-purple-600/50"
+                className="shrink-0 rounded-md bg-button-gradient px-8 py-3 text-base font-semibold text-text-primary shadow-theme-soft transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/80 hover:-translate-y-0.5 hover:shadow-theme-strong"
               >
                 SUSCRÍBETE AHORA
               </a>
               <a
                 href="#features"
-                className="shrink-0 rounded-md border border-white/50 bg-transparent px-8 py-3 text-base font-semibold text-white transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 hover:bg-white/10"
+                className="shrink-0 rounded-md border border-border-strong bg-transparent px-8 py-3 text-base font-semibold text-text-primary transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/70 hover:bg-surface-muted/30"
               >
                 CONTÁCTANOS
               </a>

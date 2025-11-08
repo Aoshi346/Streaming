@@ -152,7 +152,7 @@ const DownloadLinksSection: React.FC = () => {
   }, [])
 
   return (
-    <section id="downloads" ref={sectionRef} className="border-t border-white/10 py-14 sm:py-18">
+    <section id="downloads" ref={sectionRef} className="border-t border-border-subtle py-14 sm:py-18">
       <div className="container-wrapper">
         <h2 className="gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl mb-3">Descarga la app</h2>
         <p className="gsap-section-subtitle mb-8 text-text-secondary/90">
@@ -173,11 +173,11 @@ const DownloadLinksSection: React.FC = () => {
                 href={platform.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="gsap-card flex flex-col items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-6 py-6 shadow-theme-soft transition hover:-translate-y-1 hover:shadow-theme-strong focus:outline-none focus-visible:ring focus-visible:ring-brand-light/60"
+                className="gsap-card flex flex-col items-center justify-center gap-2 rounded-xl border border-border-subtle bg-surface-muted/20 px-6 py-6 shadow-theme-soft transition hover:-translate-y-1 hover:shadow-theme-strong focus:outline-none focus-visible:ring focus-visible:ring-brand-light/60"
                 aria-label={`Descargar para ${platform.label} (${platform.storeName})`}
               >
                 <span className="platform-icon inline-flex">{platform.icon}</span>
-                <span className="text-base font-semibold text-white label-text" aria-hidden>
+                <span className="text-base font-semibold text-text-primary label-text" aria-hidden>
                   {renderChars(platform.label, 'label-char')}
                 </span>
                 <span className="text-xs text-text-secondary store-text" aria-hidden>

@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import FeaturesSection from './components/FeaturesSection'
+import StatsCounterSection from './components/StatsCounterSection'
 import Devices from './components/Devices'
 import DownloadLinksSection from './components/DownloadLinksSection'
 import PricingCTA from './components/PricingCTA'
@@ -123,6 +124,7 @@ export default function App() {
         <Header ref={headerRef} />
         <main>
           <Hero ref={heroRef} />
+          <StatsCounterSection />
           <DownloadLinksSection />
           <FeaturesSection ref={featuresRef} />
           <Devices ref={devicesRef} />

@@ -90,7 +90,7 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
   }, [])
 
   return (
-    <section ref={sectionRef} id="features" className="relative border-t border-white/10 py-16 sm:py-20">
+    <section ref={sectionRef} id="features" className="relative border-t border-border-subtle py-16 sm:py-20">
       <div className="absolute inset-0 bg-section-spotlight opacity-70" aria-hidden />
       <div className="container-wrapper relative">
   <h2 className="feature-title gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl">Todo lo que necesitas para transmitir</h2>
