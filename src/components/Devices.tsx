@@ -37,25 +37,25 @@ const DEVICE_CONTENT: Record<DeviceID, DeviceContent> = {
   tv: {
     title: 'Experiencia Cinematográfica',
     description: 'Disfruta de contenido en pantalla grande con calidad 4K',
-    items: ['4K Ultra HD', 'Dolby Atmos', 'Pantalla completa', 'Transmisión sin cortes'],
+    items: ['Samsung', 'LG', 'Sony', 'Xiaomi TV', 'Android TV'],
     color: 'from-blue-600/20 to-blue-400/10',
   },
   mobile: {
     title: 'En Tu Bolsillo',
     description: 'Mira lo que ames en cualquier momento, en cualquier lugar',
-    items: ['Portable', 'Sincronización instantánea', 'Acceso offline', 'Control total'],
+    items: ['Android', 'iPhone'],
     color: 'from-purple-600/20 to-purple-400/10',
   },
   tablet: {
     title: 'Lo Mejor de Ambos Mundos',
     description: 'Pantalla perfecta para lectura y entretenimiento',
-    items: ['Pantalla amplia', 'Multitarea fluida', 'Interfaz táctil', 'Portabilidad'],
+    items: ['iPad', 'Xiaomi Pad', 'Samsung Tab'],
     color: 'from-pink-600/20 to-pink-400/10',
   },
   laptop: {
     title: 'Producción Total',
     description: 'Trabaja y disfruta sin límites en tu computadora',
-    items: ['Resolución full HD', 'Teclado y mouse', 'Multitarea avanzada', 'Mejor rendimiento'],
+    items: ['Windows', 'macOS'],
     color: 'from-cyan-600/20 to-cyan-400/10',
   },
 }
