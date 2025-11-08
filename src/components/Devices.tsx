@@ -2,13 +2,11 @@ import React, { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useStat
 // Replaced lucide-react icons with react-icons (already installed) to avoid adding new dependency
 import { FaTv, FaMobileAlt, FaTabletAlt, FaLaptop } from 'react-icons/fa'
 import { gsap } from 'gsap'
-import { Flip } from 'gsap/Flip'
 import mobileDeviceSvg from '../assets/mobile_device.svg'
 import tvDeviceSvg from '../assets/tv_device.svg'
 import tabletDeviceSvg from '../assets/tablet_device.svg'
 import laptopDeviceSvg from '../assets/laptop_device.svg'
 
-gsap.registerPlugin(Flip)
 
 type DeviceID = 'tv' | 'mobile' | 'tablet' | 'laptop'
 
@@ -28,11 +26,11 @@ interface DeviceContent {
 }
 
 const DEVICE_SPECS: DeviceSpec[] = [
-  { id: 'tv', label: 'TV', icon: <FaTv className="h-4 w-4 sm:h-5 sm:w-5" />, aspectRatio: '2544/1647', radius: 12 },
+  { id: 'tv', label: 'TV', icon: <FaTv className="h-5 w-5" />, aspectRatio: '2544/1647', radius: 12 },
   // Match the actual SVG's intrinsic aspect ratio to avoid odd spacing
-  { id: 'mobile', label: 'Móvil', icon: <FaMobileAlt className="h-4 w-4 sm:h-5 sm:w-5" />, aspectRatio: '783/1024', radius: 28 },
-  { id: 'tablet', label: 'Tablet', icon: <FaTabletAlt className="h-4 w-4 sm:h-5 sm:w-5" />, aspectRatio: '1920/1080', radius: 20 },
-  { id: 'laptop', label: 'Laptop', icon: <FaLaptop className="h-4 w-4 sm:h-5 sm:w-5" />, aspectRatio: '3834/2256', radius: 14 },
+  { id: 'mobile', label: 'Móvil', icon: <FaMobileAlt className="h-5 w-5" />, aspectRatio: '783/1024', radius: 28 },
+  { id: 'tablet', label: 'Tablet', icon: <FaTabletAlt className="h-5 w-5" />, aspectRatio: '1920/1080', radius: 20 },
+  { id: 'laptop', label: 'Laptop', icon: <FaLaptop className="h-5 w-5" />, aspectRatio: '3834/2256', radius: 14 },
 ]
 
 const DEVICE_CONTENT: Record<DeviceID, DeviceContent> = {
@@ -73,7 +71,6 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
   const prevIDRef = useRef<DeviceID>('tv')
 
   const tabsRef = useRef<HTMLDivElement>(null)
-  const pillRef = useRef<HTMLDivElement>(null)
   const previewOuterRef = useRef<HTMLDivElement>(null)
   const ratioBoxRef = useRef<HTMLDivElement>(null)
   const framesRef = useRef<Record<DeviceID, HTMLDivElement | null>>({ tv: null, mobile: null, tablet: null, laptop: null })
@@ -88,91 +85,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
     []
   )
 
-  // Move animated pill (responsive + performant)
-  useLayoutEffect(() => {
-    const tabs = tabsRef.current
-      const pill = pillRef.current
-    if (!tabs || !pill) return
-
-    const getIsNarrow = () => (typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(max-width: 640px)').matches : false)
-    const isNarrow = getIsNarrow()
-
-    const positionPill = () => {
-      const activeBtn = tabs.querySelector<HTMLButtonElement>(`[data-device="${activeDeviceID}"]`)
-      if (!activeBtn) return
-
-      // Use offsetLeft/Top relative to the scrolling container for more reliable positioning
-      const left = (activeBtn as HTMLElement).offsetLeft - (tabs.scrollLeft || 0)
-      const top = (activeBtn as HTMLElement).offsetTop - (tabs.scrollTop || 0)
-      const width = (activeBtn as HTMLElement).offsetWidth
-      const height = (activeBtn as HTMLElement).offsetHeight
-
-      // If user requested reduced motion or we are on a narrow viewport, avoid Flip (performance)
-      if (prefersReducedMotion || isNarrow) {
-        const shrink = isNarrow ? 0.78 : 1
-        const w2 = Math.round(width * shrink)
-        const h2 = Math.round(height * shrink)
-        const leftAdj = left + Math.round((width - w2) / 2)
-        const topAdj = top + Math.round((height - h2) / 2)
-        Object.assign(pill.style, {
-          width: `${w2}px`,
-          height: `${h2}px`,
-          left: `${leftAdj}px`,
-          top: `${topAdj}px`,
-          transform: 'none',
-        })
-        return
-      }
-
-      // Desktop: use Flip for a smooth pill transition
-      try {
-        const state = Flip.getState(pill)
-        Object.assign(pill.style, {
-          width: `${width}px`,
-          height: `${height}px`,
-          left: `${left}px`,
-          top: `${top}px`,
-          transform: 'none',
-        })
-        Flip.from(state, { duration: 0.45, ease: 'power4.inOut' })
-      } catch (err) {
-        // Fallback to direct assignment if Flip fails
-        Object.assign(pill.style, {
-          width: `${width}px`,
-          height: `${height}px`,
-          left: `${left}px`,
-          top: `${top}px`,
-          transform: 'none',
-        })
-      }
-    }
-
-    // Initial position
-    positionPill()
-
-    // Reposition on window resize and when the tabs scroll (for horizontal scrolling on mobile)
-    const onResize = () => requestAnimationFrame(positionPill)
-    const onTabsScroll = () => requestAnimationFrame(positionPill)
-    window.addEventListener('resize', onResize)
-    tabs.addEventListener('scroll', onTabsScroll, { passive: true })
-
-    // Observe size changes in case labels wrap or button sizes change
-    let ro: ResizeObserver | null = null
-    if (typeof ResizeObserver !== 'undefined') {
-      ro = new ResizeObserver(() => requestAnimationFrame(positionPill))
-      ro.observe(tabs)
-      tabs.querySelectorAll('button[data-device]').forEach((b) => ro!.observe(b))
-    }
-
-    return () => {
-      window.removeEventListener('resize', onResize)
-      tabs.removeEventListener('scroll', onTabsScroll)
-      if (ro) {
-        ro.disconnect()
-        ro = null
-      }
-    }
-  }, [activeDeviceID, prefersReducedMotion])
+  // We now use a CSS-only active state for the tab "pill" to simplify mobile behavior
+  // and avoid JS-driven position/Flip work. Keep tabsRef for hover animations.
 
   // Animate preview and content with creative transitions
   useLayoutEffect(() => {
@@ -336,32 +250,14 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
     return () => cleanups.forEach((fn) => fn())
   }, [hoverCapable, activeDeviceID])
 
-  // Initial pill position
-  useEffect(() => {
-    const tabs = tabsRef.current
-    const pill = pillRef.current
-    if (!tabs || !pill) return
-    const first = tabs.querySelector<HTMLButtonElement>('button[data-device]')
-    if (!first) return
-    const rect = first.getBoundingClientRect()
-    const parentRect = tabs.getBoundingClientRect()
-    const left = rect.left - parentRect.left + (tabs.scrollLeft || 0)
-    const top = rect.top - parentRect.top + (tabs.scrollTop || 0)
-    Object.assign(pill.style, {
-      width: `${rect.width}px`,
-      height: `${rect.height}px`,
-      left: `${left}px`,
-      top: `${top}px`,
-      transform: 'none',
-    })
-  }, [])
+  // No JS-inserted pill needed: active state is handled by CSS classes on the button itself.
 
   const activeSpec = DEVICE_SPECS.find((d) => d.id === activeDeviceID)!
   const activeContent = DEVICE_CONTENT[activeDeviceID]
   const padTop = 100 / parseAspect(activeSpec.aspectRatio)
   const isNarrowScreen = typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(max-width: 640px)').matches : false
   // Reduce the displayed padding-top on narrow screens so the preview height is not excessively tall
-  const displayPadTop = isNarrowScreen ? padTop * 0.6 : padTop
+  const displayPadTop = isNarrowScreen ? padTop * 0.68 : padTop
 
   return (
     <section ref={ref} id="devices" className="relative py-16 sm:py-20 md:py-24 border-t border-border-subtle overflow-hidden">
@@ -382,13 +278,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
             </div>
 
             {/* Device Tabs */}
-            <div ref={tabsRef} className="relative flex flex-nowrap items-center gap-2 rounded-full border border-border-subtle bg-surface-muted/50 p-1.5 backdrop-blur-md overflow-x-auto touch-pan-x whitespace-nowrap">
-              {/* Animated pill */}
-              <div
-                ref={pillRef}
-                className="pointer-events-none absolute rounded-full bg-text-primary/10 border border-brand/30 shadow-md sm:shadow-lg transition-all duration-200"
-                style={{ width: 0, height: 0, left: 0, top: 0 }}
-              />
+            <div ref={tabsRef} className="relative inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface-muted/50 p-1.5 backdrop-blur-md overflow-x-auto touch-pan-x flex-nowrap whitespace-nowrap">
               {DEVICE_SPECS.map((d) => (
                 <button
                   key={d.id}
@@ -398,9 +288,9 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                     prevIDRef.current = activeDeviceID
                     setActiveDeviceID(d.id)
                   }}
-                  className={`relative z-10 flex items-center gap-2 px-3 py-2 rounded-full text-xs sm:gap-2.5 sm:px-4 sm:py-2.5 sm:text-sm font-medium transition-all duration-200 ${
+                  className={`relative z-10 flex items-center gap-2.5 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                     activeDeviceID === d.id
-                      ? 'text-text-primary'
+                      ? 'text-text-primary bg-text-primary/10 border border-brand/30 shadow-lg'
                       : 'text-text-secondary hover:text-text-primary/80'
                   }`}
                 >
@@ -440,7 +330,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
           <div className="flex justify-center lg:justify-end">
             <div
               ref={previewOuterRef}
-              className="relative w-full max-w-[320px] sm:max-w-sm overflow-visible perspective-1000"
+              className="relative w-full max-w-[420px] sm:max-w-sm overflow-visible perspective-1000"
               style={{ perspective: '1200px' }}
             >
               {/* Animated glow background */}
