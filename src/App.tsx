@@ -10,6 +10,7 @@ import DownloadLinksSection from './components/DownloadLinksSection'
 import PricingCTA from './components/PricingCTA'
 import FAQ from './components/FAQ'
 import Footer from './components/Footer'
+import WhatsAppBubble from './components/WhatsAppBubble'
 import { ThemeProvider } from './theme'
 import SectionTitleAnimator from './components/SectionTitleAnimator'
 
@@ -132,6 +133,7 @@ export default function App() {
           <FAQ ref={faqRef} />
         </main>
         <Footer ref={footerRef} />
+        <WhatsAppBubble />
       </div>
     </ThemeProvider>
   )
