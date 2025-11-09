@@ -43,66 +43,93 @@ export type ThemePalette = {
 }
 
 export const darkPalette: ThemePalette = {
+	// Pure black foundation for maximum contrast
 	background: '#000000',
-	surface: '#0d0719',
-	surfaceMuted: '#1a0f2e',
+	// Deep purple-black surfaces for depth
+	surface: '#0a0014',
+	surfaceMuted: '#15001f',
 	brand: {
-		base: '#6d28d9',
-		light: '#8b5cf6',
-		dark: '#4c1d95',
+		// Vibrant purple range - primary brand color
+		base: '#a855f7',      // Purple 500 - main brand
+		light: '#c084fc',     // Purple 400 - hover states
+		dark: '#7e22ce',      // Purple 700 - pressed states
 	},
-	accent: '#f59e0b',
+	// Gold accent for premium feel and visual interest
+	accent: '#fbbf24',        // Gold/Amber 400 - for dots, icons, highlights
 	text: {
-		primary: '#faf8ff',
-		secondary: '#d4c5f9',
-		muted: '#a78bfa',
+		// High contrast white for readability
+		primary: '#ffffff',
+		// Soft lavender for secondary text
+		secondary: '#e9d5ff',  // Purple 200
+		// Medium purple for muted text
+		muted: '#c4b5fd',      // Purple 300
 	},
 	border: {
-		subtle: 'rgba(255,255,255,0.1)',
-		strong: 'rgba(139,92,246,0.5)',
+		// Subtle white borders for elegant separation
+		subtle: 'rgba(255, 255, 255, 0.08)',
+		// Gold borders for premium emphasis
+		strong: 'rgba(251, 191, 36, 0.4)',
 	},
 	gradients: {
-		page: 'radial-gradient(circle at top left, rgba(109,40,217,0.25), transparent 55%), radial-gradient(circle at bottom right, rgba(76,29,149,0.2), transparent 60%)',
-		hero: 'radial-gradient(circle at 20% 20%, rgba(109,40,217,0.35), transparent 40%), radial-gradient(circle at 80% 0%, rgba(139,92,246,0.28), transparent 40%)',
-		spotlight: 'radial-gradient(circle at 0% 0%, rgba(109,40,217,0.22), transparent 55%)',
-		device: 'radial-gradient(circle at top right, rgba(139,92,246,0.32), transparent 60%), radial-gradient(circle at bottom left, rgba(76,29,149,0.4), transparent 60%)',
-		button: 'linear-gradient(90deg, #6d28d9 0%, #8b5cf6 50%, #4c1d95 100%)',
+		// Deep purple atmospheric gradients
+		page: 'radial-gradient(circle at top left, rgba(126, 34, 206, 0.15), transparent 60%), radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.1), transparent 65%)',
+		hero: 'radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.25), transparent 50%), radial-gradient(circle at 80% 0%, rgba(192, 132, 252, 0.18), transparent 50%)',
+		spotlight: 'radial-gradient(circle at 0% 0%, rgba(126, 34, 206, 0.2), transparent 60%)',
+		device: 'radial-gradient(circle at top right, rgba(168, 85, 247, 0.28), transparent 65%), radial-gradient(circle at bottom left, rgba(126, 34, 206, 0.22), transparent 65%)',
+		// Purple to gold gradient for premium buttons
+		button: 'linear-gradient(135deg, #a855f7 0%, #c084fc 40%, #fbbf24 100%)',
 	},
 	shadows: {
-		soft: '0 4px 24px rgba(0,0,0,0.5)',
-		strong: '0 8px 48px rgba(109,40,217,0.4)',
+		// Soft black shadows for depth
+		soft: '0 4px 32px rgba(0, 0, 0, 0.6)',
+		// Strong gold glow shadows for premium emphasis
+		strong: '0 8px 56px rgba(251, 191, 36, 0.35)',
 	},
 }
 
 export const lightPalette: ThemePalette = {
-	background: '#fdfcff',
+	// Soft warm white foundation for comfortable reading
+	background: '#fefdfb',
+	// White surfaces with subtle warmth
 	surface: '#ffffff',
-	surfaceMuted: '#f5f3ff',
+	// Light purple-tinted surface for cards
+	surfaceMuted: '#faf5ff', // Purple 50
 	brand: {
-		base: '#7c3aed',
-		light: '#a78bfa',
-		dark: '#5b21b6',
+		// Deep vibrant purple - strong contrast on light backgrounds
+		base: '#7e22ce',      // Purple 700 - main brand (high contrast)
+		light: '#9333ea',     // Purple 600 - hover states
+		dark: '#6b21a8',      // Purple 800 - pressed states
 	},
-	accent: '#ec4899',
+	// Warm gold accent for premium feel
+	accent: '#f59e0b',        // Amber 500 - warm gold
 	text: {
-		primary: '#1f1333',
-		secondary: '#4c1d95',
-		muted: '#6d28d9',
+		// Pure black for maximum readability
+		primary: '#000000',
+		// Deep purple for high-contrast secondary text
+		secondary: '#6b21a8',  // Purple 800 (AA+ contrast)
+		// Medium purple for muted text with good readability
+		muted: '#7e22ce',      // Purple 700 (AA contrast)
 	},
 	border: {
-		subtle: 'rgba(124,58,237,0.15)',
-		strong: 'rgba(124,58,237,0.4)',
+		// Visible purple borders with good contrast
+		subtle: 'rgba(126, 34, 206, 0.2)',
+		// Strong purple borders for clear separation
+		strong: 'rgba(126, 34, 206, 0.6)',
 	},
 	gradients: {
-		page: 'radial-gradient(circle at top left, rgba(167,139,250,0.12), transparent 55%), radial-gradient(circle at bottom right, rgba(236,72,153,0.08), transparent 60%)',
-		hero: 'radial-gradient(circle at 20% 20%, rgba(167,139,250,0.18), transparent 45%), radial-gradient(circle at 80% 0%, rgba(236,72,153,0.12), transparent 45%)',
-		spotlight: 'radial-gradient(circle at 0% 0%, rgba(124,58,237,0.1), transparent 60%)',
-		device: 'radial-gradient(circle at top right, rgba(167,139,250,0.15), transparent 55%), radial-gradient(circle at bottom left, rgba(236,72,153,0.1), transparent 60%)',
-		button: 'linear-gradient(90deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%)',
+		// Subtle purple and gold atmospheric gradients
+		page: 'radial-gradient(circle at top left, rgba(168, 85, 247, 0.08), transparent 55%), radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.06), transparent 60%)',
+		hero: 'radial-gradient(circle at 20% 20%, rgba(126, 34, 206, 0.12), transparent 45%), radial-gradient(circle at 80% 0%, rgba(245, 158, 11, 0.08), transparent 50%)',
+		spotlight: 'radial-gradient(circle at 0% 0%, rgba(126, 34, 206, 0.15), transparent 55%)',
+		device: 'radial-gradient(circle at top right, rgba(168, 85, 247, 0.1), transparent 60%), radial-gradient(circle at bottom left, rgba(245, 158, 11, 0.08), transparent 60%)',
+		// Purple to gold gradient for premium buttons - high visibility
+		button: 'linear-gradient(135deg, #7e22ce 0%, #9333ea 40%, #f59e0b 100%)',
 	},
 	shadows: {
-		soft: '0 4px 16px rgba(124,58,237,0.12)',
-		strong: '0 8px 32px rgba(124,58,237,0.2)',
+		// Strong visible shadows for depth
+		soft: '0 4px 24px rgba(0, 0, 0, 0.12)',
+		// Deep purple shadows for emphasis and separation
+		strong: '0 8px 48px rgba(126, 34, 206, 0.25)',
 	},
 }
 
