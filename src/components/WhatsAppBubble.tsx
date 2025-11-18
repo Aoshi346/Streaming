@@ -46,12 +46,18 @@ const WhatsAppBubble: React.FC<Props> = ({
           id="whatsapp-panel"
           role="dialog"
           aria-label="Panel de contacto por WhatsApp"
-          className="mb-3 w-72 max-w-xs rounded-lg bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl p-3 text-white animate-fade-in"
+          className="mb-3 w-72 max-w-xs rounded-lg bg-white/5 bg-gradient-to-br from-purple-900/10 to-pink-500/6 backdrop-blur-md border border-white/10 ring-1 ring-purple-600/10 shadow-2xl p-3 text-white animate-fade-in relative overflow-visible"
           onClick={(e) => e.stopPropagation()}
         >
+          {/* pointer triangle */}
+          <div className="absolute -bottom-1 left-6 w-4 h-4 bg-white/5 rotate-45 border border-white/10 shadow-md" aria-hidden />
           <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-tr from-emerald-600 to-emerald-400 rounded-full p-2">
-              <FaWhatsapp className="w-4 h-4 text-white" aria-hidden />
+            <div className="bg-gradient-to-tr from-purple-600 to-pink-500 rounded-full p-0.5">
+              <div className="bg-white rounded-full p-2">
+                <div className="rounded-full bg-emerald-500 p-1">
+                  <FaWhatsapp className="w-4 h-4 text-white" aria-hidden />
+                </div>
+              </div>
             </div>
 
             <div className="flex-1">
@@ -68,7 +74,7 @@ const WhatsAppBubble: React.FC<Props> = ({
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="inline-flex items-center justify-center flex-1 rounded-md px-3 py-2 text-sm font-semibold bg-gradient-to-tr from-emerald-600 to-emerald-400 hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
+              className="inline-flex items-center justify-center flex-1 rounded-md px-3 py-2 text-sm font-semibold bg-gradient-to-tr from-emerald-500 to-emerald-400 hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
             >
               Chatear ahora
             </a>
@@ -88,7 +94,10 @@ const WhatsAppBubble: React.FC<Props> = ({
       )}
 
       {/* Toggle button (icon) */}
-      <button
+      <div className="relative flex items-center">
+        {/* decorative glowing ring */}
+        <span className="absolute -inset-1 rounded-full blur-2xl bg-gradient-to-tr from-purple-600/20 to-pink-500/12 opacity-80 animate-pulse-soft pointer-events-none" aria-hidden />
+        <button
         type="button"
         aria-expanded={open}
         aria-controls="whatsapp-panel"
@@ -97,13 +106,20 @@ const WhatsAppBubble: React.FC<Props> = ({
           e.stopPropagation()
           setOpen((s) => !s)
         }}
-        className="whatsapp-toggle flex items-center gap-3 rounded-full px-3 py-2 shadow-lg transform transition-transform duration-150 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-4 focus:ring-offset-2 bg-gradient-to-tr from-emerald-600 to-emerald-400 text-white"
+        className="whatsapp-toggle group relative flex items-center gap-3 rounded-full px-3 py-2 shadow-lg transform transition-transform duration-150 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-4 focus:ring-offset-2 bg-gradient-to-tr from-purple-700 to-pink-500 text-white"
       >
         <span className="sr-only">Contactar por WhatsApp</span>
-        <span className="bg-white/10 rounded-full p-2 flex items-center justify-center">
-          <FaWhatsapp className="w-5 h-5 text-white" aria-hidden />
+        <span className="bg-white/10 rounded-full p-2 flex items-center justify-center relative pointer-events-none">
+          <div className="rounded-full bg-emerald-500 p-1">
+            <FaWhatsapp className="w-5 h-5 text-white" aria-hidden />
+          </div>
+          <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-amber-400 shadow-md animate-pulse-soft" aria-hidden />
         </span>
       </button>
+
+        {/* extra subtle glow on hover for tablet */}
+        <span className="hidden sm:block absolute -inset-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 bg-gradient-to-tl from-purple-600/12 to-pink-500/8 pointer-events-none" aria-hidden />
+      </div>
 
       {/* (panel rendered above the button; duplicate below removed) */}
     </div>
