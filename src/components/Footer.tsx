@@ -10,7 +10,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
     gsap.to(e.currentTarget, { y: 0, scale: 1, duration: 0.2, ease: 'power3.out' })
   }, [])
   return (
-    <footer ref={ref} className="mt-20 border-t border-border-subtle py-10 text-sm text-text-muted">
+    <footer ref={ref} className="mt-0 border-t border-border-subtle py-10 text-sm text-text-muted bg-[#10002b]">
       <div className="container-wrapper">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-text-secondary">&copy; {new Date().getFullYear()} FullVision. Todos los derechos reservados.</p>

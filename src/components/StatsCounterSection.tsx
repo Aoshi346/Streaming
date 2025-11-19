@@ -183,20 +183,22 @@ export default function StatsCounterSection() {
   // Removed random growth for static stable numbers per request.
 
   return (
-    <section ref={sectionRef} id="stats" className="relative py-12 sm:py-16 md:py-20 overflow-hidden">
+    <section ref={sectionRef} id="stats" className="relative py-16 sm:py-20 md:py-24 overflow-hidden">
+      {/* top wave removed to prevent overlap */}
       {/* Subtle animated background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#4c1d95] via-[#581c87] to-[#2e1065] opacity-95 -z-20" />
       <div
         ref={bgRef}
         style={{
           ['--glow-x' as any]: '50%',
           ['--glow-y' as any]: '10%',
           background:
-            'radial-gradient(50% 40% at var(--glow-x) var(--glow-y), rgb(var(--color-brand-base-rgb) / 0.08), transparent 70%)',
+            'radial-gradient(50% 40% at var(--glow-x) var(--glow-y), rgba(76, 201, 240, 0.15), transparent 70%)',
         } as React.CSSProperties}
         className="pointer-events-none absolute inset-0 -z-10"
       />
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="gsap-section-title text-2xl sm:text-3xl md:text-4xl font-semibold text-text-primary mb-2">
             Mucho Por Qué Suscribirte
@@ -212,6 +214,8 @@ export default function StatsCounterSection() {
           <StatCard to={14000} label="Series" Icon={FiPlay} />
         </div>
       </div>
+        {/* Transition to Downloads (#1e1b4b) */}
+        {/* Wave divider removed */}
     </section>
   )
 }

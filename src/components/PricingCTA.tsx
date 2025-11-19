@@ -79,9 +79,9 @@ const PLANS = [
 
 const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
   return (
-    <section ref={ref} id="pricing" className="relative border-t border-white/10 py-16 sm:py-20 overflow-hidden">
+    <section ref={ref} id="pricing" className="relative border-t border-white/10 py-20 sm:py-24 overflow-hidden">
       {/* Animated background gradient */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#4c1d95] via-[#6b21a8] to-[#2e1065] opacity-95">
         <div className="absolute inset-0 bg-gradient-to-br from-brand/5 via-transparent to-accent/5 opacity-50" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse delay-700" />
@@ -114,10 +114,10 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
                 <div className="absolute -top-4 -right-4 z-20">
                   <div className="relative group/badge">
                     {/* Outer glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 animate-gradient-x blur-lg opacity-75" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-brand via-accent to-brand animate-gradient-x blur-lg opacity-75" />
                     
                     {/* Badge container with shine effect */}
-                    <div className="relative overflow-hidden bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 text-white text-xs font-black px-5 py-2 rounded-full shadow-2xl transform rotate-6 group-hover/badge:rotate-0 group-hover/badge:scale-110 transition-all duration-300 border-2 border-white/30">
+                    <div className="relative overflow-hidden bg-gradient-to-r from-brand via-accent to-brand text-white text-xs font-black px-5 py-2 rounded-full shadow-2xl transform rotate-6 group-hover/badge:rotate-0 group-hover/badge:scale-110 transition-all duration-300 border-2 border-white/30">
                       {/* Animated shine overlay */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shine-slow" />
                       
@@ -185,7 +185,7 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
 
               {/* CTA Button */}
               <button className="relative w-full group/btn overflow-hidden rounded-lg font-bold text-white py-2.5 sm:py-3 px-4 sm:px-6 transition-all duration-300 hover:shadow-xl text-sm sm:text-base">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 bg-[length:200%_100%] group-hover/btn:bg-[length:100%_100%] transition-all duration-500 animate-gradient-x" />
+                <div className="absolute inset-0 bg-button-gradient bg-[length:200%_100%] group-hover/btn:bg-[length:100%_100%] transition-all duration-500 animate-gradient-x" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   {p.cta}
@@ -196,7 +196,7 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
               </button>
 
               {/* Bottom accent line */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-50" />
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-brand to-transparent opacity-50" />
             </div>
           ))}
         </div>
@@ -217,6 +217,8 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
           </div>
         </div>
       </div>
+      {/* Transition to FAQ (#2e1065) */}
+        {/* Wave divider removed */}
     </section>
   )
 })

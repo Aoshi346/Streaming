@@ -21,9 +21,9 @@ const faqs = [
 
 const FAQ = forwardRef<HTMLElement>((_, ref) => {
   return (
-    <section ref={ref} id="faq" className="relative border-t border-white/10 py-16 sm:py-20">
-      <div className="absolute inset-0 bg-section-spotlight opacity-80" aria-hidden />
-      <div className="container-wrapper relative">
+    <section ref={ref} id="faq" className="relative border-t border-white/10 py-20 sm:py-24 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#2e1065] via-[#1e1b4b] to-[#000000] opacity-95 -z-20" aria-hidden />
+      <div className="container-wrapper relative z-10">
   <h2 className="gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl">Preguntas frecuentes</h2>
         <div className="mt-6 space-y-3 text-text-secondary">
           {faqs.map(({ q, a }) => (
@@ -36,6 +36,8 @@ const FAQ = forwardRef<HTMLElement>((_, ref) => {
           ))}
         </div>
       </div>
+      {/* Transition to Footer (Black) */}
+      {/* Wave divider removed */}
     </section>
   )
 })

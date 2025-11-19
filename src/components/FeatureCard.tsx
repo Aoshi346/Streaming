@@ -8,10 +8,13 @@ export interface FeatureCardProps {
   title: string
   description: string
   variant: FeatureVariant
+  layout?: 'vertical' | 'horizontal'
+  featured?: boolean
+  onClick?: () => void
 }
 
 const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
-  ({ icon, title, description, variant }, ref) => {
+  ({ icon, title, description, variant, layout = 'vertical', featured = false, onClick }, ref) => {
     const localRef = useRef<HTMLDivElement | null>(null)
     const iconRef = useRef<HTMLDivElement | null>(null)
     const spotRef = useRef<HTMLDivElement | null>(null)
@@ -31,6 +34,8 @@ const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
       // hover: hover and pointer: fine -> likely desktop
       return window.matchMedia('(hover: hover) and (pointer: fine)').matches
     }, [])
+
+    const descriptionBlocks = useMemo(() => description.split('\n\n'), [description])
 
     useEffect(() => {
       const card = localRef.current
@@ -75,6 +80,7 @@ const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
           }
         }
         const onLeave = () => {
+          // return to neutral smoothly
           gsap.to(card, { duration: 0.25, rotateX: 0, rotateY: 0, y: 0, scale: 1, ease: 'power3.out' })
           if (spot) gsap.to(spot, { duration: 0.2, opacity: 0, x: 0, y: 0, ease: 'power3.out' })
         }
@@ -91,20 +97,68 @@ const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
       return () => ctx.revert()
     }, [hoverCapable, prefersReducedMotion, variant])
 
+    const baseLayoutClasses =
+      layout === 'horizontal'
+        ? 'border-white/10 bg-white/5 backdrop-blur-lg p-8 sm:p-10 flex items-center gap-6'
+        : 'border-border-subtle bg-surface-muted/20 p-8 sm:p-10 flex flex-col items-center text-center'
+
+    const featuredClasses = featured
+      ? 'shadow-theme-strong border-brand/30 bg-white/6 hover:ring-2 hover:ring-brand-light/40 focus-within:ring-2 focus-within:ring-brand-light/40'
+      : ''
+
     return (
       <div
         ref={setRefs}
-        className="feature-card group relative rounded-xl border border-border-subtle bg-surface-muted/20 p-6 shadow-theme-soft will-change-transform"
+        className={
+          `feature-card group relative rounded-xl border ${baseLayoutClasses} shadow-theme-soft will-change-transform ` +
+          'transition-all duration-300 ease-out filter ' +
+          // Hover: brighten and lift the whole card
+          'hover:-translate-y-1 hover:shadow-theme-strong hover:ring-1 hover:ring-brand-light/30 ' +
+          featuredClasses +
+          ' cursor-pointer active:scale-95 active:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-light/30'
+        }
+        onClick={onClick}
+        role="button"
+        tabIndex={0}
       >
         {/* spotlight */}
-        <div ref={spotRef} className="pointer-events-none absolute inset-0 opacity-0">
+        <div
+          ref={spotRef}
+          className={`pointer-events-none absolute inset-0 opacity-0 ${
+            featured ? 'bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.12),transparent_60%)]' : ''
+          }`}
+        >
           <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgb(var(--color-brand-base-rgb)_/_0.2),transparent_60%)]" />
         </div>
-        <div ref={iconRef} className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand/40 via-brand-light/40 to-brand-dark/60 text-accent">
+        <div
+          ref={iconRef}
+          className={`flex-shrink-0 flex items-center justify-center rounded-xl bg-gradient-to-br from-brand/40 via-brand-light/40 to-brand-dark/60 text-accent ${
+            layout === 'horizontal' ? 'h-16 w-16 rounded-full' : 'h-24 w-24 rounded-full mb-6'
+          }`}
+        >
           {icon}
         </div>
-        <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-        <p className="mt-2 text-sm text-text-muted">{description}</p>
+
+        <div className={`${layout === 'horizontal' ? 'flex-1' : 'w-full max-w-xl mx-auto mt-2'}`}>
+          <h3
+            className={`text-lg font-semibold ${layout === 'vertical' ? 'mt-2' : ''} ${
+              layout === 'horizontal' ? 'text-xl' : 'text-2xl'
+            } group-hover:text-brand-dark`}
+          >
+            {title}
+          </h3>
+          <div
+            className={`mt-3 space-y-4 ${layout === 'horizontal' ? 'text-base' : 'text-sm sm:text-base leading-relaxed'} ${
+              featured ? 'text-text-primary/90' : 'text-text-muted'
+            } group-hover:text-text-primary/90`}
+          >
+            {descriptionBlocks.map((block, idx) => (
+              <p key={idx} className={`${idx <= 1 ? 'font-semibold' : ''} ${idx === 0 ? 'text-base' : ''}`}>
+                {block}
+              </p>
+            ))}
+          </div>
+        </div>
       </div>
     )
   }

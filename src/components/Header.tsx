@@ -4,7 +4,6 @@ import { gsap } from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import Logo from './Logo'
 import Button from './Button'
-import ThemeToggleButton from './ThemeToggleButton'
 
 gsap.registerPlugin(ScrollToPlugin)
 
@@ -77,13 +76,6 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
         </nav>
   <div className="flex items-center justify-end gap-2 sm:gap-3">
           <Button
-            onClick={() => console.log('click')}
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-button-gradient px-5 py-2.5 text-sm font-semibold text-text-primary shadow-theme-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-theme-strong focus:outline-none focus-visible:ring focus-visible:ring-brand-light/60"
-          >
-            Comenzar
-          </Button>
-          <ThemeToggleButton />
-          <Button
             onClick={() => setMenuOpen((s) => !s)}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
@@ -132,15 +124,6 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                 </a>
               ))}
             </div>
-            <Button
-              onClick={() => {
-                console.log('click')
-                closeMenu()
-              }}
-              className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-button-gradient px-4 py-2.5 text-sm font-semibold text-text-primary shadow-theme-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-theme-strong focus:outline-none focus-visible:ring focus-visible:ring-brand-light/60"
-            >
-              Comenzar
-            </Button>
           </div>
         </div>
       </div>

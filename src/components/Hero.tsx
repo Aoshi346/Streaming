@@ -73,22 +73,22 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
         Your browser does not support the video tag.
       </video>
       
-      {/* Enhanced gradient overlay with purple/pink theme */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-purple-950/50 to-black/85 -z-10" />
+      {/* Enhanced gradient overlay with purple/blue theme */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#2e1065] via-[#4c1d95] to-[#581c87] opacity-90 -z-10 mix-blend-multiply" />
       
       {/* Animated gradient orbs for depth */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/4 -left-20 w-64 h-64 sm:w-96 sm:h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse delay-700" />
+        <div className="absolute top-1/4 -left-20 w-64 h-64 sm:w-96 sm:h-96 bg-brand-light/30 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-accent/30 rounded-full blur-3xl animate-pulse delay-700" />
       </div>
 
       <div className="container-wrapper relative z-10 w-full">
         <div className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6">
           <div className="max-w-4xl text-center mx-auto space-y-6 sm:space-y-8">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-600/20 to-pink-500/20 border border-purple-500/30 backdrop-blur-sm">
-              <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
-              <span className="text-xs sm:text-sm font-semibold text-purple-300">Miles de películas y series disponibles</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+              <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+              <span className="text-xs sm:text-sm font-semibold text-text-secondary">Miles de películas y series disponibles</span>
             </div>
 
             <h1 ref={titleRef} aria-label="Películas, series y más ilimitadas" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-text-primary leading-tight">
@@ -115,9 +115,9 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
                 <a
                   href="#pricing"
-                  className="group relative w-full sm:w-auto overflow-hidden rounded-lg px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-purple-500/50"
+                  className="group relative w-full sm:w-auto overflow-hidden rounded-lg px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-brand/50"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 bg-[length:200%_100%] transition-all duration-500 group-hover:bg-[length:100%_100%] animate-gradient-x" />
+                  <div className="absolute inset-0 bg-button-gradient bg-[length:200%_100%] transition-all duration-500 group-hover:bg-[length:100%_100%] animate-gradient-x" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     SUSCRÍBETE AHORA
@@ -129,7 +129,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                 
                 <a
                   href="#features"
-                  className="group w-full sm:w-auto rounded-lg border-2 border-purple-500/50 bg-black/30 backdrop-blur-sm px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-purple-500/20 hover:border-purple-400 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+                  className="group w-full sm:w-auto rounded-lg border-2 border-white/10 bg-white/5 backdrop-blur-sm px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light"
                 >
                   <span className="flex items-center justify-center gap-2">
                     VER MÁS
@@ -167,7 +167,9 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
       </div>
       
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent -z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#2e1065] to-transparent -z-10" />
+      
+      {/* Wave Divider removed - transitions are now handled with gradient fades */}
     </section>
   )
 })

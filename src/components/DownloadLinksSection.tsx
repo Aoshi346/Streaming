@@ -152,8 +152,9 @@ const DownloadLinksSection: React.FC = () => {
   }, [])
 
   return (
-    <section id="downloads" ref={sectionRef} className="border-t border-border-subtle py-14 sm:py-18">
-      <div className="container-wrapper">
+    <section id="downloads" ref={sectionRef} className="relative border-t border-border-subtle py-16 sm:py-24 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1e1b4b] via-[#312e81] to-[#4c1d95] opacity-95 -z-20" />
+      <div className="container-wrapper relative z-10">
         <h2 className="gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl mb-3">Descarga la app</h2>
         <p className="gsap-section-subtitle mb-8 text-text-secondary/90">
           Obtén FullVision en tu dispositivo favorito. Elige tu plataforma y descarga la aplicación oficial.
@@ -188,6 +189,7 @@ const DownloadLinksSection: React.FC = () => {
           })}
         </div>
       </div>
+      {/* Wave divider removed */}
     </section>
   )
 }

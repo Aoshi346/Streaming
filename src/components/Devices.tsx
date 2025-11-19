@@ -260,9 +260,9 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
   const displayPadTop = isNarrowScreen ? padTop * 0.68 : padTop
 
   return (
-    <section ref={ref} id="devices" className="relative py-16 sm:py-20 md:py-24 border-t border-border-subtle overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-text-primary/2 to-transparent pointer-events-none" />
+    <section ref={ref} id="devices" className="relative py-16 sm:py-20 md:py-24 overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#4c1d95] via-[#6b21a8] to-[#4c1d95] pointer-events-none" />
 
       <div className="container mx-auto px-4">
         <div className="grid gap-12 lg:gap-16 lg:grid-cols-2 items-center">
@@ -418,6 +418,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
           </div>
         </div>
       </div>
+
+      {/* Wave divider removed */}
     </section>
   )
 })
