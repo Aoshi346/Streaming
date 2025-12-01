@@ -11,10 +11,10 @@ export default function Logo({ className = "" }: { className?: string }) {
         <img
           src={logo}
           alt=""
-          className="h-16 w-16 select-none object-contain"
+          className="h-12 w-12 sm:h-16 sm:w-16 select-none object-contain"
         />
       </div>
-      <span className="text-2xl font-extrabold tracking-tight leading-none text-gray-900">
+      <span className="text-xl sm:text-2xl font-extrabold tracking-tight leading-none text-gray-900">
         FullVisionTV
       </span>
     </a>

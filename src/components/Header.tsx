@@ -1,9 +1,8 @@
-import { forwardRef, useCallback, useState, useEffect } from "react";
+import { forwardRef, useCallback, useState, useEffect, useRef } from "react";
 import type React from "react";
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Logo from "./Logo";
-import Button from "./Button";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -14,16 +13,61 @@ const links = [
   { href: "#faq", label: "Preguntas Frecuentes" },
 ];
 
-gsap.registerPlugin(ScrollToPlugin);
-
 const Header = forwardRef<HTMLElement>((_, ref) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
 
+  const assignRefs = useCallback(
+    (node: HTMLElement | null) => {
+      headerRef.current = node;
+      if (!ref) return;
+      if (typeof ref === "function") {
+        ref(node);
+      } else {
+        (ref as React.MutableRefObject<HTMLElement | null>).current = node;
+      }
+    },
+    [ref]
+  );
+
+  // Close the menu on resize / orientation changes
   useEffect(() => {
-    // Lock body scroll when mobile menu is open
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    const handleResize = () => {
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Close on outside click or Escape key when open
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        headerRef.current &&
+        event.target instanceof Node &&
+        !headerRef.current.contains(event.target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("click", handleClickOutside);
+
     return () => {
-      document.body.style.overflow = "";
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [menuOpen]);
 
@@ -60,22 +104,59 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
     }
   }, []);
 
+  const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), []);
   const closeMenu = useCallback(() => setMenuOpen(false), []);
+
+  useEffect(() => {
+    if (!mobileMenuRef.current) return;
+    gsap.set(mobileMenuRef.current, {
+      autoAlpha: 0,
+      y: -8,
+      scale: 0.98,
+      pointerEvents: "none",
+      display: "none",
+    });
+  }, []);
+
+  useEffect(() => {
+    const menuEl = mobileMenuRef.current;
+    if (!menuEl) return;
+
+    gsap.killTweensOf(menuEl);
+
+    if (menuOpen) {
+      gsap
+        .timeline()
+        .set(menuEl, { display: "block", pointerEvents: "auto" })
+        .fromTo(
+          menuEl,
+          { autoAlpha: 0, y: -8, scale: 0.98 },
+          { autoAlpha: 1, y: 0, scale: 1, duration: 0.32, ease: "power2.out" }
+        );
+    } else {
+      gsap
+        .timeline()
+        .to(menuEl, { autoAlpha: 0, y: -8, scale: 0.98, duration: 0.22, ease: "power2.in" })
+        .set(menuEl, { pointerEvents: "none", display: "none" });
+    }
+  }, [menuOpen]);
 
   return (
     <header
-      ref={ref}
+      ref={assignRefs}
       className="sticky top-0 z-50 border-b border-gray-200 bg-white shadow-sm"
     >
-      <div className="container-wrapper relative grid h-20 grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 sm:px-6">
-        <div className="justify-self-start">
+      <div className="container-wrapper relative flex h-16 sm:h-20 items-center justify-between gap-3 px-4 sm:px-6">
+        {/* Logo - responsive sizing */}
+        <div className="flex-shrink-0">
           <Logo className="relative overflow-visible flex items-center rounded focus:outline-none focus-visible:ring focus-visible:ring-brand-light/60" />
         </div>
 
+        {/* Desktop Navigation - centered */}
         <nav
           role="navigation"
           aria-label="Principal"
-          className="hidden md:flex justify-self-center items-center gap-8 text-base font-medium text-gray-600"
+          className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-base font-medium text-gray-600"
         >
           {links.map((link) => (
             <a
@@ -87,7 +168,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                 onNavClick(e);
                 closeMenu();
               }}
-              className="group relative px-1 pb-1 transition-colors duration-200 hover:text-gray-900 will-change-transform"
+              className="group relative px-1 pb-1 transition-colors duration-200 hover:text-gray-900 will-change-transform whitespace-nowrap"
             >
               {link.label}
               <span className="pointer-events-none absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 bg-brand-light transition-transform duration-300 ease-out group-hover:scale-x-100" />
@@ -95,102 +176,78 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
           ))}
         </nav>
 
-        <div className="flex items-center justify-self-end gap-2 sm:gap-3">
-          <Button
-            onClick={() => setMenuOpen((s) => !s)}
+        {/* Mobile Menu Button */}
+        <div className="flex items-center md:hidden">
+          <button
+            type="button"
+            onClick={toggleMenu}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            className="inline-flex items-center justify-center rounded-md p-2 md:hidden bg-gray-100 text-gray-600 transition-all duration-200 hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus-visible:ring focus-visible:ring-brand-light/40"
+            className="inline-flex items-center justify-center rounded-lg p-2.5 bg-gray-100 text-gray-700 transition-all duration-200 hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60 active:scale-95"
           >
             <span className="sr-only">
               {menuOpen ? "Cerrar menú" : "Abrir menú"}
             </span>
-            <div className="h-6 w-6">
-              <svg
-                className="h-full w-full"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <g
-                  className={`transition-transform duration-300 ease-out ${
-                    menuOpen ? "rotate-45" : ""
-                  }`}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 12h12"
-                  />
-                </g>
-                <g
-                  className={`transition-transform duration-300 ease-out ${
-                    menuOpen ? "-rotate-45" : ""
-                  }`}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 12h12"
-                  />
-                </g>
-                <g
-                  className={`transition-opacity duration-300 ease-out ${
-                    menuOpen ? "opacity-0" : ""
-                  }`}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 18h16"
-                  />
-                </g>
-              </svg>
+            <div className="relative h-6 w-6">
+              <span
+                className={`absolute inset-x-0 block h-0.5 rounded-full bg-current transition-transform duration-300 ease-out ${
+                  menuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-1"
+                }`}
+              />
+              <span
+                className={`absolute left-0 right-0 block h-0.5 rounded-full bg-current transition-all duration-200 ease-out ${
+                  menuOpen ? "top-1/2 -translate-y-1/2 opacity-0" : "top-1/2 -translate-y-1/2 opacity-100"
+                }`}
+              />
+              <span
+                className={`absolute inset-x-0 block h-0.5 rounded-full bg-current transition-transform duration-300 ease-out ${
+                  menuOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-1"
+                }`}
+              />
             </div>
-          </Button>
+          </button>
         </div>
+      </div>
 
-        {/* Mobile overlay */}
-        <div
-          className={`md:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-200 ${
-            menuOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          }`}
-          onClick={() => setMenuOpen(false)}
-        />
-
-        {/* Mobile menu panel */}
-        <div
-          id="mobile-menu"
-          className={`md:hidden absolute left-0 right-0 top-full z-50 border-t border-gray-100 bg-white shadow-lg transition-all duration-200 ease-out ${
-            menuOpen
-              ? "opacity-100 translate-y-0"
-              : "pointer-events-none opacity-0 -translate-y-2"
-          }`}
-        >
-          <div className="p-4">
-            <div className="flex flex-col items-stretch gap-1 text-base font-medium text-gray-600">
-              {links.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-                    onNavClick(e);
-                    closeMenu();
-                  }}
-                  className="flex items-center rounded-lg px-4 py-3 transition-colors duration-200 hover:bg-gray-50 hover:text-gray-900"
+      {/* Mobile dropdown */}
+      <div
+        ref={mobileMenuRef}
+        id="mobile-menu"
+        className="md:hidden absolute left-0 right-0 top-full px-4 pb-4 origin-top will-change-transform"
+        aria-hidden={!menuOpen}
+      >
+        <div className="mx-auto max-w-3xl rounded-2xl border border-gray-200 bg-white shadow-2xl shadow-gray-200/80">
+          <nav className="flex flex-col divide-y divide-gray-100 py-3" aria-label="Menú móvil">
+            {links.map((link, index) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => {
+                  onNavClick(e);
+                  closeMenu();
+                }}
+                className="group flex items-center justify-between px-5 py-4 text-base font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60"
+                style={{ transitionDelay: menuOpen ? `${index * 40}ms` : "0ms" }}
+              >
+                <span>{link.label}</span>
+                <svg
+                  className="w-5 h-5 text-gray-400 transition-transform duration-200 group-hover:text-brand-light"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  {link.label}
-                </a>
-              ))}
-            </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            ))}
+          </nav>
+          <div className="border-t border-gray-100 px-5 py-4 text-center text-sm text-gray-500">
+            FullVisionTV © 2024
           </div>
         </div>
       </div>
