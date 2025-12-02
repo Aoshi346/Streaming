@@ -1,10 +1,8 @@
 import { forwardRef, useCallback, useState, useEffect, useRef } from "react";
 import type React from "react";
 import { gsap } from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Logo from "./Logo";
-
-gsap.registerPlugin(ScrollToPlugin);
+import { smoothScrollTo } from "../utils/smoothScroll";
 
 const links = [
   { href: "#features", label: "Características" },
@@ -89,20 +87,21 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
     });
   }, []);
 
-  const onNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    const href = e.currentTarget.getAttribute("href");
-    if (href && href.startsWith("#")) {
-      e.preventDefault();
-      const target = document.querySelector(href) as HTMLElement | null;
-      if (target) {
-        gsap.to(window, {
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTo: { y: target, offsetY: 72 },
-        });
-      }
-    }
+  const getScrollOffset = useCallback(() => {
+    if (!headerRef.current) return 72;
+    return headerRef.current.getBoundingClientRect().height + 12;
   }, []);
+
+  const onNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      const href = e.currentTarget.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        e.preventDefault();
+        smoothScrollTo(href, { offset: getScrollOffset(), duration: 0.65 });
+      }
+    },
+    [getScrollOffset]
+  );
 
   const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), []);
   const closeMenu = useCallback(() => setMenuOpen(false), []);

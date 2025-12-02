@@ -1,6 +1,9 @@
-import { forwardRef, useLayoutEffect, useRef, useEffect } from 'react'
+import { forwardRef, useLayoutEffect, useRef, useEffect, useCallback } from 'react'
+import type React from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { FaDownload, FaLaptop } from 'react-icons/fa'
+import { smoothScrollTo } from '../utils/smoothScroll'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -55,6 +58,20 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
     return () => ctx.revert()
   }, [])
 
+  const getGlobalOffset = useCallback(() => {
+    const headerEl = document.querySelector('header')
+    return headerEl ? headerEl.getBoundingClientRect().height + 12 : 72
+  }, [])
+
+  const handleSmoothAnchor = useCallback(
+    (hash: string) => (event: React.MouseEvent<HTMLAnchorElement>) => {
+      if (!hash.startsWith('#')) return
+      event.preventDefault()
+      smoothScrollTo(hash, { offset: getGlobalOffset(), duration: 0.65 })
+    },
+    [getGlobalOffset]
+  )
+
   return (
     <section ref={sectionRef} id="top" className="relative isolate overflow-hidden min-h-[85vh] sm:min-h-[90vh] lg:min-h-screen flex items-center">
       {/* Background Video with performance optimizations */}
@@ -88,7 +105,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
               <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-              <span className="text-xs sm:text-sm font-semibold text-text-secondary">Miles de películas y series disponibles</span>
+              <span className="text-sm sm:text-base font-semibold text-text-secondary">Miles de películas y series disponibles</span>
             </div>
 
             <h1 ref={titleRef} aria-label="Películas, series y más ilimitadas" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-text-primary leading-tight">
@@ -111,11 +128,12 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
             </p>
 
             {/* CTA Buttons with enhanced styling */}
-            <div className="mt-8 sm:mt-10 flex flex-col items-center justify-center gap-3 sm:gap-4 px-4">
+            <div className="mt-8 sm:mt-10 flex flex-col items-center gap-4 px-4">
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
                 <a
                   href="#pricing"
                   className="group relative w-full sm:w-auto overflow-hidden rounded-lg px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-brand/50"
+                  onClick={handleSmoothAnchor('#pricing')}
                 >
                   <div className="absolute inset-0 bg-button-gradient bg-[length:200%_100%] transition-all duration-500 group-hover:bg-[length:100%_100%] animate-gradient-x" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -130,6 +148,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                 <a
                   href="#features"
                   className="group w-full sm:w-auto rounded-lg border-2 border-white/10 bg-white/5 backdrop-blur-sm px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light"
+                  onClick={handleSmoothAnchor('#features')}
                 >
                   <span className="flex items-center justify-center gap-2">
                     VER MÁS
@@ -139,9 +158,51 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                   </span>
                 </a>
               </div>
-              
+
+              <div className="w-full max-w-2xl space-y-3">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <a
+                    href="#devices"
+                    className="group relative flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm sm:text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10"
+                    onClick={handleSmoothAnchor('#devices')}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand/30 text-white/90">
+                        <FaLaptop aria-hidden />
+                      </span>
+                      <div className="flex flex-col text-left">
+                        <span className="text-base">Dispositivos Compatibles</span>
+                        <span className="text-sm text-white/80">TV, móvil, tablet y más</span>
+                      </div>
+                    </div>
+                    <svg className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+
+                  <a
+                    href="#downloads"
+                    className="group relative flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm sm:text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10"
+                    onClick={handleSmoothAnchor('#downloads')}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/20 text-white">
+                        <FaDownload aria-hidden />
+                      </span>
+                      <div className="flex flex-col text-left">
+                        <span className="text-base">Descarga la app</span>
+                        <span className="text-sm text-white/80">Android, iOS, Windows, Mac</span>
+                      </div>
+                    </div>
+                    <svg className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
               {/* Trust indicators */}
-              <div className="flex items-center justify-center gap-4 sm:gap-6 mt-4 flex-wrap text-xs sm:text-sm text-text-secondary">
+              <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap text-sm sm:text-base text-text-secondary mt-2">
                 <span className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
