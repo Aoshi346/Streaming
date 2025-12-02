@@ -30,7 +30,11 @@ export default {
   				base: 'var(--color-surface)',
   				muted: 'var(--color-surface-muted)'
   			},
-  			border: 'hsl(var(--border))',
+			border: {
+				DEFAULT: 'hsl(var(--border))',
+				subtle: 'var(--color-border-subtle)',
+				strong: 'var(--color-border-strong)',
+			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
