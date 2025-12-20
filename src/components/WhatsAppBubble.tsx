@@ -46,27 +46,27 @@ const WhatsAppBubble: React.FC<Props> = ({
           id="whatsapp-panel"
           role="dialog"
           aria-label="Panel de contacto por WhatsApp"
-          className="mb-3 w-72 max-w-xs rounded-lg bg-white/5 bg-gradient-to-br from-purple-900/10 to-pink-500/6 backdrop-blur-md border border-white/10 ring-1 ring-purple-600/10 shadow-2xl p-3 text-white animate-fade-in relative overflow-visible"
+          className="mb-3 w-72 max-w-xs rounded-lg bg-[rgb(var(--color-background-rgb))/0.6] bg-gradient-to-br from-[rgba(0,0,0,0.04)] to-[rgba(236,72,153,0.08)] backdrop-blur-md border border-border-subtle ring-1 ring-border-subtle shadow-theme-soft p-3 text-text-primary animate-fade-in relative overflow-visible"
           onClick={(e) => e.stopPropagation()}
         >
           {/* pointer triangle */}
-          <div className="absolute -bottom-1 left-6 w-4 h-4 bg-white/5 rotate-45 border border-white/10 shadow-md" aria-hidden />
+          <div className="absolute -bottom-1 left-6 w-4 h-4 bg-[rgb(var(--color-background-rgb))/0.6] rotate-45 border border-border-subtle shadow-md" aria-hidden />
           <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-tr from-purple-600 to-pink-500 rounded-full p-0.5">
-              <div className="bg-white rounded-full p-2">
+            <div className="bg-gradient-to-tr from-[rgba(0,0,0,0.85)] to-[rgba(236,72,153,0.85)] rounded-full p-0.5">
+              <div className="bg-[rgb(var(--color-background-rgb))] rounded-full p-2">
                 <div className="rounded-full bg-emerald-500 p-1">
-                  <FaWhatsapp className="w-4 h-4 text-white" aria-hidden />
+                  <FaWhatsapp className="w-4 h-4 text-text-secondary" aria-hidden />
                 </div>
               </div>
             </div>
 
             <div className="flex-1">
               <div className="font-semibold">Soporte por WhatsApp</div>
-              <div className="text-sm text-white/80">+{phone} · Disponible 24/7</div>
+              <div className="text-sm text-text-secondary">+{phone} · Disponible 24/7</div>
             </div>
           </div>
 
-          <p className="mt-3 text-sm text-white/75">Escríbenos y te responderemos lo antes posible. Usa el botón para abrir el chat en WhatsApp.</p>
+          <p className="mt-3 text-sm text-text-muted">Escríbenos y te responderemos lo antes posible. Usa el botón para abrir el chat en WhatsApp.</p>
 
           <div className="mt-3 flex items-center gap-2">
             <a
@@ -83,9 +83,9 @@ const WhatsAppBubble: React.FC<Props> = ({
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Cerrar"
-              className="p-2 rounded-md bg-white/6 hover:bg-white/8"
+              className="p-2 rounded-md bg-[rgb(var(--color-background-rgb))/0.6] hover:bg-[rgb(var(--color-background-rgb))/0.7]"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-white/90">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-text-primary">
                 <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
@@ -96,7 +96,7 @@ const WhatsAppBubble: React.FC<Props> = ({
       {/* Toggle button (icon) */}
       <div className="relative flex items-center">
         {/* decorative glowing ring */}
-        <span className="absolute -inset-1 rounded-full blur-2xl bg-gradient-to-tr from-purple-600/20 to-pink-500/12 opacity-80 animate-pulse-soft pointer-events-none" aria-hidden />
+        <span className="absolute -inset-1 rounded-full blur-2xl bg-gradient-to-tr from-[rgba(0,0,0,0.12)] to-[rgba(236,72,153,0.12)] opacity-80 animate-pulse-soft pointer-events-none" aria-hidden />
         <button
         type="button"
         aria-expanded={open}
@@ -106,19 +106,19 @@ const WhatsAppBubble: React.FC<Props> = ({
           e.stopPropagation()
           setOpen((s) => !s)
         }}
-        className="whatsapp-toggle group relative flex items-center gap-3 rounded-full px-3 py-2 shadow-lg transform transition-transform duration-150 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-4 focus:ring-offset-2 bg-gradient-to-tr from-purple-700 to-pink-500 text-white"
+        className="whatsapp-toggle group relative flex items-center gap-3 rounded-full px-3 py-2 shadow-theme-soft transform transition-transform duration-150 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-4 focus:ring-offset-2 bg-gradient-to-tr from-[rgba(0,0,0,0.9)] to-[rgba(236,72,153,0.9)] text-text-primary"
       >
         <span className="sr-only">Contactar por WhatsApp</span>
-        <span className="bg-white/10 rounded-full p-2 flex items-center justify-center relative pointer-events-none">
+        <span className="bg-[rgb(var(--color-background-rgb))/0.7] rounded-full p-2 flex items-center justify-center relative pointer-events-none">
           <div className="rounded-full bg-emerald-500 p-1">
-            <FaWhatsapp className="w-5 h-5 text-white" aria-hidden />
+            <FaWhatsapp className="w-5 h-5 text-text-secondary" aria-hidden />
           </div>
           <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-amber-400 shadow-md animate-pulse-soft" aria-hidden />
         </span>
       </button>
 
         {/* extra subtle glow on hover for tablet */}
-        <span className="hidden sm:block absolute -inset-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 bg-gradient-to-tl from-purple-600/12 to-pink-500/8 pointer-events-none" aria-hidden />
+        <span className="hidden sm:block absolute -inset-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 bg-gradient-to-tl from-[rgba(0,0,0,0.08)] to-[rgba(236,72,153,0.08)] pointer-events-none" aria-hidden />
       </div>
 
       {/* (panel rendered above the button; duplicate below removed) */}

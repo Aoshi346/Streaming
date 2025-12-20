@@ -104,56 +104,56 @@ function StatCard({ to, label, Icon, duration = 2, formatter = formatCompactNumb
       ref={cardRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="stat-card group relative z-20 flex flex-col items-center gap-3 px-7 py-7 sm:px-8 sm:py-8 md:px-10 md:py-10 rounded-2xl border-[3px] border-white/40 bg-gradient-to-br from-white/20 via-white/12 to-white/6 backdrop-blur-lg will-change-transform overflow-hidden shadow-[0_25px_60px_-12px_rgba(139,92,246,0.45)] transition-all duration-300 hover:-translate-y-1.5 hover:scale-105"
+      className="stat-card group relative z-20 flex flex-col items-center gap-3 px-7 py-7 sm:px-8 sm:py-8 md:px-10 md:py-10 rounded-2xl border-[3px] border-border-subtle bg-gradient-to-br from-white via-white/90 to-white/80 backdrop-blur-lg will-change-transform overflow-hidden shadow-theme-strong transition-all duration-300 hover:-translate-y-1.5 hover:scale-105"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-400/15 via-blue-400/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-purple-400/40 via-blue-400/40 to-pink-400/40 opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-300" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-br from-[rgba(0,0,0,0.06)] via-[rgba(0,0,0,0.04)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-[rgba(236,72,153,0.35)] via-[rgba(0,0,0,0.15)] to-[rgba(236,72,153,0.2)] opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-300" aria-hidden />
 
       {/* Sheen / chrome shimmer for cinematic look */}
       <div className="card-sheen z-30" aria-hidden>
         <div className={`sheen ${!prefersReduced ? 'animate-shine' : ''}`} />
       </div>
 
-      {/* Thin film frame at top and bottom */}
-      <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-black/70 via-black/50 to-black/70 rounded-t-2xl opacity-70 z-0" aria-hidden />
-      <div className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-black/70 via-black/50 to-black/70 rounded-b-2xl opacity-70 z-0" aria-hidden />
+      {/* Thin film frame at top and bottom (brand-tinted) */}
+      <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-brand-dark/20 via-brand-base/20 to-brand-dark/20 rounded-t-2xl opacity-70 z-0" aria-hidden />
+      <div className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-brand-dark/20 via-brand-base/20 to-brand-dark/20 rounded-b-2xl opacity-70 z-0" aria-hidden />
 
       {/* Film-style perforations on card */}
       <div className="pointer-events-none absolute inset-x-0 top-2 sm:top-3 flex justify-center px-4 sm:px-5" aria-hidden>
         <div className="flex gap-2 sm:gap-2.5">
           {Array.from({ length: 12 }).map((_, idx) => (
-            <span key={`card-top-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-white/12 border border-white/20" />
+            <span key={`card-top-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-surface-muted border border-border-subtle" />
           ))}
         </div>
       </div>
       <div className="pointer-events-none absolute inset-x-0 bottom-2 sm:bottom-3 flex justify-center px-4 sm:px-5" aria-hidden>
         <div className="flex gap-2 sm:gap-2.5">
           {Array.from({ length: 12 }).map((_, idx) => (
-            <span key={`card-bottom-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-white/12 border border-white/20" />
+            <span key={`card-bottom-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-surface-muted border border-border-subtle" />
           ))}
         </div>
       </div>
 
       {/* Icon container with animation */}
-      <div ref={iconRef} className="relative z-10 flex items-center justify-center w-16 h-16 sm:w-[4.5rem] sm:h-[4.5rem] rounded-xl bg-gradient-to-br from-purple-400/30 to-blue-400/30 text-white shadow-xl ring-2 ring-white/30 group-hover:ring-white/50 transition-all duration-300">
-        <Icon className="w-8 h-8 sm:w-9 sm:h-9 text-white drop-shadow-lg" animate={isHovered} />
+      <div ref={iconRef} className="relative z-10 flex items-center justify-center w-16 h-16 sm:w-[4.5rem] sm:h-[4.5rem] rounded-xl bg-gradient-to-br from-[rgba(236,72,153,0.18)] to-[rgba(0,0,0,0.08)] text-text-primary shadow-theme-soft ring-2 ring-border-subtle group-hover:ring-border-strong transition-all duration-300">
+        <Icon className="w-8 h-8 sm:w-9 sm:h-9 text-text-secondary drop-shadow-lg" animate={isHovered} />
       </div>
 
       {/* Number display */}
       <div className="relative z-10 text-center">
-        <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow-xl">
+        <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-text-primary drop-shadow-xl">
           <span ref={valueElRef}>0</span>
         </div>
       </div>
 
       {/* Label */}
       <div className="relative z-10 text-center">
-        <div className="text-sm sm:text-base font-bold text-white/95 tracking-[0.25em] uppercase group-hover:text-white transition-all duration-300">
+        <div className="text-sm sm:text-base font-bold text-text-secondary tracking-[0.25em] uppercase group-hover:text-text-primary transition-all duration-300">
           {label}
         </div>
       </div>
 
-      <div className="absolute bottom-3 left-1/2 h-0.5 w-24 -translate-x-1/2 rounded-full bg-gradient-to-r from-transparent via-purple-300/60 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute bottom-3 left-1/2 h-0.5 w-24 -translate-x-1/2 rounded-full bg-gradient-to-r from-transparent via-[rgba(236,72,153,0.5)] to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
     </div>
   )
 }
@@ -249,7 +249,7 @@ export default function StatsCounterSection() {
   return (
     <section ref={sectionRef} id="stats" className="relative py-20 sm:py-24 md:py-32 overflow-hidden">
       {/* Subtle animated background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1a0b2e] via-[#2d1b4e] to-[#0f0820] -z-30" />
+      <div className="absolute inset-0 bg-page-gradient -z-30" />
       <div
         ref={bgRef}
         style={{
@@ -263,44 +263,44 @@ export default function StatsCounterSection() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8 sm:mb-10">
-          <h2 className="gsap-section-title text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-2 tracking-tight">
+          <h2 className="gsap-section-title text-2xl sm:text-3xl md:text-4xl font-semibold text-text-primary mb-2 tracking-tight">
             Mucho Por Qué Suscribirte
           </h2>
-          <p className="gsap-section-subtitle text-base sm:text-lg text-white/70">
+          <p className="gsap-section-subtitle text-base sm:text-lg text-text-muted">
             Programación premium, estrenos constantes y TV en vivo que no se detiene
           </p>
         </div>
 
         {/* Cinematic reel background */}
         <div className="relative mb-12 sm:mb-16 flex justify-center">
-          <div className="relative w-full max-w-6xl h-24 sm:h-28 md:h-32 overflow-hidden rounded-3xl border-2 border-white/25 bg-gradient-to-r from-black/60 via-black/80 to-black/60 backdrop-blur-md shadow-[0_25px_60px_-12px_rgba(0,0,0,0.6)]">
+          <div className="relative w-full max-w-6xl h-24 sm:h-28 md:h-32 overflow-hidden rounded-3xl border-2 border-border-subtle bg-gradient-to-r from-brand-dark/15 via-brand-base/15 to-brand-dark/15 backdrop-blur-md shadow-theme-strong">
             {/* Subtle film grain overlay */}
             <div className="pointer-events-none film-grain absolute inset-0 z-20" aria-hidden />
             {/* Film perforations top */}
             <div className="pointer-events-none absolute inset-x-0 top-2 sm:top-3 flex justify-between px-4 sm:px-6" aria-hidden>
               <div className="flex gap-2 sm:gap-2.5">
                 {Array.from({ length: 24 }).map((_, idx) => (
-                  <span key={`perf-top-left-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-white/10 border border-white/20" />
+                  <span key={`perf-top-left-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-surface-muted border border-border-subtle" />
                 ))}
               </div>
               <div className="flex gap-2 sm:gap-2.5">
                 {Array.from({ length: 24 }).map((_, idx) => (
-                  <span key={`perf-top-right-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-white/10 border border-white/20" />
+                  <span key={`perf-top-right-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-surface-muted border border-border-subtle" />
                 ))}
               </div>
             </div>
 
             {/* Scrolling content */}
             <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-32 sm:w-40 bg-gradient-to-r from-black/80 to-transparent z-10" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-40 bg-gradient-to-l from-black/80 to-transparent z-10" />
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-32 sm:w-40 bg-gradient-to-r from-[rgb(var(--color-background-rgb))/0.92] to-transparent z-10" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-40 bg-gradient-to-l from-[rgb(var(--color-background-rgb))/0.92] to-transparent z-10" />
 
               {/* Moving scanline for cinematic feel (disabled when reduced motion) */}
               {!prefersReduced && <div className="scanline absolute left-0 right-0 top-[-12%] h-8 sm:h-10 md:h-12 z-20" aria-hidden />}
 
               <div
                 ref={filmStripRef}
-                className="flex items-center gap-12 sm:gap-16 md:gap-20 whitespace-nowrap text-sm sm:text-base md:text-lg font-extrabold uppercase tracking-[0.35em] sm:tracking-[0.45em] text-white/85"
+                className="flex items-center gap-12 sm:gap-16 md:gap-20 whitespace-nowrap text-sm sm:text-base md:text-lg font-extrabold uppercase tracking-[0.35em] sm:tracking-[0.45em] text-text-primary/85"
               >
                 {[...Array(3)].map((_, loopIndex) => (
                   <div key={loopIndex} className="flex items-center gap-8 sm:gap-12">
@@ -319,12 +319,12 @@ export default function StatsCounterSection() {
             <div className="pointer-events-none absolute inset-x-0 bottom-2 sm:bottom-3 flex justify-between px-4 sm:px-6" aria-hidden>
               <div className="flex gap-2 sm:gap-2.5">
                 {Array.from({ length: 24 }).map((_, idx) => (
-                  <span key={`perf-bottom-left-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-white/10 border border-white/20" />
+                  <span key={`perf-bottom-left-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-surface-muted border border-border-subtle" />
                 ))}
               </div>
               <div className="flex gap-2 sm:gap-2.5">
                 {Array.from({ length: 24 }).map((_, idx) => (
-                  <span key={`perf-bottom-right-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-white/10 border border-white/20" />
+                  <span key={`perf-bottom-right-${idx}`} className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-surface-muted border border-border-subtle" />
                 ))}
               </div>
             </div>

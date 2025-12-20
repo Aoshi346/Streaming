@@ -17,28 +17,28 @@ const downloadPlatforms: DownloadPlatform[] = [
   {
     id: 'android',
     label: 'Android',
-      icon: <FaAndroid className="h-8 w-8 text-green-400" aria-hidden />,
+      icon: <FaAndroid className="h-8 w-8 text-brand-light" aria-hidden />,
     link: 'https://play.google.com/store/apps/details?id=com.fullvision',
     storeName: 'Google Play',
   },
   {
     id: 'ios',
     label: 'iOS',
-      icon: <FaApple className="h-8 w-8 text-gray-300" aria-hidden />,
+      icon: <FaApple className="h-8 w-8 text-text-secondary" aria-hidden />,
     link: 'https://apps.apple.com/app/fullvision/id123456789',
     storeName: 'App Store',
   },
   {
     id: 'macos',
     label: 'MacOS',
-      icon: <FaDesktop className="h-8 w-8 text-blue-400" aria-hidden />,
+      icon: <FaDesktop className="h-8 w-8 text-brand" aria-hidden />,
     link: 'https://fullvision.com/download/macos',
     storeName: 'Descargar para Mac',
   },
   {
     id: 'windows',
     label: 'Windows',
-      icon: <FaWindows className="h-8 w-8 text-blue-500" aria-hidden />,
+      icon: <FaWindows className="h-8 w-8 text-brand-dark" aria-hidden />,
     link: 'https://fullvision.com/download/windows',
     storeName: 'Descargar para Windows',
   },
@@ -153,7 +153,7 @@ const DownloadLinksSection: React.FC = () => {
 
   return (
     <section id="downloads" ref={sectionRef} className="relative border-t border-border-subtle py-16 sm:py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1e1b4b] via-[#312e81] to-[#4c1d95] opacity-95 -z-20" />
+      <div className="absolute inset-0 bg-page-gradient -z-20" />
       <div className="container-wrapper relative z-10">
         <h2 className="gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl mb-3">Descarga la app</h2>
         <p className="gsap-section-subtitle mb-8 text-text-secondary/90">

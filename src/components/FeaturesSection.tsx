@@ -142,10 +142,7 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
       id="features"
       className="relative border-t border-border-subtle py-20 sm:py-24 overflow-hidden"
     >
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-[#2e1065] via-[#4c1d95] to-[#6b21a8] opacity-95 -z-20"
-        aria-hidden
-      />
+      <div className="absolute inset-0 bg-page-gradient -z-20" aria-hidden />
       <div className="container-wrapper relative z-10">
         <h2 className="feature-title gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl">
           Todo lo que necesitas para transmitir
@@ -174,7 +171,7 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
           <div
             role="region"
             aria-label="Anuncio de premio por referidos"
-            className="mx-auto max-w-4xl rounded-lg border border-white/8 bg-white/6 p-4 sm:p-6 text-center shadow-theme-strong"
+            className="mx-auto max-w-4xl rounded-lg border border-border-subtle bg-[rgb(var(--color-background-rgb))/0.7] p-4 sm:p-6 text-center shadow-theme-strong"
           >
             <h3 className="text-lg sm:text-2xl font-semibold text-text-primary">
               ¿Sabías que después que te suscribes te premiamos?

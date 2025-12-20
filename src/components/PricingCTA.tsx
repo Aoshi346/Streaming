@@ -9,7 +9,7 @@ const PLANS = [
     price: '$20',
     term: 'x1 Mes',
     strike: '$30.99',
-    accent: 'bg-white/[0.03] border-white/10 shadow-theme-soft',
+    accent: 'bg-brand/5 border-brand-dark/30 shadow-theme-soft',
     cta: 'COMPRAR AHORA',
     perks: [
       '1 Mes de Servicio',
@@ -27,7 +27,7 @@ const PLANS = [
     price: '$40',
     term: 'x3 Meses',
     strike: '$80.99',
-    accent: 'bg-white/[0.05] border-brand/40 shadow-theme-strong ring-2 ring-brand-light/40',
+    accent: 'bg-brand/8 border-brand/40 shadow-theme-strong ring-2 ring-brand-light/40',
     cta: 'COMPRAR AHORA',
     badge: 'POPULAR',
     perks: [
@@ -46,7 +46,7 @@ const PLANS = [
     price: '$65',
     term: 'x6 Meses',
     strike: '$130.99',
-    accent: 'bg-white/[0.03] border-white/10 shadow-theme-soft',
+    accent: 'bg-brand/5 border-brand-dark/30 shadow-theme-soft',
     cta: 'COMPRAR AHORA',
     perks: [
       '6 Meses de Servicio',
@@ -64,7 +64,7 @@ const PLANS = [
     price: '$120',
     term: 'x12 Meses',
     strike: '$240.99',
-    accent: 'bg-white/[0.05] border-white/10 shadow-theme-strong',
+    accent: 'bg-brand/8 border-brand-dark/30 shadow-theme-strong',
     cta: 'COMPRAR AHORA',
     perks: [
       '12 Meses de Servicio',
@@ -79,17 +79,13 @@ const PLANS = [
 
 const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
   return (
-    <section ref={ref} id="pricing" className="relative border-t border-white/10 py-20 sm:py-24 overflow-hidden">
+    <section ref={ref} id="pricing" className="relative border-t border-border-subtle py-20 sm:py-24 overflow-hidden">
       {/* Animated background gradient */}
-      <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#4c1d95] via-[#6b21a8] to-[#2e1065] opacity-95">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand/5 via-transparent to-accent/5 opacity-50" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse delay-700" />
-      </div>
+      <div className="absolute inset-0 -z-20 bg-page-gradient" />
 
       <div className="container-wrapper relative z-10">
         <div className="text-center mb-8 sm:mb-12 px-4">
-          <h2 className="gsap-section-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight bg-gradient-to-r from-white via-white to-brand/80 bg-clip-text text-transparent">
+          <h2 className="gsap-section-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary">
             Elige un plan y comienza
           </h2>
           <p className="gsap-section-subtitle mt-3 sm:mt-4 text-base sm:text-lg text-text-secondary max-w-2xl mx-auto">
@@ -117,9 +113,9 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
                     <div className="absolute inset-0 bg-gradient-to-r from-brand via-accent to-brand animate-gradient-x blur-lg opacity-75" />
                     
                     {/* Badge container with shine effect */}
-                    <div className="relative overflow-hidden bg-gradient-to-r from-brand via-accent to-brand text-white text-xs font-black px-5 py-2 rounded-full shadow-2xl transform rotate-6 group-hover/badge:rotate-0 group-hover/badge:scale-110 transition-all duration-300 border-2 border-white/30">
+                    <div className="relative overflow-hidden bg-gradient-to-r from-brand via-accent to-brand text-text-primary text-xs font-black px-5 py-2 rounded-full shadow-2xl transform rotate-6 group-hover/badge:rotate-0 group-hover/badge:scale-110 transition-all duration-300 border-2 border-brand-light/30">
                       {/* Animated shine overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shine-slow" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgb(var(--color-background-rgb))/0.4] to-transparent animate-shine-slow" />
                       
                       {/* Content */}
                       <span className="relative z-10 flex items-center gap-1.5 drop-shadow-lg">
@@ -130,20 +126,20 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
                       </span>
                       
                       {/* Bottom highlight */}
-                      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--color-background-rgb))/0.6] to-transparent" />
                     </div>
                     
                     {/* Sparkle effects */}
-                    <div className="absolute -top-1 -left-1 w-2 h-2 bg-white rounded-full opacity-0 group-hover/badge:opacity-100 group-hover/badge:animate-ping" />
+                    <div className="absolute -top-1 -left-1 w-2 h-2 bg-[rgb(var(--color-background-rgb))] rounded-full opacity-0 group-hover/badge:opacity-100 group-hover/badge:animate-ping" />
                     <div className="absolute -bottom-1 -right-1 w-1.5 h-1.5 bg-pink-300 rounded-full opacity-0 group-hover/badge:opacity-100 group-hover/badge:animate-ping animation-delay-150" />
                   </div>
                 </div>
               )}
 
               {/* Card header with gradient background */}
-              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-white/10 to-transparent p-3 sm:p-4 mb-3 sm:mb-4 backdrop-blur-sm border border-white/10">
+              <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand/10 to-transparent p-3 sm:p-4 mb-3 sm:mb-4 backdrop-blur-sm border border-brand/20">
                 <div className="relative z-10">
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-1">{p.title}</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-text-primary mb-1">{p.title}</h3>
                   <p className="text-text-muted text-xs leading-relaxed">{p.subtitle}</p>
                 </div>
                 <div className="absolute top-0 right-0 w-20 h-20 bg-brand/20 rounded-full blur-2xl" />
@@ -151,13 +147,13 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
 
               {/* Pricing section */}
               <div className="relative mb-4 sm:mb-6">
-                <div className="text-center py-3 sm:py-4 rounded-lg bg-gradient-to-br from-white/5 to-transparent border border-white/5">
+                <div className="text-center py-3 sm:py-4 rounded-lg bg-gradient-to-br from-brand/10 to-transparent border border-brand/20">
                   <div className="flex items-center justify-center gap-2 mb-2">
                     <span className="text-xs sm:text-sm text-text-muted line-through opacity-60">{p.strike}</span>
                     <span className="text-[10px] sm:text-xs bg-red-500/20 text-red-300 px-2 py-0.5 rounded-full border border-red-500/30">AHORRO</span>
                   </div>
                   <div className="flex items-baseline justify-center">
-                    <span className="text-4xl sm:text-5xl font-black bg-gradient-to-br from-white to-brand/60 bg-clip-text text-transparent">
+                    <span className="text-4xl sm:text-5xl font-black text-text-primary">
                       {p.price}
                     </span>
                   </div>
@@ -174,9 +170,9 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
                     style={{ animationDelay: `${i * 50}ms` }}
                   >
                     <div className="flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gradient-to-br from-brand to-accent flex items-center justify-center mt-0.5 shadow-lg">
-                      <FaCheck className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-white" />
+                      <FaCheck className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-text-primary" />
                     </div>
-                    <span className="text-xs sm:text-sm text-text-secondary group-hover/item:text-white transition-colors duration-200 leading-relaxed">
+                    <span className="text-xs sm:text-sm text-text-secondary group-hover/item:text-text-primary transition-colors duration-200 leading-relaxed">
                       {perk}
                     </span>
                   </div>
@@ -184,9 +180,9 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
               </div>
 
               {/* CTA Button */}
-              <button className="relative w-full group/btn overflow-hidden rounded-lg font-bold text-white py-2.5 sm:py-3 px-4 sm:px-6 transition-all duration-300 hover:shadow-xl text-sm sm:text-base">
+              <button className="relative w-full group/btn overflow-hidden rounded-lg font-bold text-text-primary py-2.5 sm:py-3 px-4 sm:px-6 transition-all duration-300 hover:shadow-xl text-sm sm:text-base">
                 <div className="absolute inset-0 bg-button-gradient bg-[length:200%_100%] group-hover/btn:bg-[length:100%_100%] transition-all duration-500 animate-gradient-x" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--color-text-primary-rgb))/0.1] to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   {p.cta}
                   <svg className="w-3 h-3 sm:w-4 sm:h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">

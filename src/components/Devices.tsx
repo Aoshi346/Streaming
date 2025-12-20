@@ -261,8 +261,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
 
   return (
     <section ref={ref} id="devices" className="relative py-16 sm:py-20 md:py-24 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#4c1d95] via-[#6b21a8] to-[#4c1d95] pointer-events-none" />
+      {/* Background gradient from palette */}
+      <div className="absolute inset-0 -z-20 bg-page-gradient pointer-events-none" />
 
       <div className="container mx-auto px-4">
         <div className="grid gap-12 lg:gap-16 lg:grid-cols-2 items-center">
@@ -337,18 +337,13 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
               <div 
                 className="absolute inset-0 -z-10 rounded-[inherit] blur-3xl opacity-30 transition-all duration-700"
                 style={{
-                  background: `radial-gradient(circle at center, ${
-                    activeDeviceID === 'tv' ? 'rgb(37, 99, 235)' :
-                    activeDeviceID === 'mobile' ? 'rgb(147, 51, 234)' :
-                    activeDeviceID === 'tablet' ? 'rgb(236, 72, 153)' :
-                    'rgb(6, 182, 212)'
-                  } 0%, transparent 70%)`,
+                  background: 'radial-gradient(circle at center, rgb(var(--color-brand-light-rgb)) 0%, transparent 70%)',
                   transform: 'scale(1.1)'
                 }}
               />
               
               <div
-                className="relative overflow-hidden border border-border-subtle bg-gradient-to-br from-surface-muted/50 to-surface-base/20 shadow-2xl backdrop-blur-sm transition-all duration-700"
+                className="relative overflow-hidden border border-brand-dark/30 bg-gradient-to-br from-brand-dark/10 via-brand/10 to-brand-light/10 shadow-2xl backdrop-blur-sm transition-all duration-700"
                 style={{ 
                   borderRadius: `${activeSpec.radius}px`,
                   boxShadow: `0 20px 60px -15px ${
@@ -366,12 +361,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                 <div 
                   className="absolute inset-0 opacity-40 pointer-events-none transition-opacity duration-700"
                   style={{
-                    background: `linear-gradient(135deg, ${
-                      activeDeviceID === 'tv' ? 'rgba(37, 99, 235, 0.1)' :
-                      activeDeviceID === 'mobile' ? 'rgba(147, 51, 234, 0.1)' :
-                      activeDeviceID === 'tablet' ? 'rgba(236, 72, 153, 0.1)' :
-                      'rgba(6, 182, 212, 0.1)'
-                    } 0%, transparent 60%)`
+                    background: 'linear-gradient(135deg, rgba(var(--color-brand-base-rgb), 0.12) 0%, transparent 60%)'
                   }}
                 />
 

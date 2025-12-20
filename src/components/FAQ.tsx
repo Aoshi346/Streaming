@@ -21,13 +21,15 @@ const faqs = [
 
 const FAQ = forwardRef<HTMLElement>((_, ref) => {
   return (
-    <section ref={ref} id="faq" className="relative border-t border-white/10 py-20 sm:py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#2e1065] via-[#1e1b4b] to-[#000000] opacity-95 -z-20" aria-hidden />
+    <section ref={ref} id="faq" className="relative bg-page-gradient border-t border-border-subtle py-20 sm:py-24 overflow-hidden">
       <div className="container-wrapper relative z-10">
-  <h2 className="gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl">Preguntas frecuentes</h2>
+        <h2 className="gsap-section-title text-2xl font-bold tracking-tight sm:text-3xl text-text-primary">Preguntas frecuentes</h2>
         <div className="mt-6 space-y-3 text-text-secondary">
           {faqs.map(({ q, a }) => (
-            <details key={q} className="group rounded-lg border border-white/10 bg-white/[0.05] p-4 transition duration-200 open:border-brand/40 open:bg-white/[0.09]">
+            <details
+              key={q}
+              className="group rounded-lg border border-border-subtle bg-surface-base p-4 transition duration-200 open:border-brand/40 open:bg-surface-muted"
+            >
               <summary className="cursor-pointer select-none text-base font-medium text-text-primary">
                 {q}
               </summary>
@@ -36,8 +38,7 @@ const FAQ = forwardRef<HTMLElement>((_, ref) => {
           ))}
         </div>
       </div>
-      {/* Transition to Footer (Black) */}
-      {/* Wave divider removed */}
+      {/* Transition to Footer retained minimal */}
     </section>
   )
 })

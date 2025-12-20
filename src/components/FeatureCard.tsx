@@ -99,11 +99,11 @@ const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
 
     const baseLayoutClasses =
       layout === 'horizontal'
-        ? 'border-white/10 bg-white/5 backdrop-blur-lg p-8 sm:p-10 flex items-center gap-6'
-        : 'border-border-subtle bg-surface-muted/20 p-8 sm:p-10 flex flex-col items-center text-center'
+        ? 'border-brand-dark/30 bg-gradient-to-br from-brand-dark/10 via-brand/10 to-brand-light/10 backdrop-blur-lg p-8 sm:p-10 flex items-center gap-6'
+        : 'border-brand-dark/30 bg-gradient-to-br from-brand-dark/10 via-brand/10 to-brand-light/10 p-8 sm:p-10 flex flex-col items-center text-center'
 
     const featuredClasses = featured
-      ? 'shadow-theme-strong border-brand/30 bg-white/6 hover:ring-2 hover:ring-brand-light/40 focus-within:ring-2 focus-within:ring-brand-light/40'
+      ? 'shadow-theme-strong border-brand/40 bg-brand/5 hover:ring-2 hover:ring-brand-light/40 focus-within:ring-2 focus-within:ring-brand-light/40'
       : ''
 
     return (

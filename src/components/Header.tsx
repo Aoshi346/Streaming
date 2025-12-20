@@ -143,7 +143,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
   return (
     <header
       ref={assignRefs}
-      className="sticky top-0 z-50 border-b border-gray-200 bg-white shadow-sm"
+      className="sticky top-0 z-50 border-b border-border-subtle bg-background shadow-theme-soft"
     >
       <div className="container-wrapper relative flex h-16 sm:h-20 items-center justify-between gap-3 px-4 sm:px-6">
         {/* Logo - responsive sizing */}
@@ -155,7 +155,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
         <nav
           role="navigation"
           aria-label="Principal"
-          className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-base font-medium text-gray-600"
+          className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-base font-medium text-text-muted"
         >
           {links.map((link) => (
             <a
@@ -167,7 +167,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                 onNavClick(e);
                 closeMenu();
               }}
-              className="group relative px-1 pb-1 transition-colors duration-200 hover:text-gray-900 will-change-transform whitespace-nowrap"
+              className="group relative px-1 pb-1 transition-colors duration-200 hover:text-text-primary will-change-transform whitespace-nowrap"
             >
               {link.label}
               <span className="pointer-events-none absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 bg-brand-light transition-transform duration-300 ease-out group-hover:scale-x-100" />
@@ -182,7 +182,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
             onClick={toggleMenu}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            className="inline-flex items-center justify-center rounded-lg p-2.5 bg-gray-100 text-gray-700 transition-all duration-200 hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60 active:scale-95"
+            className="inline-flex items-center justify-center rounded-lg p-2.5 bg-surface-muted text-text-secondary transition-all duration-200 hover:bg-[rgb(var(--color-background-rgb))/0.7] hover:text-text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60 active:scale-95"
           >
             <span className="sr-only">
               {menuOpen ? "Cerrar menú" : "Abrir menú"}
@@ -215,8 +215,8 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
         className="md:hidden absolute left-0 right-0 top-full px-4 pb-4 origin-top will-change-transform"
         aria-hidden={!menuOpen}
       >
-        <div className="mx-auto max-w-3xl rounded-2xl border border-gray-200 bg-white shadow-2xl shadow-gray-200/80">
-          <nav className="flex flex-col divide-y divide-gray-100 py-3" aria-label="Menú móvil">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-border-subtle bg-background shadow-theme-strong">
+          <nav className="flex flex-col divide-y divide-border-subtle py-3" aria-label="Menú móvil">
             {links.map((link, index) => (
               <a
                 key={link.href}
@@ -225,12 +225,12 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                   onNavClick(e);
                   closeMenu();
                 }}
-                className="group flex items-center justify-between px-5 py-4 text-base font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60"
+                className="group flex items-center justify-between px-5 py-4 text-base font-medium text-text-secondary transition-all duration-200 hover:bg-[rgb(var(--color-background-rgb))/0.7] hover:text-text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60"
                 style={{ transitionDelay: menuOpen ? `${index * 40}ms` : "0ms" }}
               >
                 <span>{link.label}</span>
                 <svg
-                  className="w-5 h-5 text-gray-400 transition-transform duration-200 group-hover:text-brand-light"
+                  className="w-5 h-5 text-text-muted transition-transform duration-200 group-hover:text-brand-light"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -245,7 +245,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
               </a>
             ))}
           </nav>
-          <div className="border-t border-gray-100 px-5 py-4 text-center text-sm text-gray-500">
+          <div className="border-t border-border-subtle px-5 py-4 text-center text-sm text-text-muted">
             FullVisionTV © 2024
           </div>
         </div>

@@ -49,32 +49,32 @@ export const lightPalette: ThemePalette = {
 	surface: '#fbfbfb',
 	surfaceMuted: '#f3f4f6',
 	brand: {
-		// Neutral brand ramp (dark tones for contrast)
-		base: '#0f172a',      // Dark slate for UI accents
-		light: '#374151',     // Lighter slate
-		dark: '#020617',      // Almost black for emphasis
+		// Purple brand ramp used for cards/boxes
+		base: '#7c3aed',      // Vivid purple
+		light: '#a78bfa',     // Light purple
+		dark: '#4c1d95',      // Deep purple
 	},
-	// Warm accent for highlights
-	accent: '#f59e0b',
+	// Pink accent used across UI accents
+	accent: '#ec4899',
 	text: {
-		primary: '#0b1220',
-		secondary: '#334155',
+		primary: '#000000',
+		secondary: '#ec4899',
 		muted: '#6b7280',
 	},
 	border: {
-		subtle: 'rgba(15, 23, 42, 0.06)',
-		strong: 'rgba(2, 6, 23, 0.08)',
+		subtle: 'rgba(0, 0, 0, 0.08)',
+		strong: 'rgba(0, 0, 0, 0.14)',
 	},
 	gradients: {
-		page: 'linear-gradient(180deg, #ffffff 0%, #fafafa 100%)',
-		hero: 'linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(245,245,245,0.95) 100%)',
-		spotlight: 'radial-gradient(circle at 50% 40%, rgba(0,0,0,0.03), transparent 60%)',
-		device: 'linear-gradient(180deg, rgba(250,250,250,0.9), rgba(245,245,245,0.85))',
+		page: 'linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)',
+		hero: 'linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(249,250,251,0.96) 100%)',
+		spotlight: 'radial-gradient(circle at 50% 40%, rgba(0,0,0,0.035), transparent 60%)',
+		device: 'linear-gradient(180deg, rgba(250,250,250,0.95), rgba(245,245,245,0.9))',
 		button: 'linear-gradient(90deg, #ffffff 0%, #f3f4f6 100%)',
 	},
 	shadows: {
-		soft: '0 6px 18px rgba(15, 23, 42, 0.06)',
-		strong: '0 12px 36px rgba(15, 23, 42, 0.09)',
+		soft: '0 6px 18px rgba(0, 0, 0, 0.08)',
+		strong: '0 12px 36px rgba(0, 0, 0, 0.12)',
 	},
 }
 

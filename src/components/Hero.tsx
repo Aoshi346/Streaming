@@ -90,8 +90,8 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
         Your browser does not support the video tag.
       </video>
       
-      {/* Enhanced gradient overlay with purple/blue theme */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#2e1065] via-[#4c1d95] to-[#581c87] opacity-90 -z-10 mix-blend-multiply" />
+      {/* Palette-driven gradient overlay */}
+      <div className="absolute inset-0 bg-hero-gradient opacity-85 -z-10" />
       
       {/* Animated gradient orbs for depth */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -103,7 +103,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
         <div className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6">
           <div className="max-w-4xl text-center mx-auto space-y-6 sm:space-y-8">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-muted/30 border border-border-subtle backdrop-blur-sm">
               <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
               <span className="text-sm sm:text-base font-semibold text-text-secondary">Miles de películas y series disponibles</span>
             </div>
@@ -132,11 +132,11 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
                 <a
                   href="#pricing"
-                  className="group relative w-full sm:w-auto overflow-hidden rounded-lg px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-brand/50"
+                  className="group relative w-full sm:w-auto overflow-hidden rounded-lg px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-text-primary shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-brand/50"
                   onClick={handleSmoothAnchor('#pricing')}
                 >
                   <div className="absolute inset-0 bg-button-gradient bg-[length:200%_100%] transition-all duration-500 group-hover:bg-[length:100%_100%] animate-gradient-x" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     SUSCRÍBETE AHORA
                     <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -147,7 +147,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                 
                 <a
                   href="#features"
-                  className="group w-full sm:w-auto rounded-lg border-2 border-white/10 bg-white/5 backdrop-blur-sm px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light"
+                  className="group w-full sm:w-auto rounded-lg border-2 border-border-subtle bg-surface-muted/30 backdrop-blur-sm px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-text-primary transition-all duration-300 hover:bg-surface-muted/40 hover:border-border-strong hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light"
                   onClick={handleSmoothAnchor('#features')}
                 >
                   <span className="flex items-center justify-center gap-2">
@@ -163,38 +163,38 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                 <div className="grid gap-3 sm:grid-cols-2">
                   <a
                     href="#devices"
-                    className="group relative flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm sm:text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10"
+                    className="group relative flex items-center justify-between rounded-xl border border-border-subtle bg-surface-muted/30 px-5 py-3 text-sm sm:text-base font-semibold text-text-primary backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-muted/40"
                     onClick={handleSmoothAnchor('#devices')}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand/30 text-white/90">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand/30 text-text-primary">
                         <FaLaptop aria-hidden />
                       </span>
                       <div className="flex flex-col text-left">
                         <span className="text-base">Dispositivos Compatibles</span>
-                        <span className="text-sm text-white/80">TV, móvil, tablet y más</span>
+                        <span className="text-sm text-text-secondary">TV, móvil, tablet y más</span>
                       </div>
                     </div>
-                    <svg className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-5 w-5 text-text-muted transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </a>
 
                   <a
                     href="#downloads"
-                    className="group relative flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm sm:text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10"
+                    className="group relative flex items-center justify-between rounded-xl border border-border-subtle bg-surface-muted/30 px-5 py-3 text-sm sm:text-base font-semibold text-text-primary backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-muted/40"
                     onClick={handleSmoothAnchor('#downloads')}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/20 text-white">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/20 text-text-primary">
                         <FaDownload aria-hidden />
                       </span>
                       <div className="flex flex-col text-left">
                         <span className="text-base">Descarga la app</span>
-                        <span className="text-sm text-white/80">Android, iOS, Windows, Mac</span>
+                        <span className="text-sm text-text-secondary">Android, iOS, Windows, Mac</span>
                       </div>
                     </div>
-                    <svg className="h-5 w-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-5 w-5 text-text-muted transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </a>
@@ -204,19 +204,19 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               {/* Trust indicators */}
               <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap text-sm sm:text-base text-text-secondary mt-2">
                 <span className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-brand-light" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Sin compromisos
                 </span>
                 <span className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-brand-light" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   HD & 4K disponible
                 </span>
                 <span className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-brand-light" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   Cancela cuando quieras
@@ -228,7 +228,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
       </div>
       
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#2e1065] to-transparent -z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent -z-10" />
       
       {/* Wave Divider removed - transitions are now handled with gradient fades */}
     </section>

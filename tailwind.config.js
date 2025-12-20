@@ -18,8 +18,8 @@ export default {
   				dark: 'rgb(var(--color-brand-dark-rgb))'
   			},
   			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
+  				DEFAULT: 'rgb(var(--color-accent-rgb))',
+  				foreground: 'rgb(var(--color-text-primary-rgb))'
   			},
   			text: {
   				primary: 'rgb(var(--color-text-primary-rgb))',
