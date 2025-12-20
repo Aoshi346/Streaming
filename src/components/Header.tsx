@@ -174,25 +174,23 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
           preserveAspectRatio="none"
           className="absolute right-0 top-0 h-full w-[70%]"
         >
-          {/* Navy blue wave - extends furthest left */}
+          {/* Deep purple wave - extends furthest left */}
           <path
             d="M0,100 C50,75 100,62 180,67 C260,72 320,50 400,35 C450,28 480,25 500,20 L500,100 Z"
-            className="fill-[#1e3a5f]"
+            className="fill-[#581c87]"
+            fillOpacity="0.2"
           />
-          {/* Deep purple wave */}
+          {/* Fuchsia wave */}
           <path
             d="M80,100 C130,72 180,58 260,63 C340,68 400,45 460,32 C485,28 500,30 500,30 L500,100 Z"
-            className="fill-[#581c87]"
+            className="fill-[#a21caf]"
+            fillOpacity="0.3"
           />
-          {/* Rich purple wave */}
-          <path
-            d="M180,100 C230,68 280,56 350,60 C420,64 460,45 485,38 C495,35 500,38 500,38 L500,100 Z"
-            className="fill-[#7c3aed]"
-          />
-          {/* Magenta/pink wave - closest to right edge */}
+          {/* Pink wave - closest to right edge */}
           <path
             d="M280,100 C330,72 370,60 420,63 C470,66 490,52 500,45 L500,100 Z"
-            className="fill-[#c026d3]"
+            className="fill-[#ec4899]"
+            fillOpacity="0.25"
           />
         </svg>
         {/* Gradient fade to blend waves into background */}
