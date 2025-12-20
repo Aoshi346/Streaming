@@ -7,15 +7,14 @@ export default function Logo({ className = "" }: { className?: string }) {
       className={`flex items-center gap-2 ${className}`}
       aria-label="FullVision Home"
     >
-      <div className="bg-[rgb(var(--color-background-rgb))] rounded-full p-1 shadow-sm">
-        <img
-          src={logo}
-          alt=""
-          className="h-12 w-12 sm:h-16 sm:w-16 select-none object-contain"
-        />
-      </div>
-      <span className="text-xl sm:text-2xl font-extrabold tracking-tight leading-none text-text-primary">
-        FullVisionTV
+      <img
+        src={logo}
+        alt="FullVisionTV logo"
+        className="h-14 sm:h-20 md:h-24 w-auto select-none object-contain"
+      />
+      <span className="text-base sm:text-lg md:text-xl tracking-tight leading-none text-text-primary uppercase">
+        <span className="font-extrabold">FULL</span>
+        <span className="font-bold">VISIONTV</span>
       </span>
     </a>
   );

@@ -170,7 +170,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
               className="group relative px-1 pb-1 transition-colors duration-200 hover:text-text-primary will-change-transform whitespace-nowrap"
             >
               {link.label}
-              <span className="pointer-events-none absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 bg-brand-light transition-transform duration-300 ease-out group-hover:scale-x-100" />
+              <span className="pointer-events-none absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </a>
           ))}
         </nav>
