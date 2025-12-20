@@ -3,36 +3,38 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
-  --color-background: #000000;
-  --color-background-rgb: 0 0 0;
-  --color-surface: #0d0719;
-  --color-surface-rgb: 13 7 25;
-  --color-surface-muted: #120d22;
-  --color-surface-muted-rgb: 18 13 34;
-  --color-brand-base: #4c1d95;
-  --color-brand-base-rgb: 76 29 149;
-  --color-brand-light: #7c3aed;
-  --color-brand-light-rgb: 124 58 237;
-  --color-brand-dark: #2e1065;
-  --color-brand-dark-rgb: 46 16 101;
-  --color-accent: #f59e0b;
-  --color-accent-rgb: 245 158 11;
-  --color-text-primary: #f8f5ff;
-  --color-text-primary-rgb: 248 245 255;
-  --color-text-secondary: #c7c1d9;
-  --color-text-secondary-rgb: 199 193 217;
-  --color-text-muted: #9ca3af;
-  --color-text-muted-rgb: 156 163 175;
-  --color-border-subtle: rgba(255,255,255,0.08);
-  --color-border-strong: rgba(124,58,237,0.4);
-  --gradient-page: radial-gradient(circle at top left, rgba(76,29,149,0.22), transparent 55%), radial-gradient(circle at bottom right, rgba(37,8,77,0.2), transparent 60%);
-  --gradient-hero: radial-gradient(circle at 20% 20%, rgba(76,29,149,0.3), transparent 40%), radial-gradient(circle at 80% 0%, rgba(124,58,237,0.25), transparent 40%);
-  --gradient-spotlight: radial-gradient(circle at 0% 0%, rgba(76,29,149,0.18), transparent 55%);
-  --gradient-device: radial-gradient(circle at top right, rgba(124,58,237,0.28), transparent 60%), radial-gradient(circle at bottom left, rgba(47,14,94,0.35), transparent 60%);
-  --gradient-button: linear-gradient(90deg, #4c1d95 0%, #7c3aed 50%, #2e1065 100%);
-  --shadow-soft: 0 0 30px rgba(12,10,26,0.45);
-  --shadow-strong: 0 0 60px rgba(32,16,64,0.35);
+  color-scheme: light;
+  /* These values will be overridden by ThemeProvider; keep them aligned with the light palette as a safe default */
+  --color-background: #ffffff;
+  --color-background-rgb: 255 255 255;
+  --color-surface: #fbfbfb;
+  --color-surface-rgb: 251 251 251;
+  --color-surface-muted: #f3f4f6;
+  --color-surface-muted-rgb: 243 244 246;
+  --color-brand-base: #7c3aed;
+  --color-brand-base-rgb: 124 58 237;
+  --color-brand-light: #a78bfa;
+  --color-brand-light-rgb: 167 139 250;
+  --color-brand-dark: #6f1b7a;
+  --color-brand-dark-rgb: 111 27 122;
+  --color-accent: #ff6f91;
+  --color-accent-rgb: 255 111 145;
+  --color-text-primary: #000000;
+  --color-text-primary-rgb: 0 0 0;
+  --color-text-secondary: #ff6f91;
+  --color-text-secondary-rgb: 255 111 145;
+  --color-text-muted: #6b7280;
+  --color-text-muted-rgb: 107 114 128;
+  --color-border-subtle: rgba(0,0,0,0.08);
+  --color-border-strong: rgba(0,0,0,0.14);
+  /* Gradients aligned to palette */
+  --gradient-page: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  --gradient-hero: linear-gradient(180deg, rgba(111,27,122,0.12) 0%, rgba(15,58,132,0.12) 100%);
+  --gradient-spotlight: radial-gradient(circle at 50% 40%, rgba(61,220,247,0.12), transparent 60%);
+  --gradient-device: linear-gradient(180deg, rgba(250,250,250,0.95), rgba(19,42,111,0.06));
+  --gradient-button: linear-gradient(90deg, #ffffff 0%, #f3f4f6 70%, rgba(255,111,145,0.20) 100%);
+  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.08);
+  --shadow-strong: 0 12px 36px rgba(0, 0, 0, 0.12);
 }
 
 html, body, #root {
