@@ -135,7 +135,13 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
     } else {
       gsap
         .timeline()
-        .to(menuEl, { autoAlpha: 0, y: -8, scale: 0.98, duration: 0.22, ease: "power2.in" })
+        .to(menuEl, {
+          autoAlpha: 0,
+          y: -8,
+          scale: 0.98,
+          duration: 0.22,
+          ease: "power2.in",
+        })
         .set(menuEl, { pointerEvents: "none", display: "none" });
     }
   }, [menuOpen]);
@@ -145,7 +151,38 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
       ref={assignRefs}
       className="sticky top-0 z-50 border-b border-border-subtle bg-background shadow-theme-soft"
     >
-      <div className="container-wrapper relative flex h-16 sm:h-20 items-center justify-between gap-3 px-4 sm:px-6">
+      {/* Background Waves */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <svg
+          viewBox="0 0 500 100"
+          preserveAspectRatio="none"
+          className="absolute right-0 top-0 h-full w-[70%]"
+        >
+          {/* Navy blue wave - extends furthest left */}
+          <path
+            d="M0,100 C50,75 100,62 180,67 C260,72 320,50 400,35 C450,28 480,25 500,20 L500,100 Z"
+            className="fill-[#1e3a5f]"
+          />
+          {/* Deep purple wave */}
+          <path
+            d="M80,100 C130,72 180,58 260,63 C340,68 400,45 460,32 C485,28 500,30 500,30 L500,100 Z"
+            className="fill-[#581c87]"
+          />
+          {/* Rich purple wave */}
+          <path
+            d="M180,100 C230,68 280,56 350,60 C420,64 460,45 485,38 C495,35 500,38 500,38 L500,100 Z"
+            className="fill-[#7c3aed]"
+          />
+          {/* Magenta/pink wave - closest to right edge */}
+          <path
+            d="M280,100 C330,72 370,60 420,63 C470,66 490,52 500,45 L500,100 Z"
+            className="fill-[#c026d3]"
+          />
+        </svg>
+        {/* Gradient fade to blend waves into background */}
+        <div className="absolute right-0 top-0 h-full w-[70%] bg-gradient-to-r from-background via-transparent to-transparent" />
+      </div>
+      <div className="container-wrapper relative z-10 flex h-16 sm:h-20 items-center justify-between gap-3 px-4 sm:px-6">
         {/* Logo - responsive sizing */}
         <div className="flex-shrink-0">
           <Logo className="relative overflow-visible flex items-center rounded focus:outline-none focus-visible:ring focus-visible:ring-brand-light/60" />
@@ -195,7 +232,9 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
               />
               <span
                 className={`absolute left-0 right-0 block h-0.5 rounded-full bg-current transition-all duration-200 ease-out ${
-                  menuOpen ? "top-1/2 -translate-y-1/2 opacity-0" : "top-1/2 -translate-y-1/2 opacity-100"
+                  menuOpen
+                    ? "top-1/2 -translate-y-1/2 opacity-0"
+                    : "top-1/2 -translate-y-1/2 opacity-100"
                 }`}
               />
               <span
@@ -212,11 +251,14 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
       <div
         ref={mobileMenuRef}
         id="mobile-menu"
-        className="md:hidden absolute left-0 right-0 top-full px-4 pb-4 origin-top will-change-transform"
+        className="md:hidden absolute z-20 left-0 right-0 top-full px-4 pb-4 origin-top will-change-transform"
         aria-hidden={!menuOpen}
       >
         <div className="mx-auto max-w-3xl rounded-2xl border border-border-subtle bg-background shadow-theme-strong">
-          <nav className="flex flex-col divide-y divide-border-subtle py-3" aria-label="Menú móvil">
+          <nav
+            className="flex flex-col divide-y divide-border-subtle py-3"
+            aria-label="Menú móvil"
+          >
             {links.map((link, index) => (
               <a
                 key={link.href}
@@ -226,7 +268,9 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                   closeMenu();
                 }}
                 className="group flex items-center justify-between px-5 py-4 text-base font-medium text-text-secondary transition-all duration-200 hover:bg-[rgb(var(--color-background-rgb))/0.7] hover:text-text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60"
-                style={{ transitionDelay: menuOpen ? `${index * 40}ms` : "0ms" }}
+                style={{
+                  transitionDelay: menuOpen ? `${index * 40}ms` : "0ms",
+                }}
               >
                 <span>{link.label}</span>
                 <svg
