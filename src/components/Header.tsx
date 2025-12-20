@@ -282,7 +282,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                   onNavClick(e);
                   closeMenu();
                 }}
-                className="group flex items-center gap-4 px-5 py-4 text-base font-medium text-text-secondary transition-all duration-200 hover:bg-[#581c87]/10 hover:text-[#a21caf] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60 border-l-4 border-transparent hover:border-[#a21caf]"
+                className="group flex items-center gap-4 px-5 py-4 text-base font-medium text-gray-900 transition-all duration-200 hover:bg-[#581c87]/10 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60 border-l-4 border-transparent hover:border-[#a21caf]"
                 style={{
                   transitionDelay: menuOpen ? `${index * 40}ms` : "0ms",
                 }}
