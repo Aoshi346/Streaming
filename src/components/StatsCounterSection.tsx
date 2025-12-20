@@ -136,10 +136,10 @@ function StatCard({
         aria-hidden
       >
         <div className="flex gap-2 sm:gap-2.5">
-          {Array.from({ length: 12 }).map((_, idx) => (
+          {Array.from({ length: 18 }).map((_, idx) => (
             <span
               key={`card-top-${idx}`}
-              className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#0d1445] border border-[#4a5fc9]"
+              className="w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#0d1445] border border-[#4a5fc9]"
             />
           ))}
         </div>
@@ -149,10 +149,10 @@ function StatCard({
         aria-hidden
       >
         <div className="flex gap-2 sm:gap-2.5">
-          {Array.from({ length: 12 }).map((_, idx) => (
+          {Array.from({ length: 18 }).map((_, idx) => (
             <span
               key={`card-bottom-${idx}`}
-              className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#0d1445] border border-[#4a5fc9]"
+              className="w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#0d1445] border border-[#4a5fc9]"
             />
           ))}
         </div>
@@ -198,7 +198,6 @@ export default function StatsCounterSection() {
   );
 
   const sectionRef = useRef<HTMLElement | null>(null);
-  const bgRef = useRef<HTMLDivElement | null>(null);
   const filmStripRef = useRef<HTMLDivElement | null>(null);
 
   // Section entrance: stagger cards
@@ -232,22 +231,7 @@ export default function StatsCounterSection() {
     return () => ctx.revert();
   }, [prefersReduced]);
 
-  // Moving radial background
-  useEffect(() => {
-    if (prefersReduced) return;
-    if (!bgRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.to(bgRef.current, {
-        "--glow-x": "70%",
-        "--glow-y": "80%",
-        duration: 12,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-    }, bgRef);
-    return () => ctx.revert();
-  }, [prefersReduced]);
+  // bgRef animation removed - replaced with static wave background
 
   useEffect(() => {
     if (prefersReduced) return;
@@ -280,29 +264,121 @@ export default function StatsCounterSection() {
     <section
       ref={sectionRef}
       id="stats"
-      className="relative py-20 sm:py-24 md:py-32 overflow-hidden"
+      className="relative isolate py-20 sm:py-24 md:py-32 overflow-hidden -mt-1"
     >
-      {/* Subtle animated background */}
-      <div className="absolute inset-0 bg-page-gradient -z-30" />
-      <div
-        ref={bgRef}
-        style={
-          {
-            ["--glow-x" as any]: "50%",
-            ["--glow-y" as any]: "10%",
-            background:
-              "radial-gradient(50% 40% at var(--glow-x) var(--glow-y), rgba(139, 92, 246, 0.25), transparent 70%)",
-          } as React.CSSProperties
-        }
-        className="pointer-events-none absolute inset-0 -z-20"
-      />
+      {/* Flowing wave background */}
+      {/* Clean background with subtle gradient */}
+      {/* Clean background with subtle gradient */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#f8fafc] via-[#f1f5f9] to-[#ffffff]" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      {/* Wave layers */}
+      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+        {/* Top Wave Group - Aligned with Hero rhythm */}
+        <div className="absolute -top-4 left-0 right-0 h-[480px]">
+          <svg
+            className="w-full h-full"
+            viewBox="0 0 1440 450"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient
+                id="waveTopGrad1"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop offset="0%" stopColor="#581c87" stopOpacity="0.7" />
+                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#ec4899" stopOpacity="0.9" />
+              </linearGradient>
+              <linearGradient
+                id="waveTopGrad2"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop offset="0%" stopColor="#581c87" stopOpacity="0.5" />
+                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#ec4899" stopOpacity="0.7" />
+              </linearGradient>
+            </defs>
+
+            {/* Layer 1 - Deepest/Largest */}
+            <path
+              d="M0,0 L1440,0 L1440,300 C1200,380 950,200 720,280 C480,350 240,200 0,320 Z"
+              fill="url(#waveTopGrad2)"
+              opacity="0.6"
+            />
+            {/* Layer 2 - Middle detail */}
+            <path
+              d="M0,0 L1440,0 L1440,240 C1200,280 960,180 720,240 C480,300 240,160 0,260 Z"
+              fill="url(#waveTopGrad1)"
+              opacity="0.8"
+            />
+            {/* Layer 3 - Top detail (Hero match) */}
+            <path
+              d="M0,0 L1440,0 L1440,180 C1100,220 800,100 500,160 C250,200 0,120 0,120 Z"
+              fill="#581c87"
+              fillOpacity="0.1"
+            />
+          </svg>
+        </div>
+
+        {/* Bottom Wave Group */}
+        <div className="absolute bottom-0 left-0 right-0 h-[400px]">
+          <svg
+            className="w-full h-full"
+            viewBox="0 0 1440 400"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient
+                id="waveBottomGrad1"
+                x1="100%"
+                y1="0%"
+                x2="0%"
+                y2="100%"
+              >
+                <stop offset="0%" stopColor="#581c87" stopOpacity="0.5" />
+                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#ec4899" stopOpacity="0.7" />
+              </linearGradient>
+              <linearGradient
+                id="waveBottomGrad2"
+                x1="100%"
+                y1="0%"
+                x2="0%"
+                y2="0%"
+              >
+                <stop offset="0%" stopColor="#581c87" stopOpacity="0.3" />
+                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="#ec4899" stopOpacity="0.5" />
+              </linearGradient>
+            </defs>
+
+            {/* Layer 1 - Background (Sides Lifted) */}
+            <path
+              d="M0,400 L1440,400 L1440,220 C1100,280 700,340 350,280 C150,250 0,300 0,300 Z"
+              fill="url(#waveBottomGrad2)"
+              opacity="0.7"
+            />
+            {/* Layer 2 - Foreground accent (Sides Lifted) */}
+            <path
+              d="M0,400 L1440,400 L1440,280 C1100,320 700,350 400,300 C150,280 0,340 0,340 Z"
+              fill="url(#waveBottomGrad1)"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-20">
         <div className="text-center mb-8 sm:mb-10">
-          <h2 className="gsap-section-title text-2xl sm:text-3xl md:text-4xl font-semibold text-text-primary mb-2 tracking-tight">
+          <h2 className="gsap-section-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 tracking-tight text-white drop-shadow-md">
             Mucho Por Qué Suscribirte
           </h2>
-          <p className="gsap-section-subtitle text-base sm:text-lg text-text-muted">
+          <p className="gsap-section-subtitle text-base sm:text-lg text-white/90 font-medium drop-shadow-sm">
             Programación premium, estrenos constantes y TV en vivo que no se
             detiene
           </p>
