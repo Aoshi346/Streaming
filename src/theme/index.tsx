@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useState, type ReactNode } from 'react'
-import palette, { darkPalette, type ThemeName, type ThemePalette } from './palette'
+import palette, { type ThemeName, type ThemePalette } from './palette'
 
 type ThemeContextValue = {
 	theme: ThemeName
@@ -10,9 +10,9 @@ type ThemeContextValue = {
 const STORAGE_KEY = 'fullvision-theme'
 
 const ThemeContext = createContext<ThemeContextValue>({
-	theme: 'dark',
+	theme: 'light',
 	setTheme: () => {},
-	palette: darkPalette,
+	palette: palette.light,
 })
 
 const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
@@ -72,11 +72,11 @@ type ThemeProviderProps = {
 	children: ReactNode
 }
 
-export function ThemeProvider({ initialTheme = 'dark', children }: ThemeProviderProps) {
+export function ThemeProvider({ initialTheme = 'light', children }: ThemeProviderProps) {
 	const [theme, setThemeState] = useState<ThemeName>(() => {
 		if (typeof window === 'undefined') return initialTheme
 		const stored = window.localStorage.getItem(STORAGE_KEY)
-		if (stored === 'dark' || stored === 'light') return stored
+		if (stored === 'light') return stored
 		return initialTheme
 	})
 
@@ -89,7 +89,8 @@ export function ThemeProvider({ initialTheme = 'dark', children }: ThemeProvider
 		applyPalette(activePalette)
 		if (typeof document !== 'undefined') {
 			document.documentElement.dataset.theme = theme
-			document.documentElement.style.setProperty('color-scheme', theme)
+			// Ensure the browser uses light color-scheme
+			document.documentElement.style.setProperty('color-scheme', 'light')
 		}
 		if (typeof window !== 'undefined') {
 			window.localStorage.setItem(STORAGE_KEY, theme)

@@ -59,6 +59,56 @@ body {
   }
 }
 
+@keyframes scanline-move {
+  0% { transform: translateY(-30%); opacity: 0; }
+  10% { opacity: 0.06; }
+  50% { transform: translateY(110%); opacity: 0.12; }
+  100% { transform: translateY(110%); opacity: 0; }
+}
+
+/* Very subtle grain using multiple radial gradients */
+.film-grain {
+  background-image: radial-gradient(rgba(255,255,255,0.02) 0.5px, transparent 0.6px), radial-gradient(rgba(0,0,0,0.03) 0.6px, transparent 0.8px);
+  background-position: 0 0, 10px 14px;
+  background-size: 6px 6px, 8px 8px;
+  mix-blend-mode: overlay;
+  opacity: 0.06;
+}
+
+.scanline {
+  background: linear-gradient(180deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.00) 100%);
+  height: 10%;
+  filter: blur(0.6px);
+  opacity: 0.5;
+  animation: scanline-move 5s linear infinite;
+}
+
+.card-sheen {
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.card-sheen > .sheen {
+  position: absolute;
+  left: -60%;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  transform: skewX(-12deg);
+  background: linear-gradient(90deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 40%, rgba(255,255,255,0.0) 100%);
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+.group:hover .card-sheen > .sheen { opacity: 0.55; }
+.group:hover .card-sheen > .sheen.animate-shine { animation: shine-slow 1.6s ease-in-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scanline { animation: none; }
+  .group:hover .card-sheen > .sheen.animate-shine { animation: none; }
+}
+
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(6px) scale(.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }

@@ -1,4 +1,4 @@
-export type ThemeName = 'dark' | 'light'
+export type ThemeName = 'light'
 
 type ColorRamp = {
 	base: string
@@ -42,46 +42,43 @@ export type ThemePalette = {
 	shadows: ShadowPalette
 }
 
-export const darkPalette: ThemePalette = {
-	// Deep purple/blue foundation
-	background: '#10002b',
-	// Rich purple surfaces
-	surface: '#240046',
-	surfaceMuted: '#3c096c',
+export const lightPalette: ThemePalette = {
+	// All-white base palette (starting from scratch)
+	background: '#ffffff',
+	// Slightly off-white surfaces to create depth
+	surface: '#fbfbfb',
+	surfaceMuted: '#f3f4f6',
 	brand: {
-		// Violet/Blue range
-		base: '#7b2cbf',      // Violet
-		light: '#9d4edd',     // Light Violet
-		dark: '#5a189a',      // Dark Violet
+		// Neutral brand ramp (dark tones for contrast)
+		base: '#0f172a',      // Dark slate for UI accents
+		light: '#374151',     // Lighter slate
+		dark: '#020617',      // Almost black for emphasis
 	},
-	// Cyan accent for high energy highlights
-	accent: '#4cc9f0',        // Vivid Sky Blue
+	// Warm accent for highlights
+	accent: '#f59e0b',
 	text: {
-		primary: '#ffffff',
-		secondary: '#e0aaff',
-		muted: '#c77dff',
+		primary: '#0b1220',
+		secondary: '#334155',
+		muted: '#6b7280',
 	},
 	border: {
-		subtle: 'rgba(123, 44, 191, 0.2)',
-		strong: 'rgba(76, 201, 240, 0.4)',
+		subtle: 'rgba(15, 23, 42, 0.06)',
+		strong: 'rgba(2, 6, 23, 0.08)',
 	},
 	gradients: {
-		page: 'linear-gradient(to bottom right, #10002b, #001233)',
-		hero: 'linear-gradient(135deg, #3c096c 0%, #023e8a 100%)', // Purple to Blue
-		spotlight: 'radial-gradient(circle at 50% 50%, rgba(60, 9, 108, 0.25), transparent 70%)',
-		device: 'linear-gradient(135deg, rgba(60, 9, 108, 0.4), rgba(2, 62, 138, 0.4))',
-		button: 'linear-gradient(to right, #7b2cbf, #4361ee)',
+		page: 'linear-gradient(180deg, #ffffff 0%, #fafafa 100%)',
+		hero: 'linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(245,245,245,0.95) 100%)',
+		spotlight: 'radial-gradient(circle at 50% 40%, rgba(0,0,0,0.03), transparent 60%)',
+		device: 'linear-gradient(180deg, rgba(250,250,250,0.9), rgba(245,245,245,0.85))',
+		button: 'linear-gradient(90deg, #ffffff 0%, #f3f4f6 100%)',
 	},
 	shadows: {
-		soft: '0 8px 32px rgba(0, 0, 0, 0.4)',
-		strong: '0 12px 48px rgba(60, 9, 108, 0.4)',
+		soft: '0 6px 18px rgba(15, 23, 42, 0.06)',
+		strong: '0 12px 36px rgba(15, 23, 42, 0.09)',
 	},
 }
 
-export const lightPalette: ThemePalette = darkPalette // Unify themes
-
 export const palette: Record<ThemeName, ThemePalette> = {
-	dark: darkPalette,
 	light: lightPalette,
 }
 
