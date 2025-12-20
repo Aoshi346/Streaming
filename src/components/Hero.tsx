@@ -352,6 +352,17 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               <stop offset="50%" stopColor="#a21caf" />
               <stop offset="100%" stopColor="#ec4899" />
             </linearGradient>
+            <linearGradient
+              id="waveGradientBottom"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="#581c87" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.6" />
+            </linearGradient>
           </defs>
           <path
             d="M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60 L1440,120 L0,120 Z"
@@ -359,7 +370,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
           />
           <path
             d="M0,80 C240,40 480,100 720,80 C960,40 1200,100 1440,80 L1440,120 L0,120 Z"
-            fill="rgb(var(--color-background-rgb))"
+            fill="url(#waveGradientBottom)"
           />
         </svg>
       </div>
