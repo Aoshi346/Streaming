@@ -332,27 +332,41 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
       id="devices"
       className="relative py-16 sm:py-20 md:py-24 overflow-hidden -mt-1"
     >
-      {/* Background gradient from palette */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#ec4899] via-[#a21caf] to-[#581c87] pointer-events-none" />
+      {/* Background gradient - new palette */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] pointer-events-none" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid gap-12 lg:gap-16 lg:grid-cols-2 items-center">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid gap-8 sm:gap-12 lg:gap-16 lg:grid-cols-2 items-center">
           {/* Left: Tabs and Info */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-semibold text-white mb-3">
-                Mira en cualquier dispositivo
+          <div className="space-y-6 sm:space-y-8">
+            {/* Header with badge */}
+            <div className="space-y-3 sm:space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#fcf3e1]/20 border border-[#fcf3e1]/30 backdrop-blur-sm">
+                <span className="w-2 h-2 bg-[#fcf3e1] rounded-full animate-pulse" />
+                <span className="text-xs sm:text-sm font-semibold text-[#fcf3e1] uppercase tracking-wider">
+                  Multiplataforma
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#fcf3e1] leading-tight drop-shadow-lg">
+                Disponible en{" "}
+                <span className="bg-gradient-to-r from-[#fcf3e1] via-[#fcf3e1]/90 to-[#fcf3e1]/70 bg-clip-text">
+                  tus dispositivos favoritos
+                </span>
               </h2>
-              <p className="text-base text-white/90">
-                Transmite sin interrupciones en TV, móvil, tablet o laptop. Tu
+              <p className="text-sm sm:text-base md:text-lg text-[#fcf3e1]/90 font-medium leading-relaxed max-w-lg">
+                Transmite sin interrupciones en{" "}
+                <strong className="text-[#fcf3e1]">TV</strong>,{" "}
+                <strong className="text-[#fcf3e1]">móvil</strong>,{" "}
+                <strong className="text-[#fcf3e1]">tablet</strong> o{" "}
+                <strong className="text-[#fcf3e1]">laptop</strong>. Tu
                 contenido, en cualquier pantalla.
               </p>
             </div>
 
-            {/* Device Tabs */}
+            {/* Device Tabs - Mobile optimized */}
             <div
               ref={tabsRef}
-              className="relative inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 p-1.5 backdrop-blur-md overflow-x-auto touch-pan-x flex-nowrap whitespace-nowrap"
+              className="relative inline-flex items-center gap-1.5 sm:gap-2 rounded-2xl sm:rounded-full border-2 border-[#fcf3e1]/30 bg-[#fcf3e1]/15 p-1 sm:p-1.5 backdrop-blur-lg overflow-x-auto touch-pan-x flex-nowrap whitespace-nowrap shadow-lg scrollbar-hide max-w-full"
             >
               {DEVICE_SPECS.map((d) => (
                 <button
@@ -363,36 +377,46 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                     prevIDRef.current = activeDeviceID;
                     setActiveDeviceID(d.id);
                   }}
-                  className={`relative z-10 flex items-center gap-2.5 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  className={`relative z-10 flex items-center gap-1.5 sm:gap-2.5 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold transition-all duration-300 shrink-0 ${
                     activeDeviceID === d.id
-                      ? "text-[#2e1065] bg-white border border-white/50 shadow-lg"
-                      : "text-white/80 hover:text-white hover:bg-white/10"
+                      ? "text-[#1f1f66] bg-[#fcf3e1] border-2 border-[#fcf3e1] shadow-[0_0_15px_rgba(249,231,195,0.6)] scale-105"
+                      : "text-[#fcf3e1]/90 hover:text-[#fcf3e1] hover:bg-[#fcf3e1]/20 active:scale-95"
                   }`}
                 >
-                  <span className="icon inline-flex">{d.icon}</span>
-                  <span>{d.label}</span>
+                  <span className="icon inline-flex text-base sm:text-lg">
+                    {d.icon}
+                  </span>
+                  <span className="hidden sm:inline">{d.label}</span>
                 </button>
               ))}
             </div>
 
-            {/* Device Info */}
-            <div ref={contentRef} className="space-y-6 opacity-100">
-              <div>
-                <h3 className="text-2xl font-semibold text-white mb-2">
+            {/* Device Info - Enhanced mobile typography */}
+            <div
+              ref={contentRef}
+              className="space-y-4 sm:space-y-6 opacity-100"
+            >
+              <div className="space-y-2 sm:space-y-3">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#fcf3e1] leading-snug drop-shadow-md">
                   {activeContent.title}
                 </h3>
-                <p className="text-white/80">{activeContent.description}</p>
+                <p className="text-sm sm:text-base text-[#fcf3e1]/85 font-medium leading-relaxed">
+                  {activeContent.description}
+                </p>
               </div>
 
-              {/* Feature list */}
-              <div className="grid grid-cols-2 gap-3">
-                {activeContent.items.map((item) => (
+              {/* Feature list - Mobile optimized cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+                {activeContent.items.map((item, index) => (
                   <div
                     key={item}
-                    className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/10 border border-white/10 backdrop-blur-sm"
+                    className="group flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg sm:rounded-xl bg-[#fcf3e1]/20 border border-[#fcf3e1]/25 sm:border-2 sm:border-[#fcf3e1]/30 backdrop-blur-md shadow-md sm:shadow-lg hover:bg-[#fcf3e1]/30 hover:border-[#fcf3e1]/50 hover:scale-[1.02] sm:hover:scale-105 transition-all duration-300 cursor-default"
+                    style={{ animationDelay: `${index * 50}ms` }}
                   >
-                    <div className="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-                    <span className="text-sm text-white/90">{item}</span>
+                    <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#fcf3e1] flex-shrink-0 shadow-[0_0_8px_rgba(249,231,195,0.8)] sm:shadow-[0_0_12px_rgba(249,231,195,1)] group-hover:shadow-[0_0_16px_rgba(249,231,195,1)] transition-shadow duration-300" />
+                    <span className="text-xs sm:text-sm font-semibold text-[#fcf3e1] truncate drop-shadow-sm">
+                      {item}
+                    </span>
                   </div>
                 ))}
               </div>

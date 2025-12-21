@@ -347,11 +347,11 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
           className="w-full h-20 sm:h-28 md:h-32"
         >
           <defs>
-            {/* Gradient matching Stats top: pink left, purple right, fully opaque */}
+            {/* New gradient palette: magenta → blue-purple → dark navy */}
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#ec4899" stopOpacity="1" />
-              <stop offset="50%" stopColor="#a21caf" stopOpacity="1" />
-              <stop offset="100%" stopColor="#581c87" stopOpacity="1" />
+              <stop offset="0%" stopColor="#822e6a" stopOpacity="1" />
+              <stop offset="50%" stopColor="#5456d5" stopOpacity="1" />
+              <stop offset="100%" stopColor="#1f1f66" stopOpacity="1" />
             </linearGradient>
             <linearGradient
               id="waveGradientBottom"
@@ -360,9 +360,9 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#ec4899" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#581c87" stopOpacity="0.9" />
+              <stop offset="0%" stopColor="#822e6a" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.85" />
+              <stop offset="100%" stopColor="#1f1f66" stopOpacity="0.9" />
             </linearGradient>
           </defs>
           <path

@@ -161,24 +161,24 @@ function StatCard({
       {/* Icon container with animation */}
       <div
         ref={iconRef}
-        className="relative z-10 flex items-center justify-center w-16 h-16 sm:w-[4.5rem] sm:h-[4.5rem] rounded-xl bg-gradient-to-br from-[#4a5fc9]/40 via-[#6b7fd9]/30 to-[#4a5fc9]/20 text-white shadow-lg ring-2 ring-[#6b7fd9]/60 group-hover:ring-[#8fa0e9]/80 group-hover:shadow-[#4a5fc9]/30 transition-all duration-300"
+        className="relative z-10 flex items-center justify-center w-16 h-16 sm:w-[4.5rem] sm:h-[4.5rem] rounded-xl bg-gradient-to-br from-[#4a5fc9]/40 via-[#6b7fd9]/30 to-[#4a5fc9]/20 text-[#fcf3e1] shadow-lg ring-2 ring-[#6b7fd9]/60 group-hover:ring-[#8fa0e9]/80 group-hover:shadow-[#4a5fc9]/30 transition-all duration-300"
       >
         <Icon
-          className="w-8 h-8 sm:w-9 sm:h-9 text-white drop-shadow-lg"
+          className="w-8 h-8 sm:w-9 sm:h-9 text-[#fcf3e1] drop-shadow-lg"
           animate={isHovered}
         />
       </div>
 
       {/* Number display */}
       <div className="relative z-10 text-center">
-        <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow-xl">
+        <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#fcf3e1] drop-shadow-xl">
           <span ref={valueElRef}>0</span>
         </div>
       </div>
 
       {/* Label */}
       <div className="relative z-10 text-center">
-        <div className="text-sm sm:text-base font-bold text-white/80 tracking-[0.25em] uppercase group-hover:text-white transition-all duration-300">
+        <div className="text-sm sm:text-base font-bold text-[#fcf3e1]/80 tracking-[0.25em] uppercase group-hover:text-[#fcf3e1] transition-all duration-300">
           {label}
         </div>
       </div>
@@ -281,7 +281,7 @@ export default function StatsCounterSection() {
             preserveAspectRatio="none"
           >
             <defs>
-              {/* Gradient matching Hero bottom: pink left, purple right, fully opaque */}
+              {/* New gradient palette: magenta → blue-purple → dark navy */}
               <linearGradient
                 id="waveTopGrad1"
                 x1="0%"
@@ -289,9 +289,9 @@ export default function StatsCounterSection() {
                 x2="100%"
                 y2="0%"
               >
-                <stop offset="0%" stopColor="#ec4899" stopOpacity="1" />
-                <stop offset="50%" stopColor="#a21caf" stopOpacity="1" />
-                <stop offset="100%" stopColor="#581c87" stopOpacity="1" />
+                <stop offset="0%" stopColor="#822e6a" stopOpacity="1" />
+                <stop offset="50%" stopColor="#5456d5" stopOpacity="1" />
+                <stop offset="100%" stopColor="#1f1f66" stopOpacity="1" />
               </linearGradient>
               <linearGradient
                 id="waveTopGrad2"
@@ -300,9 +300,9 @@ export default function StatsCounterSection() {
                 x2="100%"
                 y2="0%"
               >
-                <stop offset="0%" stopColor="#ec4899" stopOpacity="0.8" />
-                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="#581c87" stopOpacity="0.9" />
+                <stop offset="0%" stopColor="#822e6a" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#5456d5" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#1f1f66" stopOpacity="0.9" />
               </linearGradient>
             </defs>
 
@@ -333,7 +333,7 @@ export default function StatsCounterSection() {
             preserveAspectRatio="none"
           >
             <defs>
-              {/* Gradient matching Devices section: left=pink, right=purple, purely horizontal */}
+              {/* New gradient palette: magenta → blue-purple → dark navy */}
               <linearGradient
                 id="waveBottomGrad1"
                 x1="0%"
@@ -341,9 +341,9 @@ export default function StatsCounterSection() {
                 x2="100%"
                 y2="0%"
               >
-                <stop offset="0%" stopColor="#ec4899" stopOpacity="1" />
-                <stop offset="50%" stopColor="#a21caf" stopOpacity="1" />
-                <stop offset="100%" stopColor="#581c87" stopOpacity="1" />
+                <stop offset="0%" stopColor="#822e6a" stopOpacity="1" />
+                <stop offset="50%" stopColor="#5456d5" stopOpacity="1" />
+                <stop offset="100%" stopColor="#1f1f66" stopOpacity="1" />
               </linearGradient>
               <linearGradient
                 id="waveBottomGrad2"
@@ -352,9 +352,9 @@ export default function StatsCounterSection() {
                 x2="100%"
                 y2="0%"
               >
-                <stop offset="0%" stopColor="#ec4899" stopOpacity="0.7" />
-                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#581c87" stopOpacity="0.9" />
+                <stop offset="0%" stopColor="#822e6a" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#5456d5" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#1f1f66" stopOpacity="0.9" />
               </linearGradient>
             </defs>
 
@@ -375,10 +375,10 @@ export default function StatsCounterSection() {
 
       <div className="container mx-auto px-4 relative z-20">
         <div className="text-center mb-8 sm:mb-10">
-          <h2 className="gsap-section-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 tracking-tight text-white drop-shadow-md">
+          <h2 className="gsap-section-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 tracking-tight text-[#fcf3e1] drop-shadow-md">
             Mucho Por Qué Suscribirte
           </h2>
-          <p className="gsap-section-subtitle text-base sm:text-lg text-white/90 font-medium drop-shadow-sm">
+          <p className="gsap-section-subtitle text-base sm:text-lg text-[#fcf3e1]/90 font-medium drop-shadow-sm">
             Programación premium, estrenos constantes y TV en vivo que no se
             detiene
           </p>

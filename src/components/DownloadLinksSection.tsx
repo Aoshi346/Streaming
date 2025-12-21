@@ -252,7 +252,7 @@ const DownloadLinksSection: React.FC = () => {
           preserveAspectRatio="none"
         >
           <defs>
-            {/* Primary gradient - matches StatsCounter waveBottomGrad1 */}
+            {/* New gradient palette: navy → blue-purple → magenta */}
             <linearGradient
               id="curveGradient1"
               x1="100%"
@@ -260,11 +260,11 @@ const DownloadLinksSection: React.FC = () => {
               x2="0%"
               y2="100%"
             >
-              <stop offset="0%" stopColor="#581c87" stopOpacity="0.5" />
-              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.7" />
+              <stop offset="0%" stopColor="#1f1f66" stopOpacity="0.5" />
+              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#822e6a" stopOpacity="0.7" />
             </linearGradient>
-            {/* Secondary gradient - matches StatsCounter waveBottomGrad2 */}
+            {/* Secondary gradient */}
             <linearGradient
               id="curveGradient2"
               x1="100%"
@@ -272,11 +272,11 @@ const DownloadLinksSection: React.FC = () => {
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#581c87" stopOpacity="0.3" />
-              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.5" />
+              <stop offset="0%" stopColor="#1f1f66" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#822e6a" stopOpacity="0.5" />
             </linearGradient>
-            {/* Tertiary gradient - lighter accent */}
+            {/* Tertiary gradient */}
             <linearGradient
               id="curveGradient3"
               x1="100%"
@@ -284,9 +284,9 @@ const DownloadLinksSection: React.FC = () => {
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#581c87" stopOpacity="0.2" />
-              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="#1f1f66" stopOpacity="0.2" />
+              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#822e6a" stopOpacity="0.4" />
             </linearGradient>
           </defs>
           {/* Layer 1 - Foreground: smooth flowing curve */}
@@ -322,7 +322,7 @@ const DownloadLinksSection: React.FC = () => {
           preserveAspectRatio="none"
         >
           <defs>
-            {/* Primary gradient - matches StatsCounter style */}
+            {/* New gradient palette: magenta → blue-purple → navy */}
             <linearGradient
               id="bottomCurveGradient1"
               x1="0%"
@@ -330,9 +330,9 @@ const DownloadLinksSection: React.FC = () => {
               x2="100%"
               y2="100%"
             >
-              <stop offset="0%" stopColor="#ec4899" stopOpacity="0.7" />
-              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#581c87" stopOpacity="0.5" />
+              <stop offset="0%" stopColor="#822e6a" stopOpacity="0.7" />
+              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#1f1f66" stopOpacity="0.5" />
             </linearGradient>
             {/* Secondary gradient */}
             <linearGradient
@@ -342,9 +342,9 @@ const DownloadLinksSection: React.FC = () => {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#ec4899" stopOpacity="0.5" />
-              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#581c87" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="#822e6a" stopOpacity="0.5" />
+              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#1f1f66" stopOpacity="0.3" />
             </linearGradient>
             {/* Tertiary gradient */}
             <linearGradient
@@ -354,9 +354,9 @@ const DownloadLinksSection: React.FC = () => {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#ec4899" stopOpacity="0.4" />
-              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#581c87" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="#822e6a" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#1f1f66" stopOpacity="0.2" />
             </linearGradient>
           </defs>
           {/* Layer 1 - Foreground: smooth flowing curve from right */}

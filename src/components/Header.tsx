@@ -174,22 +174,22 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
           preserveAspectRatio="none"
           className="absolute right-0 top-0 h-full w-[70%]"
         >
-          {/* Deep purple wave - extends furthest left */}
+          {/* Dark navy wave - extends furthest left */}
           <path
             d="M0,100 C50,75 100,62 180,67 C260,72 320,50 400,35 C450,28 480,25 500,20 L500,100 Z"
-            className="fill-[#581c87]"
+            className="fill-[#1f1f66]"
             fillOpacity="0.2"
           />
-          {/* Fuchsia wave */}
+          {/* Blue-purple wave */}
           <path
             d="M80,100 C130,72 180,58 260,63 C340,68 400,45 460,32 C485,28 500,30 500,30 L500,100 Z"
-            className="fill-[#a21caf]"
+            className="fill-[#5456d5]"
             fillOpacity="0.3"
           />
-          {/* Pink wave - closest to right edge */}
+          {/* Magenta wave - closest to right edge */}
           <path
             d="M280,100 C330,72 370,60 420,63 C470,66 490,52 500,45 L500,100 Z"
-            className="fill-[#ec4899]"
+            className="fill-[#822e6a]"
             fillOpacity="0.25"
           />
         </svg>
@@ -218,10 +218,10 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                 onNavClick(e);
                 closeMenu();
               }}
-              className="group relative px-1 pb-1 transition-colors duration-200 hover:text-text-primary will-change-transform whitespace-nowrap"
+              className="group relative px-1 pb-1 transition-colors duration-200 hover:text-[#822e6a] will-change-transform whitespace-nowrap"
             >
               {link.label}
-              <span className="pointer-events-none absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
+              <span className="pointer-events-none absolute inset-x-0 -bottom-0.5 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </a>
           ))}
         </nav>
@@ -270,7 +270,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
       >
         <div className="mx-auto max-w-3xl rounded-2xl border border-border-subtle bg-background shadow-theme-strong overflow-hidden">
           {/* Gradient accent bar at top */}
-          <div className="h-1 bg-gradient-to-r from-[#581c87] via-[#a21caf] to-[#ec4899]" />
+          <div className="h-1 bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66]" />
           <nav className="flex flex-col py-2" aria-label="Menú móvil">
             {links.map((link, index) => (
               <a
@@ -280,13 +280,13 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                   onNavClick(e);
                   closeMenu();
                 }}
-                className="group flex items-center gap-4 px-5 py-4 text-base font-medium text-gray-900 transition-all duration-200 hover:bg-[#581c87]/10 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60 border-l-4 border-transparent hover:border-[#a21caf]"
+                className="group flex items-center gap-4 px-5 py-4 text-base font-medium text-gray-900 transition-all duration-200 hover:bg-[#1f1f66]/10 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60 border-l-4 border-transparent hover:border-[#5456d5]"
                 style={{
                   transitionDelay: menuOpen ? `${index * 40}ms` : "0ms",
                 }}
               >
                 <svg
-                  className="w-6 h-6 text-[#7c3aed] group-hover:text-[#a21caf] transition-colors duration-200 flex-shrink-0"
+                  className="w-6 h-6 text-[#5456d5] group-hover:text-[#822e6a] transition-colors duration-200 flex-shrink-0"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -300,7 +300,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                 </svg>
                 <span className="flex-1">{link.label}</span>
                 <svg
-                  className="w-5 h-5 text-text-muted transition-all duration-200 group-hover:text-[#a21caf] group-hover:translate-x-1"
+                  className="w-5 h-5 text-text-muted transition-all duration-200 group-hover:text-[#5456d5] group-hover:translate-x-1"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -316,7 +316,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
             ))}
           </nav>
           <div className="border-t border-border-subtle px-5 py-4 text-center">
-            <span className="text-sm font-medium bg-gradient-to-r from-[#581c87] via-[#a21caf] to-[#ec4899] bg-clip-text text-transparent">
+            <span className="text-sm font-medium bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] bg-clip-text text-transparent">
               FullVisionTV
             </span>
             <span className="text-sm text-text-muted"> © 2024</span>
