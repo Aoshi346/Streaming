@@ -339,7 +339,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
         </div>
       </div>
 
-      {/* Wave Divider */}
+      {/* Wave Divider - matching Stats section top wave */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <svg
           viewBox="0 0 1440 120"
@@ -347,10 +347,11 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
           className="w-full h-20 sm:h-28 md:h-32"
         >
           <defs>
+            {/* Gradient matching Stats top: pink left, purple right, fully opaque */}
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#581c87" />
-              <stop offset="50%" stopColor="#a21caf" />
-              <stop offset="100%" stopColor="#ec4899" />
+              <stop offset="0%" stopColor="#ec4899" stopOpacity="1" />
+              <stop offset="50%" stopColor="#a21caf" stopOpacity="1" />
+              <stop offset="100%" stopColor="#581c87" stopOpacity="1" />
             </linearGradient>
             <linearGradient
               id="waveGradientBottom"
@@ -359,9 +360,9 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#581c87" stopOpacity="0.4" />
-              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.6" />
+              <stop offset="0%" stopColor="#ec4899" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.85" />
+              <stop offset="100%" stopColor="#581c87" stopOpacity="0.9" />
             </linearGradient>
           </defs>
           <path

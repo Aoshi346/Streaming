@@ -281,6 +281,7 @@ export default function StatsCounterSection() {
             preserveAspectRatio="none"
           >
             <defs>
+              {/* Gradient matching Hero bottom: pink left, purple right, fully opaque */}
               <linearGradient
                 id="waveTopGrad1"
                 x1="0%"
@@ -288,9 +289,9 @@ export default function StatsCounterSection() {
                 x2="100%"
                 y2="0%"
               >
-                <stop offset="0%" stopColor="#581c87" stopOpacity="0.7" />
-                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#ec4899" stopOpacity="0.9" />
+                <stop offset="0%" stopColor="#ec4899" stopOpacity="1" />
+                <stop offset="50%" stopColor="#a21caf" stopOpacity="1" />
+                <stop offset="100%" stopColor="#581c87" stopOpacity="1" />
               </linearGradient>
               <linearGradient
                 id="waveTopGrad2"
@@ -299,9 +300,9 @@ export default function StatsCounterSection() {
                 x2="100%"
                 y2="0%"
               >
-                <stop offset="0%" stopColor="#581c87" stopOpacity="0.5" />
-                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#ec4899" stopOpacity="0.7" />
+                <stop offset="0%" stopColor="#ec4899" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#581c87" stopOpacity="0.9" />
               </linearGradient>
             </defs>
 
@@ -309,19 +310,17 @@ export default function StatsCounterSection() {
             <path
               d="M0,0 L1440,0 L1440,300 C1200,380 950,200 720,280 C480,350 240,200 0,320 Z"
               fill="url(#waveTopGrad2)"
-              opacity="0.6"
             />
             {/* Layer 2 - Middle detail */}
             <path
               d="M0,0 L1440,0 L1440,240 C1200,280 960,180 720,240 C480,300 240,160 0,260 Z"
               fill="url(#waveTopGrad1)"
-              opacity="0.8"
             />
             {/* Layer 3 - Top detail (Hero match) */}
             <path
               d="M0,0 L1440,0 L1440,180 C1100,220 800,100 500,160 C250,200 0,120 0,120 Z"
-              fill="#581c87"
-              fillOpacity="0.1"
+              fill="url(#waveTopGrad1)"
+              opacity="0.5"
             />
           </svg>
         </div>
