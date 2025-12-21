@@ -238,69 +238,151 @@ const DownloadLinksSection: React.FC = () => {
     >
       <div className="absolute inset-0 bg-page-gradient -z-20" />
 
-      {/* Top Divider - Slant Down (High Left -> Low Right) */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-0">
+      {/* Top Divider - Layered Big Curves (Left to Right) */}
+      <div
+        className="absolute top-0 left-0 right-0 z-0 pointer-events-none overflow-hidden"
+        style={{
+          height: "320px",
+        }}
+      >
         <svg
-          className="relative block w-full h-[60px] sm:h-[100px]"
-          data-name="Layer 1"
+          className="absolute w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
+          viewBox="0 0 1200 320"
           preserveAspectRatio="none"
         >
           <defs>
+            {/* Primary gradient - matches StatsCounter waveBottomGrad1 */}
             <linearGradient
-              id="dividerGradientTop"
+              id="curveGradient1"
+              x1="100%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="#581c87" stopOpacity="0.5" />
+              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.7" />
+            </linearGradient>
+            {/* Secondary gradient - matches StatsCounter waveBottomGrad2 */}
+            <linearGradient
+              id="curveGradient2"
+              x1="100%"
+              y1="0%"
+              x2="0%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="#581c87" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.5" />
+            </linearGradient>
+            {/* Tertiary gradient - lighter accent */}
+            <linearGradient
+              id="curveGradient3"
+              x1="100%"
+              y1="0%"
+              x2="0%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="#581c87" stopOpacity="0.2" />
+              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#ec4899" stopOpacity="0.4" />
+            </linearGradient>
+          </defs>
+          {/* Layer 1 - Foreground: smooth flowing curve */}
+          <path
+            d="M0,0 L0,200 Q350,240 650,130 Q950,40 1200,25 L1200,0 Z"
+            fill="url(#curveGradient1)"
+          />
+          {/* Layer 2 - Middle: tighter curve, more dramatic bend */}
+          <path
+            d="M0,0 L0,260 Q200,290 500,200 Q850,100 1200,55 L1200,0 Z"
+            fill="url(#curveGradient2)"
+          />
+          {/* Layer 3 - Background: wider, gentler curve */}
+          <path
+            d="M0,0 L0,310 Q450,340 700,240 Q1000,130 1200,80 L1200,0 Z"
+            fill="url(#curveGradient3)"
+            opacity="0.7"
+          />
+        </svg>
+      </div>
+
+      {/* Bottom Divider - Layered Big Curves (Right to Left) */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-0 pointer-events-none overflow-hidden"
+        style={{
+          height: "320px",
+        }}
+      >
+        <svg
+          className="absolute w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 320"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            {/* Primary gradient - matches StatsCounter style */}
+            <linearGradient
+              id="bottomCurveGradient1"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="#ec4899" stopOpacity="0.7" />
+              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#581c87" stopOpacity="0.5" />
+            </linearGradient>
+            {/* Secondary gradient */}
+            <linearGradient
+              id="bottomCurveGradient2"
               x1="0%"
               y1="0%"
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#581c87" />
-              <stop offset="50%" stopColor="#a21caf" />
-              <stop offset="100%" stopColor="#ec4899" />
+              <stop offset="0%" stopColor="#ec4899" stopOpacity="0.5" />
+              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#581c87" stopOpacity="0.3" />
             </linearGradient>
-          </defs>
-          <path
-            d="M0,0 L1200,0 L1200,20 L0,120 Z"
-            fill="url(#dividerGradientTop)"
-          ></path>
-        </svg>
-      </div>
-
-      {/* Bottom Divider - Slant Down (High Left -> Low Right) */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0">
-        <svg
-          className="relative block w-full h-[60px] sm:h-[100px]"
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <defs>
+            {/* Tertiary gradient */}
             <linearGradient
-              id="dividerGradientBottom"
+              id="bottomCurveGradient3"
               x1="0%"
               y1="0%"
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#581c87" />
-              <stop offset="50%" stopColor="#a21caf" />
-              <stop offset="100%" stopColor="#ec4899" />
+              <stop offset="0%" stopColor="#ec4899" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#a21caf" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#581c87" stopOpacity="0.2" />
             </linearGradient>
           </defs>
+          {/* Layer 1 - Foreground: smooth flowing curve from right */}
           <path
-            d="M0,120 L1200,120 L1200,20 Z"
-            fill="url(#dividerGradientBottom)"
-          ></path>
+            d="M1200,320 L1200,120 Q850,80 550,190 Q250,280 0,295 L0,320 Z"
+            fill="url(#bottomCurveGradient1)"
+          />
+          {/* Layer 2 - Middle: tighter curve */}
+          <path
+            d="M1200,320 L1200,60 Q1000,30 700,120 Q350,220 0,255 L0,320 Z"
+            fill="url(#bottomCurveGradient2)"
+          />
+          {/* Layer 3 - Background: wider, gentler curve */}
+          <path
+            d="M1200,320 L1200,10 Q750,-20 500,80 Q200,180 0,220 L0,320 Z"
+            fill="url(#bottomCurveGradient3)"
+            opacity="0.7"
+          />
         </svg>
       </div>
 
-      <div className="container-wrapper relative z-10 pt-12 sm:pt-16 pb-12">
-        <h2 className="gsap-section-title text-2xl font-extrabold tracking-tight sm:text-3xl md:text-4xl mb-3 text-left bg-gradient-to-r from-[#581c87] via-[#a21caf] to-[#ec4899] bg-clip-text text-transparent drop-shadow-sm pb-2">
+      <div className="container-wrapper relative z-10 -mt-12 pb-12">
+        <h2 className="gsap-section-title text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl mb-4 text-left text-[#3b0764] drop-shadow-sm pb-2">
           Descarga la app
         </h2>
-        <p className="gsap-section-subtitle mb-8 text-left text-base sm:text-lg text-gray-700 font-medium">
+        <p className="gsap-section-subtitle mb-8 text-left text-lg sm:text-xl text-slate-700 font-medium">
           Descarga la app en tu movil o tablet.
         </p>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
