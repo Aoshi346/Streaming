@@ -334,27 +334,28 @@ export default function StatsCounterSection() {
             preserveAspectRatio="none"
           >
             <defs>
+              {/* Gradient matching Devices section: left=pink, right=purple, purely horizontal */}
               <linearGradient
                 id="waveBottomGrad1"
-                x1="100%"
+                x1="0%"
                 y1="0%"
-                x2="0%"
-                y2="100%"
+                x2="100%"
+                y2="0%"
               >
-                <stop offset="0%" stopColor="#581c87" stopOpacity="0.5" />
-                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#ec4899" stopOpacity="0.7" />
+                <stop offset="0%" stopColor="#ec4899" stopOpacity="1" />
+                <stop offset="50%" stopColor="#a21caf" stopOpacity="1" />
+                <stop offset="100%" stopColor="#581c87" stopOpacity="1" />
               </linearGradient>
               <linearGradient
                 id="waveBottomGrad2"
-                x1="100%"
+                x1="0%"
                 y1="0%"
-                x2="0%"
+                x2="100%"
                 y2="0%"
               >
-                <stop offset="0%" stopColor="#581c87" stopOpacity="0.3" />
-                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="#ec4899" stopOpacity="0.5" />
+                <stop offset="0%" stopColor="#ec4899" stopOpacity="0.7" />
+                <stop offset="50%" stopColor="#a21caf" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#581c87" stopOpacity="0.9" />
               </linearGradient>
             </defs>
 
