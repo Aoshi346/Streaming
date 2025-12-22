@@ -1,4 +1,4 @@
-import logo from "../assets/fullvision_logo_color.svg";
+import logo from "../assets/images/fullvision_logo_color.svg";
 
 export default function Logo({ className = "" }: { className?: string }) {
   return (

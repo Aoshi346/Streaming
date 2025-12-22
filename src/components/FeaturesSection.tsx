@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // icons are replaced with brand logo
-import fullvisionLogo from "../assets/fullvision_logo2.svg";
+import fullvisionLogo from "../assets/images/fullvision_logo2.svg";
 import FeatureCard, { FeatureVariant } from "./FeatureCard";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -188,7 +188,7 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
         </div>
       </div>
       {/* Transition to Stats (#4c1d95) */}
-        {/* Wave divider removed */}
+      {/* Wave divider removed */}
     </section>
   );
 });

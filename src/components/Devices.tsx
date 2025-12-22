@@ -9,10 +9,10 @@ import React, {
 // Replaced lucide-react icons with react-icons (already installed) to avoid adding new dependency
 import { FaTv, FaMobileAlt, FaTabletAlt, FaLaptop } from "react-icons/fa";
 import { gsap } from "gsap";
-import mobileDevicePng from "../assets/phone_mockup_bg-landscape.png";
-import tvDevicePng from "../assets/tv_mockup_bg-front.png";
-import tabletDevicePng from "../assets/tablet_mockup.png";
-import laptopDevicePng from "../assets/laptop_mockup_bg-front.png";
+import mobileDevicePng from "../assets/images/phone_mockup_bg-landscape.png";
+import tvDevicePng from "../assets/images/tv_mockup_bg-front.png";
+import tabletDevicePng from "../assets/images/tablet_mockup.png";
+import laptopDevicePng from "../assets/images/laptop_mockup_bg-front.png";
 
 type DeviceID = "tv" | "mobile" | "tablet" | "laptop";
 

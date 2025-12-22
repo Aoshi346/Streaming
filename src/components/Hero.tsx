@@ -10,8 +10,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaDownload, FaLaptop } from "react-icons/fa";
 import { smoothScrollTo } from "../utils/smoothScroll";
-import heroBackground from "../assets/hero_background.png";
-import heroBackgroundMobile from "../assets/hero_background_mobile.png";
+import heroBackground from "../assets/images/hero_background.png";
+import heroBackgroundMobile from "../assets/images/hero_background_mobile.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
