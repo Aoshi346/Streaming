@@ -171,26 +171,34 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
                 <a
                   href="#pricing"
-                  className="group relative w-full sm:w-auto overflow-hidden rounded-lg px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-[#a21caf]/50"
+                  className="group relative w-full sm:w-auto overflow-hidden rounded-lg sm:rounded-xl px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-base font-black text-[#fcf3e1] shadow-[0_0_20px_rgba(130,46,106,0.4),0_0_40px_rgba(84,86,213,0.2)] sm:shadow-[0_0_30px_rgba(130,46,106,0.4),0_0_60px_rgba(84,86,213,0.2)] transition-all duration-300 hover:scale-105 sm:hover:scale-110 hover:shadow-[0_0_30px_rgba(130,46,106,0.6),0_0_60px_rgba(84,86,213,0.4)] ring-2 ring-[#fcf3e1]/30 hover:ring-[#fcf3e1]/60"
                   onClick={handleSmoothAnchor("#pricing")}
                   style={{
                     background:
-                      "linear-gradient(135deg, #581c87 0%, #a21caf 50%, #ec4899 100%)",
+                      "linear-gradient(135deg, #822e6a 0%, #5456d5 50%, #1f1f66 100%)",
                   }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    SUSCRÍBETE AHORA
+                  {/* Animated shimmer effect */}
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-[#fcf3e1]/20 to-transparent" />
+
+                  {/* Glow pulse background */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-[#822e6a]/30 via-transparent to-[#5456d5]/20" />
+
+                  {/* Pulsing border glow */}
+                  <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] opacity-60 blur-sm animate-pulse -z-10" />
+
+                  <span className="relative z-10 flex items-center justify-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+                    <span className="tracking-wider">✨ SUSCRÍBETE AHORA</span>
                     <svg
-                      className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                      className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-2 transition-transform duration-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
+                      strokeWidth={2.5}
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth={2}
                         d="M13 7l5 5m0 0l-5 5m5-5H6"
                       />
                     </svg>
@@ -199,13 +207,13 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
 
                 <a
                   href="#features"
-                  className="group w-full sm:w-auto rounded-lg border-2 border-[#7c3aed]/50 bg-[#581c87]/20 backdrop-blur-sm px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white transition-all duration-300 hover:bg-[#581c87]/40 hover:border-[#a21caf] hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#a21caf]"
+                  className="group w-full sm:w-auto rounded-lg border-2 border-[#5456d5]/50 bg-[#1f1f66]/20 backdrop-blur-sm px-4 py-2 sm:px-6 sm:py-3 text-xs sm:text-sm font-bold text-[#fcf3e1] transition-all duration-300 hover:bg-[#822e6a]/30 hover:border-[#fcf3e1]/50 hover:text-[#fcf3e1] hover:scale-105 hover:shadow-[0_4px_20px_rgba(84,86,213,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fcf3e1]/50"
                   onClick={handleSmoothAnchor("#features")}
                 >
                   <span className="flex items-center justify-center gap-2">
                     VER MÁS
                     <svg
-                      className="w-4 h-4 transform group-hover:translate-y-1 transition-transform duration-300"
+                      className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover:translate-y-1 transition-transform duration-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -225,11 +233,11 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                 <div className="grid gap-2 sm:grid-cols-2">
                   <a
                     href="#devices"
-                    className="group relative flex items-center justify-between rounded-lg border border-[#7c3aed]/30 bg-[#581c87]/20 px-3 py-2 text-xs sm:text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-[#a21caf]/50 hover:bg-[#581c87]/30"
+                    className="group relative flex items-center justify-between rounded-lg border border-[#5456d5]/30 bg-[#1f1f66]/20 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-semibold text-[#fcf3e1] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-[#fcf3e1]/40 hover:bg-[#5456d5]/25 hover:shadow-[0_4px_15px_rgba(84,86,213,0.25)]"
                     onClick={handleSmoothAnchor("#devices")}
                   >
                     <div className="flex items-center gap-2">
-                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#7c3aed]/30 text-white text-sm">
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#5456d5]/30 text-[#fcf3e1] text-sm">
                         <FaLaptop aria-hidden />
                       </span>
                       <div className="flex flex-col text-left">
@@ -242,7 +250,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                       </div>
                     </div>
                     <svg
-                      className="h-5 w-5 text-white/50 transition-transform duration-300 group-hover:translate-x-1"
+                      className="h-5 w-5 text-[#fcf3e1]/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#fcf3e1]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -258,11 +266,11 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
 
                   <a
                     href="#downloads"
-                    className="group relative flex items-center justify-between rounded-lg border border-[#7c3aed]/30 bg-[#581c87]/20 px-3 py-2 text-xs sm:text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-[#a21caf]/50 hover:bg-[#581c87]/30"
+                    className="group relative flex items-center justify-between rounded-lg border border-[#5456d5]/30 bg-[#1f1f66]/20 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-semibold text-[#fcf3e1] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-[#fcf3e1]/40 hover:bg-[#822e6a]/25 hover:shadow-[0_4px_15px_rgba(130,46,106,0.25)]"
                     onClick={handleSmoothAnchor("#downloads")}
                   >
                     <div className="flex items-center gap-2">
-                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#ec4899]/30 text-white text-sm">
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#822e6a]/30 text-[#fcf3e1] text-sm">
                         <FaDownload aria-hidden />
                       </span>
                       <div className="flex flex-col text-left">
@@ -273,7 +281,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                       </div>
                     </div>
                     <svg
-                      className="h-5 w-5 text-white/50 transition-transform duration-300 group-hover:translate-x-1"
+                      className="h-5 w-5 text-[#fcf3e1]/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#fcf3e1]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -290,10 +298,10 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               </div>
 
               {/* Trust indicators */}
-              <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap text-xs sm:text-sm text-white mt-2">
-                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#581c87]/40 backdrop-blur-sm border border-[#7c3aed]/30">
+              <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap text-xs sm:text-sm text-[#fcf3e1] mt-2">
+                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
                   <svg
-                    className="w-3.5 h-3.5 text-[#ec4899]"
+                    className="w-3.5 h-3.5 text-[#822e6a]"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -305,9 +313,9 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                   </svg>
                   Sin compromisos
                 </span>
-                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#581c87]/40 backdrop-blur-sm border border-[#7c3aed]/30">
+                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
                   <svg
-                    className="w-3.5 h-3.5 text-[#ec4899]"
+                    className="w-3.5 h-3.5 text-[#822e6a]"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -319,9 +327,9 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                   </svg>
                   HD & 4K disponible
                 </span>
-                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#581c87]/40 backdrop-blur-sm border border-[#7c3aed]/30">
+                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
                   <svg
-                    className="w-3.5 h-3.5 text-[#ec4899]"
+                    className="w-3.5 h-3.5 text-[#822e6a]"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
