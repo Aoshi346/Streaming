@@ -9,10 +9,10 @@ import React, {
 // Replaced lucide-react icons with react-icons (already installed) to avoid adding new dependency
 import { FaTv, FaMobileAlt, FaTabletAlt, FaLaptop } from "react-icons/fa";
 import { gsap } from "gsap";
-import mobileDeviceSvg from "../assets/mobile_device.svg";
-import tvDeviceSvg from "../assets/tv_device.svg";
-import tabletDeviceSvg from "../assets/tablet_device.svg";
-import laptopDeviceSvg from "../assets/laptop_device.svg";
+import mobileDevicePng from "../assets/phone_mockup_bg-landscape.png";
+import tvDevicePng from "../assets/tv_mockup_bg-front.png";
+import tabletDevicePng from "../assets/tablet_mockup.png";
+import laptopDevicePng from "../assets/laptop_mockup_bg-front.png";
 
 type DeviceID = "tv" | "mobile" | "tablet" | "laptop";
 
@@ -36,55 +36,59 @@ const DEVICE_SPECS: DeviceSpec[] = [
     id: "tv",
     label: "TV",
     icon: <FaTv className="h-5 w-5" />,
-    aspectRatio: "2544/1647",
+    aspectRatio: "16/9",
     radius: 12,
   },
-  // Match the actual SVG's intrinsic aspect ratio to avoid odd spacing
+  // Phone PNG is now horizontal/landscape orientation
   {
     id: "mobile",
     label: "Móvil",
     icon: <FaMobileAlt className="h-5 w-5" />,
-    aspectRatio: "783/1024",
-    radius: 28,
+    aspectRatio: "16/9",
+    radius: 20,
   },
   {
     id: "tablet",
     label: "Tablet",
     icon: <FaTabletAlt className="h-5 w-5" />,
-    aspectRatio: "1920/1080",
-    radius: 20,
+    aspectRatio: "16/9",
+    radius: 16,
   },
   {
     id: "laptop",
     label: "Laptop",
     icon: <FaLaptop className="h-5 w-5" />,
-    aspectRatio: "3834/2256",
-    radius: 14,
+    aspectRatio: "16/9",
+    radius: 12,
   },
 ];
 
 const DEVICE_CONTENT: Record<DeviceID, DeviceContent> = {
   tv: {
-    title: "Experiencia Cinematográfica",
-    description: "Disfruta de contenido en pantalla grande con calidad 4K",
+    title: "Streaming en Pantalla Grande",
+    description:
+      "Vive tus películas y series favoritas en calidad 4K con sonido envolvente",
     items: ["Samsung", "LG", "Sony", "Xiaomi TV", "Android TV"],
     color: "from-blue-600/20 to-blue-400/10",
   },
   mobile: {
-    title: "En Tu Bolsillo",
-    description: "Mira lo que ames en cualquier momento, en cualquier lugar",
+    title: "Streaming Sin Límites",
+    description:
+      "Lleva miles de canales, series y películas en tu bolsillo. Mira donde quieras",
     items: ["Android", "iPhone"],
     color: "from-purple-600/20 to-purple-400/10",
   },
   tablet: {
-    title: "Lo Mejor de Ambos Mundos",
-    description: "Pantalla perfecta para lectura y entretenimiento",
+    title: "Tu Cine Personal",
+    description:
+      "Disfruta del streaming en una pantalla más grande mientras te relajas",
     items: ["iPad", "Xiaomi Pad", "Samsung Tab"],
     color: "from-pink-600/20 to-pink-400/10",
   },
   laptop: {
-    title: "Producción Total",
-    description: "Trabaja y disfruta sin límites en tu computadora",
+    title: "Streaming en tu Escritorio",
+    description:
+      "Accede a todo tu contenido favorito mientras trabajas o estudias",
     items: ["Windows", "macOS"],
     color: "from-cyan-600/20 to-cyan-400/10",
   },
@@ -427,7 +431,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
           <div className="flex justify-center lg:justify-end">
             <div
               ref={previewOuterRef}
-              className="relative w-full max-w-[420px] sm:max-w-sm overflow-visible perspective-1000"
+              className="relative w-full max-w-[90vw] sm:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] overflow-visible perspective-1000"
               style={{ perspective: "1200px" }}
             >
               {/* Animated glow background */}
@@ -475,34 +479,33 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                     }}
                   >
                     {
-                      // Render the matching SVG asset for each device. Use <img> so the SVG stays sandboxed
-                      // and responsive. Keep sizes a little smaller than the container to avoid overlap.
+                      // Render the matching PNG mockup asset for each device.
                       d.id === "mobile" ? (
                         <img
-                          src={mobileDeviceSvg}
+                          src={mobileDevicePng}
                           alt={`${d.label} frame`}
-                          className="max-h-[88%] max-w-[88%] object-contain drop-shadow-2xl"
+                          className="w-[85%] h-[85%] object-contain drop-shadow-2xl"
                           draggable={false}
                         />
                       ) : d.id === "tv" ? (
                         <img
-                          src={tvDeviceSvg}
+                          src={tvDevicePng}
                           alt={`${d.label} frame`}
-                          className="max-h-[92%] max-w-[92%] object-contain drop-shadow-2xl"
+                          className="w-full h-full object-contain drop-shadow-2xl scale-150"
                           draggable={false}
                         />
                       ) : d.id === "tablet" ? (
                         <img
-                          src={tabletDeviceSvg}
+                          src={tabletDevicePng}
                           alt={`${d.label} frame`}
-                          className="max-h-[90%] max-w-[90%] object-contain drop-shadow-2xl"
+                          className="w-full h-full object-contain drop-shadow-2xl scale-[1.75] sm:scale-125"
                           draggable={false}
                         />
                       ) : d.id === "laptop" ? (
                         <img
-                          src={laptopDeviceSvg}
+                          src={laptopDevicePng}
                           alt={`${d.label} frame`}
-                          className="max-h-[92%] max-w-[92%] object-contain drop-shadow-2xl"
+                          className="w-full h-full object-contain drop-shadow-2xl"
                           draggable={false}
                         />
                       ) : (
