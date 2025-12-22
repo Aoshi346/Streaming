@@ -233,7 +233,11 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
             onClick={toggleMenu}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            className="inline-flex items-center justify-center rounded-lg p-2.5 bg-surface-muted text-text-secondary transition-all duration-200 hover:bg-[rgb(var(--color-background-rgb))/0.7] hover:text-text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60 active:scale-95"
+            className={`inline-flex items-center justify-center rounded-xl p-2.5 border-2 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5456d5]/60 active:scale-95 ${
+              menuOpen
+                ? "bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] border-[#fcf3e1]/40 text-[#fcf3e1] shadow-[0_0_20px_rgba(84,86,213,0.4)]"
+                : "bg-white border-[#5456d5]/30 text-[#5456d5] hover:border-[#822e6a] hover:text-[#822e6a] shadow-md"
+            }`}
           >
             <span className="sr-only">
               {menuOpen ? "Cerrar menú" : "Abrir menú"}
@@ -268,9 +272,9 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
         className="md:hidden absolute z-20 left-0 right-0 top-full px-4 pb-4 origin-top will-change-transform"
         aria-hidden={!menuOpen}
       >
-        <div className="mx-auto max-w-3xl rounded-2xl border border-border-subtle bg-background shadow-theme-strong overflow-hidden">
+        <div className="mx-auto max-w-3xl rounded-2xl border-2 border-[#5456d5]/30 bg-background/95 backdrop-blur-lg shadow-[0_10px_40px_rgba(31,31,102,0.3)] overflow-hidden">
           {/* Gradient accent bar at top */}
-          <div className="h-1 bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66]" />
+          <div className="h-1.5 bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66]" />
           <nav className="flex flex-col py-2" aria-label="Menú móvil">
             {links.map((link, index) => (
               <a
@@ -280,27 +284,31 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
                   onNavClick(e);
                   closeMenu();
                 }}
-                className="group flex items-center gap-4 px-5 py-4 text-base font-medium text-gray-900 transition-all duration-200 hover:bg-[#1f1f66]/10 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-light/60 border-l-4 border-transparent hover:border-[#5456d5]"
+                className="group flex items-center gap-4 px-5 py-4 text-base font-medium text-gray-800 transition-all duration-300 hover:bg-gradient-to-r hover:from-[#822e6a]/10 hover:via-[#5456d5]/10 hover:to-[#1f1f66]/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5456d5]/60 border-l-4 border-transparent hover:border-[#822e6a]"
                 style={{
                   transitionDelay: menuOpen ? `${index * 40}ms` : "0ms",
                 }}
               >
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-[#822e6a]/20 via-[#5456d5]/15 to-[#1f1f66]/20 group-hover:from-[#822e6a]/30 group-hover:via-[#5456d5]/25 group-hover:to-[#1f1f66]/30 transition-all duration-300">
+                  <svg
+                    className="w-5 h-5 text-[#5456d5] group-hover:text-[#822e6a] transition-colors duration-200"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d={link.icon}
+                    />
+                  </svg>
+                </span>
+                <span className="flex-1 group-hover:text-[#1f1f66] transition-colors duration-200">
+                  {link.label}
+                </span>
                 <svg
-                  className="w-6 h-6 text-[#5456d5] group-hover:text-[#822e6a] transition-colors duration-200 flex-shrink-0"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d={link.icon}
-                  />
-                </svg>
-                <span className="flex-1">{link.label}</span>
-                <svg
-                  className="w-5 h-5 text-text-muted transition-all duration-200 group-hover:text-[#5456d5] group-hover:translate-x-1"
+                  className="w-5 h-5 text-[#5456d5]/50 transition-all duration-200 group-hover:text-[#822e6a] group-hover:translate-x-1"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -315,11 +323,11 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
               </a>
             ))}
           </nav>
-          <div className="border-t border-border-subtle px-5 py-4 text-center">
-            <span className="text-sm font-medium bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] bg-clip-text text-transparent">
+          <div className="border-t border-[#5456d5]/20 px-5 py-4 text-center bg-gradient-to-r from-[#822e6a]/5 via-[#5456d5]/5 to-[#1f1f66]/5">
+            <span className="text-sm font-bold bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] bg-clip-text text-transparent">
               FullVisionTV
             </span>
-            <span className="text-sm text-text-muted"> © 2024</span>
+            <span className="text-sm text-[#5456d5]/60"> © 2025</span>
           </div>
         </div>
       </div>
