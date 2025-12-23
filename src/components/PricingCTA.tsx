@@ -85,24 +85,24 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
       id="pricing"
       className="relative py-20 sm:py-24 overflow-hidden"
     >
-      {/* Base background gradient - DEEP: bridge color → indigo depth → dark footer */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#1e1b4b] via-indigo-900 to-slate-950 pointer-events-none" />
+      {/* Base background gradient - matches Devices section palette for seamless flow */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] pointer-events-none" />
 
-      {/* Aurora animated background blobs - bright and playful to blur the bridge line */}
+      {/* Aurora animated background blobs - using same palette for cohesive look */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Top blob - bright purple catching light from Devices section, overlaps bridge area */}
+        {/* Top-left blob - magenta glow matching gradient start */}
         <div
-          className="absolute -top-20 -left-1/4 w-[70%] h-[55%] rounded-full bg-purple-500/25 blur-[140px] animate-aurora-1"
+          className="absolute -top-20 -left-1/4 w-[70%] h-[55%] rounded-full bg-[#822e6a]/30 blur-[140px] animate-aurora-1"
           style={{ willChange: "transform, opacity" }}
         />
-        {/* Center-right blob - vibrant violet glow */}
+        {/* Center-right blob - blue-purple matching gradient middle */}
         <div
-          className="absolute top-1/3 -right-1/4 w-[55%] h-[50%] rounded-full bg-violet-400/20 blur-[120px] animate-aurora-2"
+          className="absolute top-1/3 -right-1/4 w-[55%] h-[50%] rounded-full bg-[#5456d5]/25 blur-[120px] animate-aurora-2"
           style={{ willChange: "transform, opacity" }}
         />
-        {/* Bottom blob - deeper blue for the "ocean depth" feel */}
+        {/* Bottom blob - dark navy matching gradient end */}
         <div
-          className="absolute bottom-0 left-1/4 w-[60%] h-[45%] rounded-full bg-blue-600/20 blur-[130px] animate-aurora-3"
+          className="absolute bottom-0 left-1/4 w-[60%] h-[45%] rounded-full bg-[#1f1f66]/35 blur-[130px] animate-aurora-3"
           style={{ willChange: "transform, opacity" }}
         />
       </div>
