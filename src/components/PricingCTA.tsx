@@ -67,6 +67,7 @@ const PLANS = [
     strike: "$240.99",
     accent: "bg-brand/8 border-brand-dark/30 shadow-theme-strong",
     cta: "COMPRAR AHORA",
+    badge: "+AHORRO",
     perks: [
       "12 Meses de Servicio",
       "X3 Pantallas FHD",
