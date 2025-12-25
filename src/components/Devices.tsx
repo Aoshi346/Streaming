@@ -129,6 +129,13 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
         : false,
     []
   );
+  const isMobile = useMemo(
+    () =>
+      typeof window !== "undefined" && window.matchMedia
+        ? window.matchMedia("(max-width: 768px)").matches
+        : false,
+    []
+  );
 
   // We now use a CSS-only active state for the tab "pill" to simplify mobile behavior
   // and avoid JS-driven position/Flip work. Keep tabsRef for hover animations.
@@ -237,8 +244,9 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
   // (floating animation removed per request)
 
   // Parallax effect on mouse move
+  // Parallax effect on mouse move - disabled on mobile for performance
   useEffect(() => {
-    if (!hoverCapable || prefersReducedMotion) return;
+    if (!hoverCapable || prefersReducedMotion || isMobile) return;
 
     const outer = previewOuterRef.current;
     if (!outer) return;
@@ -486,6 +494,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                           alt={`${d.label} frame`}
                           className="w-[85%] h-[85%] object-contain drop-shadow-2xl"
                           draggable={false}
+                          loading="lazy"
+                          decoding="async"
                         />
                       ) : d.id === "tv" ? (
                         <img
@@ -493,6 +503,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                           alt={`${d.label} frame`}
                           className="w-full h-full object-contain drop-shadow-2xl scale-150"
                           draggable={false}
+                          loading="lazy"
+                          decoding="async"
                         />
                       ) : d.id === "tablet" ? (
                         <img
@@ -500,6 +512,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                           alt={`${d.label} frame`}
                           className="w-full h-full object-contain drop-shadow-2xl scale-[1.75] sm:scale-125"
                           draggable={false}
+                          loading="lazy"
+                          decoding="async"
                         />
                       ) : d.id === "laptop" ? (
                         <img
@@ -507,6 +521,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                           alt={`${d.label} frame`}
                           className="w-full h-full object-contain drop-shadow-2xl"
                           draggable={false}
+                          loading="lazy"
+                          decoding="async"
                         />
                       ) : (
                         <svg

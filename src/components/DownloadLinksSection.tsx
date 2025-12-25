@@ -74,6 +74,11 @@ const DownloadLinksSection: React.FC = () => {
       return;
     }
 
+    const isMobile =
+      typeof window !== "undefined" && window.matchMedia
+        ? window.matchMedia("(max-width: 768px)").matches
+        : false;
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         defaults: { immediateRender: false },
@@ -98,37 +103,48 @@ const DownloadLinksSection: React.FC = () => {
           ease: "power3.out",
         },
         "-=0.35"
-      )
-        // Animate label characters with a gentle stagger
-        .from(
-          ".gsap-card .label-char",
-          {
-            opacity: 0,
-            y: 10,
-            stagger: 0.02,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.45"
-        )
-        // Animate store name characters slightly after labels
-        .from(
-          ".gsap-card .store-char",
-          {
-            opacity: 0,
-            y: 8,
-            stagger: 0.03,
-            duration: 0.45,
-            ease: "power2.out",
-          },
-          "-=0.42"
-        );
+      );
+
+      // Skip character animations on mobile for performance
+      if (!isMobile) {
+        tl
+          // Animate label characters with a gentle stagger
+          .from(
+            ".gsap-card .label-char",
+            {
+              opacity: 0,
+              y: 10,
+              stagger: 0.02,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.45"
+          )
+          // Animate store name characters slightly after labels
+          .from(
+            ".gsap-card .store-char",
+            {
+              opacity: 0,
+              y: 8,
+              stagger: 0.03,
+              duration: 0.45,
+              ease: "power2.out",
+            },
+            "-=0.42"
+          );
+      } else {
+        // On mobile, just ensure text is visible
+        gsap.set([".gsap-card .label-char", ".gsap-card .store-char"], {
+          opacity: 1,
+          y: 0,
+        });
+      }
     }, section);
 
     return () => ctx.revert();
   }, []);
 
-  // Hover micro-interactions: card lift + icon bounce
+  // Hover micro-interactions: card lift + icon bounce - disabled on touch devices
   React.useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
@@ -137,7 +153,14 @@ const DownloadLinksSection: React.FC = () => {
       typeof window !== "undefined" &&
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
+
+    // Skip hover animations on touch devices (no hover capability)
+    const isTouchDevice =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    if (prefersReducedMotion || isTouchDevice) return;
 
     const cards = Array.from(
       section.querySelectorAll<HTMLElement>(".gsap-card")

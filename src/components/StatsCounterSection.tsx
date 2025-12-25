@@ -130,13 +130,13 @@ function StatCard({
 
       {/* Film frame accents removed for uniform appearance */}
 
-      {/* Film-style perforations on card */}
+      {/* Film-style perforations on card - reduced count for performance */}
       <div
         className="pointer-events-none absolute inset-x-0 top-2 sm:top-3 flex justify-center px-4 sm:px-5"
         aria-hidden
       >
-        <div className="flex gap-2 sm:gap-2.5">
-          {Array.from({ length: 18 }).map((_, idx) => (
+        <div className="flex gap-4 sm:gap-5">
+          {Array.from({ length: 6 }).map((_, idx) => (
             <span
               key={`card-top-${idx}`}
               className="w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#0d1445] border border-[#4a5fc9]"
@@ -148,8 +148,8 @@ function StatCard({
         className="pointer-events-none absolute inset-x-0 bottom-2 sm:bottom-3 flex justify-center px-4 sm:px-5"
         aria-hidden
       >
-        <div className="flex gap-2 sm:gap-2.5">
-          {Array.from({ length: 18 }).map((_, idx) => (
+        <div className="flex gap-4 sm:gap-5">
+          {Array.from({ length: 6 }).map((_, idx) => (
             <span
               key={`card-bottom-${idx}`}
               className="w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#0d1445] border border-[#4a5fc9]"
@@ -412,21 +412,21 @@ export default function StatsCounterSection() {
               className="pointer-events-none film-grain absolute inset-0 z-20"
               aria-hidden
             />
-            {/* Film perforations top */}
+            {/* Film perforations top - reduced count for performance */}
             <div
               className="pointer-events-none absolute inset-x-0 top-2 sm:top-3 flex justify-between px-4 sm:px-6"
               aria-hidden
             >
-              <div className="flex gap-2 sm:gap-2.5">
-                {Array.from({ length: 24 }).map((_, idx) => (
+              <div className="flex gap-4 sm:gap-5">
+                {Array.from({ length: 6 }).map((_, idx) => (
                   <span
                     key={`perf-top-left-${idx}`}
                     className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#0d1445] border border-[#4a5fc9] shadow-inner"
                   />
                 ))}
               </div>
-              <div className="flex gap-2 sm:gap-2.5">
-                {Array.from({ length: 24 }).map((_, idx) => (
+              <div className="flex gap-4 sm:gap-5">
+                {Array.from({ length: 6 }).map((_, idx) => (
                   <span
                     key={`perf-top-right-${idx}`}
                     className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#0d1445] border border-[#4a5fc9] shadow-inner"
@@ -470,7 +470,7 @@ export default function StatsCounterSection() {
                         className="flex items-center gap-3 sm:gap-4"
                       >
                         {item}
-                        <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-accent animate-pulse" />
+                        <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-accent" />
                       </span>
                     ))}
                   </div>
@@ -478,21 +478,21 @@ export default function StatsCounterSection() {
               </div>
             </div>
 
-            {/* Film perforations bottom */}
+            {/* Film perforations bottom - reduced count for performance */}
             <div
               className="pointer-events-none absolute inset-x-0 bottom-2 sm:bottom-3 flex justify-between px-4 sm:px-6"
               aria-hidden
             >
-              <div className="flex gap-2 sm:gap-2.5">
-                {Array.from({ length: 24 }).map((_, idx) => (
+              <div className="flex gap-4 sm:gap-5">
+                {Array.from({ length: 6 }).map((_, idx) => (
                   <span
                     key={`perf-bottom-left-${idx}`}
                     className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#0d1445] border border-[#4a5fc9] shadow-inner"
                   />
                 ))}
               </div>
-              <div className="flex gap-2 sm:gap-2.5">
-                {Array.from({ length: 24 }).map((_, idx) => (
+              <div className="flex gap-4 sm:gap-5">
+                {Array.from({ length: 6 }).map((_, idx) => (
                   <span
                     key={`perf-bottom-right-${idx}`}
                     className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#0d1445] border border-[#4a5fc9] shadow-inner"

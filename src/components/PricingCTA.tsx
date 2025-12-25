@@ -89,22 +89,22 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
       {/* Base background gradient - matches Devices section palette for seamless flow */}
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] pointer-events-none" />
 
-      {/* Aurora animated background blobs - using same palette for cohesive look */}
+      {/* Aurora animated background blobs - simplified for mobile performance */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Top-left blob - magenta glow matching gradient start */}
+        {/* Top-left blob - reduced blur on mobile, no animation on mobile */}
         <div
-          className="absolute -top-20 -left-1/4 w-[70%] h-[55%] rounded-full bg-[#822e6a]/30 blur-[140px] animate-aurora-1"
-          style={{ willChange: "transform, opacity" }}
+          className="absolute -top-20 -left-1/4 w-[70%] h-[55%] rounded-full bg-[#822e6a]/30 blur-[40px] sm:blur-[80px] md:blur-[100px] sm:animate-aurora-1"
+          style={{ willChange: "auto" }}
         />
-        {/* Center-right blob - blue-purple matching gradient middle */}
+        {/* Center-right blob */}
         <div
-          className="absolute top-1/3 -right-1/4 w-[55%] h-[50%] rounded-full bg-[#5456d5]/25 blur-[120px] animate-aurora-2"
-          style={{ willChange: "transform, opacity" }}
+          className="absolute top-1/3 -right-1/4 w-[55%] h-[50%] rounded-full bg-[#5456d5]/25 blur-[40px] sm:blur-[70px] md:blur-[90px] sm:animate-aurora-2"
+          style={{ willChange: "auto" }}
         />
-        {/* Bottom blob - dark navy matching gradient end */}
+        {/* Bottom blob */}
         <div
-          className="absolute bottom-0 left-1/4 w-[60%] h-[45%] rounded-full bg-[#1f1f66]/35 blur-[130px] animate-aurora-3"
-          style={{ willChange: "transform, opacity" }}
+          className="absolute bottom-0 left-1/4 w-[60%] h-[45%] rounded-full bg-[#1f1f66]/35 blur-[40px] sm:blur-[70px] md:blur-[90px] sm:animate-aurora-3"
+          style={{ willChange: "auto" }}
         />
       </div>
 

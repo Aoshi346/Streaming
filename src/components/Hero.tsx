@@ -102,16 +102,18 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
           alt=""
           aria-hidden="true"
           className="absolute top-0 left-0 w-full h-full object-cover object-center -z-20"
+          fetchPriority="high"
+          decoding="async"
         />
       </picture>
 
       {/* Palette-driven gradient overlay */}
       <div className="absolute inset-0 bg-hero-gradient opacity-90 -z-10" />
 
-      {/* Animated gradient orbs for depth */}
+      {/* Animated gradient orbs for depth - reduced blur on mobile for performance */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/4 -left-20 w-64 h-64 sm:w-96 sm:h-96 bg-brand-light/30 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-accent/30 rounded-full blur-3xl animate-pulse delay-700" />
+        <div className="absolute top-1/4 -left-20 w-64 h-64 sm:w-96 sm:h-96 bg-brand-light/30 rounded-full blur-xl sm:blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-accent/30 rounded-full blur-xl sm:blur-3xl animate-pulse delay-700" />
       </div>
 
       <div className="container-wrapper relative z-10 w-full">
