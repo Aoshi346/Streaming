@@ -1,456 +1,224 @@
-import React, { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaMobileAlt, FaTabletAlt, FaWindows } from "react-icons/fa";
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Smartphone,
+  Tablet,
+  Monitor,
+  Download,
+  ArrowRight,
+} from "lucide-react";
 
 interface DownloadPlatform {
   id: string;
   label: string;
-  icon: React.ReactNode;
+  sublabel: string;
+  icon: React.ElementType;
   link: string;
-  storeName: string;
+  gradient: string;
+  shadowColor: string;
 }
 
 const downloadPlatforms: DownloadPlatform[] = [
   {
     id: "mobile",
     label: "Móvil",
-    icon: (
-      <FaMobileAlt
-        className="h-8 w-8 md:h-12 md:w-12 text-white drop-shadow-md transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-        aria-hidden
-      />
-    ),
+    sublabel: "Android & iOS",
+    icon: Smartphone,
     link: "https://fullvision.com/download/mobile",
-    storeName: "Android & iOS",
+    gradient: "from-[#3b82f6] to-[#06b6d4]", // Brand Blue -> Cyan
+    shadowColor: "shadow-blue-500/20",
   },
   {
     id: "tablet",
     label: "Tablet",
-    icon: (
-      <FaTabletAlt
-        className="h-8 w-8 md:h-12 md:w-12 text-white drop-shadow-md transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-        aria-hidden
-      />
-    ),
+    sublabel: "iPad & Android",
+    icon: Tablet,
     link: "https://fullvision.com/download/tablet",
-    storeName: "Android & iPad",
+    gradient: "from-[#8b5cf6] to-[#ec4899]", // Brand Purple -> Pink
+    shadowColor: "shadow-purple-500/20",
   },
   {
     id: "windows",
     label: "Windows",
-    icon: (
-      <FaWindows
-        className="h-8 w-8 md:h-12 md:w-12 text-white drop-shadow-md transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-        aria-hidden
-      />
-    ),
+    sublabel: "PC Desktop",
+    icon: Monitor,
     link: "https://fullvision.com/download/windows",
-    storeName: "Descargar para PC",
+    gradient: "from-[#6366f1] to-[#8b5cf6]", // Brand Indigo -> Violet
+    shadowColor: "shadow-indigo-500/20",
   },
 ];
 
 const DownloadLinksSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-    const prefersReducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReducedMotion) {
-      const targets = section.querySelectorAll(
-        ".gsap-section-title, .gsap-section-subtitle, .gsap-card, .label-char, .store-char"
-      );
-      if (targets.length) {
-        gsap.set(targets, { opacity: 1, y: 0 });
-      }
-      return;
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
 
-    const isMobile =
-      typeof window !== "undefined" && window.matchMedia
-        ? window.matchMedia("(max-width: 768px)").matches
-        : false;
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        defaults: { immediateRender: false },
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          toggleActions: "play none none none",
-          once: true,
-        },
-      });
-
-      // Title/subtitle are handled globally by SectionTitleAnimator
-      // Cards come in with a slightly slower timing for a more deliberate feel
-      tl.from(
-        ".gsap-card",
-        {
-          opacity: 0,
-          y: 40,
-          scale: 0.96,
-          stagger: 0.16,
-          duration: 0.7,
-          ease: "power3.out",
-        },
-        "-=0.35"
-      );
-
-      // Skip character animations on mobile for performance
-      if (!isMobile) {
-        tl
-          // Animate label characters with a gentle stagger
-          .from(
-            ".gsap-card .label-char",
-            {
-              opacity: 0,
-              y: 10,
-              stagger: 0.02,
-              duration: 0.6,
-              ease: "power2.out",
-            },
-            "-=0.45"
-          )
-          // Animate store name characters slightly after labels
-          .from(
-            ".gsap-card .store-char",
-            {
-              opacity: 0,
-              y: 8,
-              stagger: 0.03,
-              duration: 0.45,
-              ease: "power2.out",
-            },
-            "-=0.42"
-          );
-      } else {
-        // On mobile, just ensure text is visible
-        gsap.set([".gsap-card .label-char", ".gsap-card .store-char"], {
-          opacity: 1,
-          y: 0,
-        });
-      }
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
-
-  // Hover micro-interactions: card lift + icon bounce - disabled on touch devices
-  React.useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const prefersReducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // Skip hover animations on touch devices (no hover capability)
-    const isTouchDevice =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      !window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-    if (prefersReducedMotion || isTouchDevice) return;
-
-    const cards = Array.from(
-      section.querySelectorAll<HTMLElement>(".gsap-card")
-    );
-    const cleanups: Array<() => void> = [];
-
-    cards.forEach((card) => {
-      const icon = card.querySelector<HTMLElement>(".platform-icon");
-      const labelChars = Array.from(
-        card.querySelectorAll<HTMLElement>(".label-char")
-      );
-      const storeChars = Array.from(
-        card.querySelectorAll<HTMLElement>(".store-char")
-      );
-      // prepare text animation timeline (paused) for hover — performs a subtle pop/bounce
-      let textTl: gsap.core.Timeline | null = null;
-      if (labelChars.length || storeChars.length) {
-        textTl = gsap.timeline({ paused: true });
-        if (labelChars.length)
-          textTl.to(
-            labelChars,
-            {
-              y: -6,
-              scale: 1.02,
-              stagger: 0.02,
-              duration: 0.22,
-              yoyo: true,
-              repeat: 1,
-              ease: "power2.out",
-            },
-            0
-          );
-        if (storeChars.length)
-          textTl.to(
-            storeChars,
-            {
-              y: -4,
-              scale: 1.01,
-              stagger: 0.025,
-              duration: 0.2,
-              yoyo: true,
-              repeat: 1,
-              ease: "power2.out",
-            },
-            0.04
-          );
-      }
-      const onEnter = () => {
-        gsap.killTweensOf(card);
-        gsap.to(card, {
-          y: -8,
-          scale: 1.03,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-        if (icon) {
-          gsap.killTweensOf(icon);
-          gsap.fromTo(
-            icon,
-            { y: -4 },
-            { y: 4, duration: 0.4, yoyo: true, repeat: 1, ease: "power2.inOut" }
-          );
-        }
-        // play hover text animation (subtle pop) — don't hide text on leave
-        if (textTl) {
-          textTl.restart();
-        }
-      };
-      const onLeave = () => {
-        gsap.killTweensOf(card);
-        gsap.to(card, { y: 0, scale: 1, duration: 0.3, ease: "power2.out" });
-        if (icon) {
-          gsap.killTweensOf(icon);
-          gsap.to(icon, { y: 0, scale: 1, duration: 0.18, ease: "power2.out" });
-        }
-        // let the hover text animation finish naturally; ensure chars remain visible
-        if (textTl) {
-          // fast-forward to end to ensure they settle back to original
-          textTl.progress(1);
-        }
-      };
-      card.addEventListener("mouseenter", onEnter);
-      card.addEventListener("mouseleave", onLeave);
-      cleanups.push(() => {
-        card.removeEventListener("mouseenter", onEnter);
-        card.removeEventListener("mouseleave", onLeave);
-      });
-    });
-
-    return () => cleanups.forEach((fn) => fn());
+    return () => observer.disconnect();
   }, []);
 
   return (
     <section
       id="downloads"
       ref={sectionRef}
-      className="relative border-t-0 py-24 sm:py-32 overflow-hidden"
+      className="relative py-24 sm:py-36 bg-white overflow-hidden"
+      aria-labelledby="downloads-heading"
     >
-      <div className="absolute inset-0 bg-page-gradient -z-20" />
-
-      {/* Top Divider - Layered Big Curves (Left to Right) */}
-      <div
-        className="absolute top-0 left-0 right-0 z-0 pointer-events-none overflow-hidden"
-        style={{
-          height: "320px",
-        }}
-      >
+      {/* Top Wave Transition - Seamless from PricingCTA (Purple -> Blue -> Navy) */}
+      <div className="absolute top-0 left-0 right-0 w-full overflow-hidden leading-none z-10">
         <svg
-          className="absolute w-full h-full"
+          className="relative block w-full h-[150px] sm:h-[200px]"
+          data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 320"
+          viewBox="0 0 1200 120"
           preserveAspectRatio="none"
         >
           <defs>
-            {/* New gradient palette: navy → blue-purple → magenta */}
             <linearGradient
-              id="curveGradient1"
-              x1="100%"
+              id="pricingGradient"
+              x1="0%"
               y1="0%"
-              x2="0%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#1f1f66" stopOpacity="0.5" />
-              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#822e6a" stopOpacity="0.7" />
-            </linearGradient>
-            {/* Secondary gradient */}
-            <linearGradient
-              id="curveGradient2"
-              x1="100%"
-              y1="0%"
-              x2="0%"
+              x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#1f1f66" stopOpacity="0.3" />
-              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#822e6a" stopOpacity="0.5" />
-            </linearGradient>
-            {/* Tertiary gradient */}
-            <linearGradient
-              id="curveGradient3"
-              x1="100%"
-              y1="0%"
-              x2="0%"
-              y2="0%"
-            >
-              <stop offset="0%" stopColor="#1f1f66" stopOpacity="0.2" />
-              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#822e6a" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="#822e6a" />
+              <stop offset="50%" stopColor="#5456d5" />
+              <stop offset="100%" stopColor="#1f1f66" />
             </linearGradient>
           </defs>
-          {/* Layer 1 - Foreground: smooth flowing curve */}
           <path
-            d="M0,0 L0,200 Q350,240 650,130 Q950,40 1200,25 L1200,0 Z"
-            fill="url(#curveGradient1)"
-          />
-          {/* Layer 2 - Middle: tighter curve, more dramatic bend */}
-          <path
-            d="M0,0 L0,260 Q200,290 500,200 Q850,100 1200,55 L1200,0 Z"
-            fill="url(#curveGradient2)"
-          />
-          {/* Layer 3 - Background: wider, gentler curve */}
-          <path
-            d="M0,0 L0,310 Q450,340 700,240 Q1000,130 1200,80 L1200,0 Z"
-            fill="url(#curveGradient3)"
-            opacity="0.7"
+            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+            fill="url(#pricingGradient)"
+            fillOpacity="1"
           />
         </svg>
       </div>
 
-      {/* Bottom Divider - Layered Big Curves (Right to Left) */}
-      <div
-        className="absolute bottom-0 left-0 right-0 z-0 pointer-events-none overflow-hidden"
-        style={{
-          height: "320px",
-        }}
-      >
-        <svg
-          className="absolute w-full h-full"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 320"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            {/* New gradient palette: magenta → blue-purple → navy */}
-            <linearGradient
-              id="bottomCurveGradient1"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="#822e6a" stopOpacity="0.7" />
-              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#1f1f66" stopOpacity="0.5" />
-            </linearGradient>
-            {/* Secondary gradient */}
-            <linearGradient
-              id="bottomCurveGradient2"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
-              <stop offset="0%" stopColor="#822e6a" stopOpacity="0.5" />
-              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#1f1f66" stopOpacity="0.3" />
-            </linearGradient>
-            {/* Tertiary gradient */}
-            <linearGradient
-              id="bottomCurveGradient3"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
-              <stop offset="0%" stopColor="#822e6a" stopOpacity="0.4" />
-              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#1f1f66" stopOpacity="0.2" />
-            </linearGradient>
-          </defs>
-          {/* Layer 1 - Foreground: smooth flowing curve from right */}
-          <path
-            d="M1200,320 L1200,120 Q850,80 550,190 Q250,280 0,295 L0,320 Z"
-            fill="url(#bottomCurveGradient1)"
-          />
-          {/* Layer 2 - Middle: tighter curve */}
-          <path
-            d="M1200,320 L1200,60 Q1000,30 700,120 Q350,220 0,255 L0,320 Z"
-            fill="url(#bottomCurveGradient2)"
-          />
-          {/* Layer 3 - Background: wider, gentler curve */}
-          <path
-            d="M1200,320 L1200,10 Q750,-20 500,80 Q200,180 0,220 L0,320 Z"
-            fill="url(#bottomCurveGradient3)"
-            opacity="0.7"
-          />
-        </svg>
+      {/* Animated Background Elements - Updated to Brand Colors */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none mt-[150px]">
+        {/* Purple Blob */}
+        <div className="absolute top-20 left-10 w-96 h-96 bg-purple-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob" />
+        {/* Pink Blob */}
+        <div className="absolute top-40 right-10 w-96 h-96 bg-pink-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-2000" />
+        {/* Blue Blob */}
+        <div className="absolute -bottom-20 left-1/2 w-96 h-96 bg-blue-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-4000" />
       </div>
 
-      <div className="container-wrapper relative z-10 -mt-12 pb-12">
-        <h2 className="gsap-section-title text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl mb-4 text-left text-[#3b0764] drop-shadow-sm pb-2">
-          Descarga la app
-        </h2>
-        <p className="gsap-section-subtitle mb-8 text-left text-lg sm:text-xl text-slate-700 font-medium">
-          Descarga la app en tu movil o tablet.
-        </p>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-          {downloadPlatforms.map((platform) => {
-            const renderChars = (text: string, baseClass = "") =>
-              text.split("").map((ch, i) => (
-                <span
-                  key={i}
-                  className={`${baseClass} inline-block align-middle will-change-transform backface-hidden`}
-                  aria-hidden
-                >
-                  {ch === " " ? "\u00A0" : ch}
-                </span>
-              ));
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20 max-w-6xl pt-10">
+        {/* Title Section */}
+        <div
+          className={`text-center mb-16 sm:mb-20 transition-all duration-1000 transform ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-purple-500/20">
+            <Download className="w-3.5 h-3.5 mr-2" aria-hidden="true" />
+            Disponible en todas las plataformas
+          </div>
+
+          <h2
+            id="downloads-heading"
+            className="text-4xl sm:text-5xl font-extrabold text-[#1f1f66] mb-6 tracking-tight drop-shadow-sm"
+          >
+            Descarga la app
+          </h2>
+
+          <p className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed font-medium">
+            Lleva tu entretenimiento a donde vayas.
+            <span className="block mt-1 text-slate-400">
+              Calidad premium en todos tus dispositivos.
+            </span>
+          </p>
+        </div>
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {downloadPlatforms.map((platform, index) => {
+            const Icon = platform.icon;
+            const isHovered = hoveredCard === platform.id;
 
             return (
               <a
                 key={platform.id}
                 href={platform.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="gsap-card group flex flex-col items-center justify-center gap-3 md:gap-4 rounded-xl border-2 border-white/20 bg-gradient-to-br from-[#460869] via-[#4e0b6a] to-[#802369] px-5 py-6 md:px-8 md:py-10 shadow-lg shadow-[#460869]/50 transition-all duration-300 hover:-translate-y-2 hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6),0_0_40px_rgba(236,72,153,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 relative overflow-hidden"
-                aria-label={`Descargar para ${platform.label} (${platform.storeName})`}
+                onMouseEnter={() => setHoveredCard(platform.id)}
+                onMouseLeave={() => setHoveredCard(null)}
+                onFocus={() => setHoveredCard(platform.id)}
+                onBlur={() => setHoveredCard(null)}
+                className={`group relative flex flex-col items-center bg-white rounded-[2rem] p-8 shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50 ${
+                  platform.shadowColor
+                } min-h-[340px] border border-slate-50 ${
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-12"
+                }`}
+                style={{
+                  transitionDelay: isVisible ? `${index * 150}ms` : "0ms",
+                }}
+                aria-label={`Descargar para ${platform.label} - ${platform.sublabel}`}
               >
-                <span className="platform-icon inline-flex">
-                  {platform.icon}
-                </span>
-                <span
-                  className="text-lg md:text-xl font-bold text-white label-text drop-shadow-sm transition-all duration-300 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]"
-                  aria-hidden
+                {/* Gradient Border Effect on Hover */}
+                <div
+                  className={`absolute inset-0 rounded-[2rem] p-[2px] bg-gradient-to-br ${platform.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`}
+                  aria-hidden="true"
+                />
+
+                {/* Inner White Background to simulate border */}
+                <div className="absolute inset-[2px] bg-white rounded-[1.9rem] -z-10" />
+
+                {/* Icon Container - Brand Gradient */}
+                <div
+                  className={`relative mb-6 p-5 rounded-2xl bg-gradient-to-br ${platform.gradient} shadow-lg shadow-gray-200 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.15)] transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-3`}
                 >
-                  {renderChars(platform.label, "label-char")}
-                </span>
-                <span
-                  className="text-sm text-white/90 font-medium store-text drop-shadow-sm transition-all duration-300 group-hover:text-white group-hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]"
-                  aria-hidden
-                >
-                  {renderChars(platform.storeName, "store-char")}
-                </span>
+                  <Icon
+                    className="w-10 h-10 text-white drop-shadow-md"
+                    aria-hidden="true"
+                  />
+
+                  {/* Internal Icon Glow */}
+                  <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                </div>
+
+                {/* Typography */}
+                <h3 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight group-hover:bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-slate-900 group-hover:to-slate-600 transition-colors">
+                  {platform.label}
+                </h3>
+
+                <p className="text-slate-400 text-sm font-medium mb-10 text-center">
+                  {platform.sublabel}
+                </p>
+
+                {/* Download Button */}
+                <div className="mt-auto w-full">
+                  <div
+                    className={`flex items-center justify-center gap-2 w-full h-12 px-6 rounded-xl font-bold text-white bg-gradient-to-r ${platform.gradient} shadow-lg transition-all duration-300 transform group-hover:shadow-xl group-hover:scale-[1.02] group-active:scale-95`}
+                  >
+                    <span>Descargar</span>
+                    <ArrowRight
+                      className={`w-4 h-4 transition-transform duration-300 ${
+                        isHovered ? "translate-x-1" : ""
+                      }`}
+                      aria-hidden="true"
+                    />
+                  </div>
+                </div>
               </a>
             );
           })}
         </div>
       </div>
-      {/* Wave divider removed */}
     </section>
   );
 };
