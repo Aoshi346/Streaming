@@ -37,6 +37,15 @@ function StatCard({
     []
   );
 
+  // Skip complex animations on mobile for performance
+  const isMobile = useMemo(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(max-width: 768px)").matches,
+    []
+  );
+
   const cardRef = useRef<HTMLDivElement | null>(null);
   const valueElRef = useRef<HTMLSpanElement | null>(null);
   const iconRef = useRef<HTMLDivElement | null>(null);
@@ -48,37 +57,34 @@ function StatCard({
 
     // No GSAP continuous icon animation to avoid conflict with framer-motion
 
-    // Hover micro-interactions
-    const onEnter = () => {
-      if (prefersReduced) return;
-      gsap.to(el, {
-        scale: 1.05,
-        boxShadow: "0 25px 50px -12px rgba(139, 92, 246, 0.5)",
-        duration: 0.3,
-        ease: "power2.out",
-      });
-      // Icon hover animation handled by Framer Motion AnimatedIcon
-    };
-    const onLeave = () => {
-      if (prefersReduced) return;
-      gsap.to(el, {
-        scale: 1,
-        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
-        duration: 0.35,
-        ease: "power2.out",
-      });
-      // Icon hover reset handled by Framer Motion AnimatedIcon
-    };
-    el.addEventListener("mouseenter", onEnter);
-    el.addEventListener("mouseleave", onLeave);
+    // Skip hover event listeners on mobile for performance
+    if (!isMobile && !prefersReduced) {
+      // Hover micro-interactions (desktop only)
+      const onEnter = () => {
+        gsap.to(el, {
+          scale: 1.05,
+          boxShadow: "0 25px 50px -12px rgba(139, 92, 246, 0.5)",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      };
+      const onLeave = () => {
+        gsap.to(el, {
+          scale: 1,
+          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+          duration: 0.35,
+          ease: "power2.out",
+        });
+      };
+      el.addEventListener("mouseenter", onEnter);
+      el.addEventListener("mouseleave", onLeave);
+    }
 
     // Count-up intro
-    if (prefersReduced) {
+    // On mobile or reduced motion: show final value immediately
+    if (prefersReduced || isMobile) {
       valueEl.textContent = formatter(to);
-      return () => {
-        el.removeEventListener("mouseenter", onEnter);
-        el.removeEventListener("mouseleave", onLeave);
-      };
+      return;
     }
 
     const ctx = gsap.context(() => {
@@ -104,11 +110,9 @@ function StatCard({
     }, cardRef);
 
     return () => {
-      el.removeEventListener("mouseenter", onEnter);
-      el.removeEventListener("mouseleave", onLeave);
       ctx.revert();
     };
-  }, [to, duration, prefersReduced]);
+  }, [to, duration, prefersReduced, isMobile]);
 
   return (
     <div

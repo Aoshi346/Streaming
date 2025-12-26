@@ -180,42 +180,86 @@ body {
 @media (max-width: 768px) {
   /* Reduce blur effects on mobile */
   .blur-3xl {
-    filter: blur(20px) !important;
+    filter: blur(12px) !important;
   }
   .blur-2xl {
-    filter: blur(16px) !important;
+    filter: blur(8px) !important;
   }
   .blur-xl {
-    filter: blur(12px) !important;
+    filter: blur(6px) !important;
   }
 
   /* Disable backdrop blur on mobile for performance */
   .backdrop-blur-lg,
-  .backdrop-blur-md {
+  .backdrop-blur-md,
+  .backdrop-blur-sm {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
 
-  /* Disable aurora animations on mobile */
+  /* Disable all expensive animations on mobile */
   .animate-aurora-1,
   .animate-aurora-2,
-  .animate-aurora-3 {
+  .animate-aurora-3,
+  .animate-pulse,
+  .animate-shine,
+  .animate-shine-slow,
+  .animate-blob,
+  .animate-gradient-x,
+  .animate-float-slow,
+  .animate-pulse-soft {
     animation: none !important;
   }
 
-  /* Reduce box-shadow complexity on mobile */
+  /* Reduce box-shadow and drop-shadow complexity on mobile */
   .shadow-2xl {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25) !important;
+    box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.2) !important;
+  }
+  .shadow-xl {
+    box-shadow: 0 6px 15px -4px rgba(0, 0, 0, 0.15) !important;
+  }
+  .shadow-lg {
+    box-shadow: 0 4px 10px -3px rgba(0, 0, 0, 0.12) !important;
+  }
+  .drop-shadow-2xl,
+  .drop-shadow-xl,
+  .drop-shadow-lg,
+  .drop-shadow-md {
+    filter: none !important;
   }
 
-  /* Disable scanline on mobile */
-  .scanline {
+  /* Disable 3D transforms on mobile */
+  .preserve-3d {
+    transform-style: flat !important;
+  }
+  .perspective-1000 {
+    perspective: none !important;
+  }
+
+  /* Disable will-change on mobile to reduce memory pressure */
+  .will-change-transform {
+    will-change: auto !important;
+  }
+
+  /* Disable scanline and film-grain on mobile */
+  .scanline,
+  .film-grain {
     display: none !important;
+  }
+
+  /* Disable sheen animation on mobile */
+  .card-sheen {
+    display: none !important;
+  }
+
+  /* Simplify hover effects on mobile */
+  .group:hover .group-hover\:scale-105 {
+    transform: none !important;
   }
 
   /* Reduce transition durations on mobile */
   * {
-    transition-duration: 0.15s !important;
+    transition-duration: 0.1s !important;
   }
 }
 

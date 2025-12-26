@@ -11,7 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaDownload, FaLaptop } from "react-icons/fa";
 import { smoothScrollTo } from "../utils/smoothScroll";
 import heroBackground from "../assets/images/hero_background.png";
-import heroBackgroundMobile from "../assets/images/hero_background_mobile.png";
+import heroBackgroundMobile from "../assets/images/hero_background_mobile-min.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,7 +39,13 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (prefersReduced) {
+    // Skip complex animations on mobile for performance
+    const isMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(max-width: 768px)").matches;
+
+    if (prefersReduced || isMobile) {
       const chars = titleEl.querySelectorAll(".hero-title-char");
       if (chars.length) gsap.set(chars, { opacity: 1, y: 0 });
       if (subEl) gsap.set(subEl, { opacity: 1, y: 0 });
