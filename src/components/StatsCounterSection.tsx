@@ -80,12 +80,14 @@ function StatCard({
       el.addEventListener("mouseleave", onLeave);
     }
 
-    // Count-up intro
-    // On mobile or reduced motion: show final value immediately
-    if (prefersReduced || isMobile) {
+    // Count-up intro - faster on mobile
+    if (prefersReduced) {
       valueEl.textContent = formatter(to);
       return;
     }
+
+    // On mobile, use faster animation
+    const animDuration = isMobile ? duration * 0.5 : duration;
 
     const ctx = gsap.context(() => {
       const obj = { val: 0 };
@@ -94,7 +96,7 @@ function StatCard({
         { val: 0 },
         {
           val: to,
-          duration,
+          duration: animDuration,
           ease: "power2.out",
           onUpdate: () => {
             valueEl.textContent = formatter(obj.val);

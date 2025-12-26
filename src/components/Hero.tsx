@@ -39,13 +39,14 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Skip complex animations on mobile for performance
+    // Check if mobile for lighter animations
     const isMobile =
       typeof window !== "undefined" &&
       window.matchMedia &&
       window.matchMedia("(max-width: 768px)").matches;
 
-    if (prefersReduced || isMobile) {
+    // Skip animations only for reduced motion preference
+    if (prefersReduced) {
       const chars = titleEl.querySelectorAll(".hero-title-char");
       if (chars.length) gsap.set(chars, { opacity: 1, y: 0 });
       if (subEl) gsap.set(subEl, { opacity: 1, y: 0 });
@@ -58,16 +59,26 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
         scrollTrigger: { trigger: sectionEl, start: "top 80%", once: true },
       });
 
-      tl.from(chars, {
-        opacity: 0,
-        y: 30,
-        skewX: 8,
-        rotation: 4,
-        scale: 0.98,
-        duration: 0.55,
-        stagger: { each: 0.03, from: "start" },
-        ease: "back.out(1.2)",
-      });
+      if (isMobile) {
+        // Mobile: simple fade-in for all chars at once
+        tl.from(chars, {
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+      } else {
+        // Desktop: full character animation
+        tl.from(chars, {
+          opacity: 0,
+          y: 30,
+          skewX: 8,
+          rotation: 4,
+          scale: 0.98,
+          duration: 0.55,
+          stagger: { each: 0.03, from: "start" },
+          ease: "back.out(1.2)",
+        });
+      }
 
       if (subEl)
         tl.from(

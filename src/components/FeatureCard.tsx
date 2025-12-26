@@ -78,7 +78,12 @@ const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
       const iconEl = iconRef.current;
       const spot = spotRef.current;
       if (!card) return;
-      if (!hoverCapable || prefersReducedMotion) return;
+      // Skip all GSAP animations on mobile for performance
+      const isMobile =
+        typeof window !== "undefined" &&
+        window.matchMedia &&
+        window.matchMedia("(max-width: 768px)").matches;
+      if (!hoverCapable || prefersReducedMotion || isMobile) return;
 
       const maxDeg = 6;
       const ctx = gsap.context(() => {

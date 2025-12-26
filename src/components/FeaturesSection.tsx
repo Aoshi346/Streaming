@@ -85,6 +85,12 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // Check if mobile for lighter animations
+    const isMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(max-width: 768px)").matches;
+
     // Ensure cards are visible by default in case ScrollTrigger doesn't run (e.g. navigation without reload)
     const cardsNodeList = el.querySelectorAll(".feature-card");
     const cards = Array.from(cardsNodeList) as HTMLElement[];
@@ -92,45 +98,46 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
 
     gsap.set(cards, { opacity: 1, y: 0 });
 
+    // Skip animations only for reduced motion preference
     if (prefersReduced) {
       return;
     }
 
     const ctx = gsap.context(() => {
-      ScrollTrigger.matchMedia({
-        // mobile
-        "(max-width: 767px)": function () {
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: el,
-              start: "top 80%",
-            },
-          });
-          tl.from(cards, {
-            opacity: 0,
-            y: 20,
-            duration: 0.35,
-            ease: "power2.out",
-            stagger: 0.08,
-          });
-        },
-        // tablet and up
-        "(min-width: 768px)": function () {
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: el,
-              start: "top 80%",
-            },
-          });
-          tl.from(cards, {
-            opacity: 0,
-            y: 24,
-            duration: 0.45,
-            ease: "power2.out",
-            stagger: 0.15,
-          });
-        },
-      });
+      // Use simpler animations on mobile - just fade in
+      if (isMobile) {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+          },
+        });
+        tl.from(cards, {
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.out",
+          stagger: 0.05,
+        });
+      } else {
+        // Desktop: full animations
+        ScrollTrigger.matchMedia({
+          "(min-width: 769px)": function () {
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: el,
+                start: "top 80%",
+              },
+            });
+            tl.from(cards, {
+              opacity: 0,
+              y: 24,
+              duration: 0.45,
+              ease: "power2.out",
+              stagger: 0.15,
+            });
+          },
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();

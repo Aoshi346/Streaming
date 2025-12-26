@@ -26,6 +26,12 @@ export default function App() {
   const footerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // Check if mobile for lighter animations
+    const isMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(max-width: 768px)").matches;
+
     const animations: gsap.core.Tween[] = [];
 
     if (headerRef.current) {
@@ -34,12 +40,12 @@ export default function App() {
         animations.push(
           gsap.fromTo(
             headerChildren,
-            { opacity: 0, y: -20 },
+            { opacity: 0, y: isMobile ? -10 : -20 },
             {
               opacity: 1,
               y: 0,
-              duration: 0.8,
-              stagger: 0.1,
+              duration: isMobile ? 0.4 : 0.8,
+              stagger: isMobile ? 0.05 : 0.1,
               ease: "power2.out",
               scrollTrigger: { trigger: headerRef.current, start: "top 80%" },
             }
