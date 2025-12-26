@@ -215,21 +215,15 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
             aria-label="Anuncio de premio por referidos"
             className="group relative mx-auto max-w-3xl"
           >
-            {/* Premium badge - positioned outside the overflow-hidden card */}
-            <div className="absolute -top-3 -right-2 z-30">
-              <div className="relative group/badge">
-                {/* Outer glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#f8d675] via-[#fde68a] to-[#f8d675] animate-gradient-x blur-lg opacity-75" />
-
-                {/* Badge container with shine effect */}
-                <div className="relative overflow-hidden bg-gradient-to-r from-[#f8d675] via-[#fde68a] to-[#f8d675] text-[#1f1f66] text-sm sm:text-base font-black px-6 py-2.5 rounded-full shadow-2xl transform rotate-6 group-hover/badge:rotate-0 group-hover/badge:scale-110 transition-all duration-300 border-2 border-white/50">
-                  {/* Animated shine overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent animate-shine-slow" />
-
+            {/* Premium badge - Mobile optimized */}
+            <div className="absolute -top-2 -right-1 sm:-top-3 sm:-right-2 z-30">
+              <div className="relative">
+                {/* Badge container - responsive sizing */}
+                <div className="relative overflow-hidden bg-gradient-to-r from-[#f8d675] via-[#fde68a] to-[#f8d675] text-[#1f1f66] text-xs sm:text-sm md:text-base font-black px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full shadow-lg sm:shadow-2xl transform rotate-3 sm:rotate-6 border-2 border-white/60 sm:border-white/50">
                   {/* Content */}
-                  <span className="relative z-10 flex items-center gap-2 drop-shadow-sm">
+                  <span className="relative z-10 flex items-center gap-1.5 sm:gap-2">
                     <svg
-                      className="w-4 h-4 animate-pulse"
+                      className="w-3 h-3 sm:w-4 sm:h-4"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -241,10 +235,6 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
                   {/* Bottom highlight */}
                   <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent" />
                 </div>
-
-                {/* Sparkle effects */}
-                <div className="absolute -top-1 -left-1 w-2 h-2 bg-white rounded-full opacity-0 group-hover/badge:opacity-100 group-hover/badge:animate-ping" />
-                <div className="absolute -bottom-1 -right-1 w-1.5 h-1.5 bg-yellow-300 rounded-full opacity-0 group-hover/badge:opacity-100 group-hover/badge:animate-ping animation-delay-150" />
               </div>
             </div>
 

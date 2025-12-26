@@ -9,10 +9,10 @@ import React, {
 // Replaced lucide-react icons with react-icons (already installed) to avoid adding new dependency
 import { FaTv, FaMobileAlt, FaTabletAlt, FaLaptop } from "react-icons/fa";
 import { gsap } from "gsap";
-import mobileDevicePng from "../assets/images/phone_mockup_bg-landscape-min.png";
-import tvDevicePng from "../assets/images/tv_mockup_bg-front-min.png";
-import tabletDevicePng from "../assets/images/tablet_mockup-min.png";
-import laptopDevicePng from "../assets/images/laptop_mockup_bg-front-min.png";
+import mobileDevicePng from "../assets/images/phone_mockup_bg-landscape-min.webp";
+import tvDevicePng from "../assets/images/tv_mockup_bg-front-min.webp";
+import tabletDevicePng from "../assets/images/tablet_mockup-min.webp";
+import laptopDevicePng from "../assets/images/laptop_mockup_bg-front-min.webp";
 
 type DeviceID = "tv" | "mobile" | "tablet" | "laptop";
 
@@ -492,6 +492,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                         <img
                           src={mobileDevicePng}
                           alt={`${d.label} frame`}
+                          width="1920"
+                          height="1080"
                           className="w-[85%] h-[85%] object-contain drop-shadow-2xl"
                           draggable={false}
                           loading="lazy"
@@ -501,6 +503,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                         <img
                           src={tvDevicePng}
                           alt={`${d.label} frame`}
+                          width="1920"
+                          height="1080"
                           className="w-full h-full object-contain drop-shadow-2xl scale-150"
                           draggable={false}
                           loading="lazy"
@@ -510,6 +514,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                         <img
                           src={tabletDevicePng}
                           alt={`${d.label} frame`}
+                          width="1024"
+                          height="768"
                           className="w-full h-full object-contain drop-shadow-2xl scale-[1.75] sm:scale-125"
                           draggable={false}
                           loading="lazy"
@@ -519,6 +525,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                         <img
                           src={laptopDevicePng}
                           alt={`${d.label} frame`}
+                          width="1920"
+                          height="1080"
                           className="w-full h-full object-contain drop-shadow-2xl"
                           draggable={false}
                           loading="lazy"

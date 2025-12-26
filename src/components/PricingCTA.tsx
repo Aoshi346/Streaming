@@ -138,28 +138,22 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
               >
                 {/* Intensified glow effect behind Popular card */}
                 {isPopular && (
-                  <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-[#8b5cf6]/40 via-[#a855f7]/30 to-[#7c3aed]/40 blur-2xl -z-10 opacity-90 animate-pulse" />
+                  <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-[#8b5cf6]/30 via-[#a855f7]/20 to-[#7c3aed]/30 -z-10 opacity-90 sm:blur-xl" />
                 )}
 
                 {/* Glow effect on hover */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#5456d5]/20 to-[#822e6a]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10" />
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#5456d5]/20 to-[#822e6a]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:blur-lg -z-10" />
 
-                {/* Premium badge */}
+                {/* Premium badge - Mobile optimized */}
                 {p.badge && (
-                  <div className="absolute -top-4 -right-4 z-20">
-                    <div className="relative group/badge">
-                      {/* Outer glow effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#5456d5] via-[#822e6a] to-[#5456d5] animate-gradient-x blur-lg opacity-75" />
-
-                      {/* Badge container with shine effect */}
-                      <div className="relative overflow-hidden bg-gradient-to-r from-[#5456d5] via-[#822e6a] to-[#5456d5] text-white text-xs font-black px-5 py-2 rounded-full shadow-2xl transform rotate-6 group-hover/badge:rotate-0 group-hover/badge:scale-110 transition-all duration-300 border-2 border-white/30">
-                        {/* Animated shine overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shine-slow" />
-
+                  <div className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 z-20">
+                    <div className="relative">
+                      {/* Badge container - solid background for mobile, gradient for desktop */}
+                      <div className="relative overflow-hidden bg-gradient-to-r from-[#5456d5] via-[#822e6a] to-[#5456d5] text-white text-[10px] sm:text-xs font-black px-3 sm:px-5 py-1.5 sm:py-2 rounded-full shadow-lg sm:shadow-2xl transform rotate-3 sm:rotate-6 border-2 border-white/40 sm:border-white/30">
                         {/* Content */}
-                        <span className="relative z-10 flex items-center gap-1.5 drop-shadow-lg">
+                        <span className="relative z-10 flex items-center gap-1 sm:gap-1.5">
                           <svg
-                            className="w-3 h-3 animate-pulse"
+                            className="w-2.5 h-2.5 sm:w-3 sm:h-3"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -171,10 +165,6 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
                         {/* Bottom highlight */}
                         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
                       </div>
-
-                      {/* Sparkle effects */}
-                      <div className="absolute -top-1 -left-1 w-2 h-2 bg-white rounded-full opacity-0 group-hover/badge:opacity-100 group-hover/badge:animate-ping" />
-                      <div className="absolute -bottom-1 -right-1 w-1.5 h-1.5 bg-pink-300 rounded-full opacity-0 group-hover/badge:opacity-100 group-hover/badge:animate-ping animation-delay-150" />
                     </div>
                   </div>
                 )}
