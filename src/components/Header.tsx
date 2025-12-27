@@ -272,7 +272,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
         className="md:hidden absolute z-20 left-0 right-0 top-full px-4 pb-4 origin-top will-change-transform"
         aria-hidden={!menuOpen}
       >
-        <div className="mx-auto max-w-3xl rounded-2xl border-2 border-[#5456d5]/30 bg-background/95 backdrop-blur-lg shadow-[0_10px_40px_rgba(31,31,102,0.3)] overflow-hidden">
+        <div className="mx-auto max-w-3xl rounded-2xl border-2 border-[#5456d5]/40 bg-white shadow-[0_10px_40px_rgba(31,31,102,0.35)] overflow-hidden">
           {/* Gradient accent bar at top */}
           <div className="h-1.5 bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66]" />
           <nav className="flex flex-col py-2" aria-label="Menú móvil">

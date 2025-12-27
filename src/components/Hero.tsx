@@ -226,7 +226,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
 
                 <a
                   href="#features"
-                  className="group w-full sm:w-auto rounded-lg border-2 border-[#5456d5]/50 bg-[#1f1f66]/20 backdrop-blur-sm px-4 py-2 sm:px-6 sm:py-3 text-xs sm:text-sm font-bold text-[#fcf3e1] transition-all duration-300 hover:bg-[#822e6a]/30 hover:border-[#fcf3e1]/50 hover:text-[#fcf3e1] hover:scale-105 hover:shadow-[0_4px_20px_rgba(84,86,213,0.3)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fcf3e1]/50"
+                  className="group w-full sm:w-auto rounded-lg border-2 border-white/50 bg-[#1f1f66] px-4 py-2 sm:px-6 sm:py-3 text-xs sm:text-sm font-bold text-[#fcf3e1] text-center transition-all duration-300 hover:bg-[#5456d5] hover:border-white/70 hover:text-white hover:scale-105 hover:shadow-[0_4px_20px_rgba(84,86,213,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fcf3e1]/50 shadow-xl"
                   onClick={handleSmoothAnchor("#features")}
                 >
                   <span className="flex items-center justify-center gap-2">
@@ -252,7 +252,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                 <div className="grid gap-2 sm:grid-cols-2">
                   <a
                     href="#devices"
-                    className="group relative flex items-center justify-between rounded-lg border border-[#5456d5]/30 bg-[#1f1f66]/20 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-semibold text-[#fcf3e1] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-[#fcf3e1]/40 hover:bg-[#5456d5]/25 hover:shadow-[0_4px_15px_rgba(84,86,213,0.25)]"
+                    className="group relative flex items-center justify-between rounded-lg border-2 border-white/40 bg-[#1f1f66] px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-semibold text-[#fcf3e1] shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-white/60 hover:bg-[#5456d5] hover:shadow-[0_6px_20px_rgba(84,86,213,0.4)]"
                     onClick={handleSmoothAnchor("#devices")}
                   >
                     <div className="flex items-center gap-2">
@@ -285,7 +285,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
 
                   <a
                     href="#downloads"
-                    className="group relative flex items-center justify-between rounded-lg border border-[#5456d5]/30 bg-[#1f1f66]/20 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-semibold text-[#fcf3e1] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-[#fcf3e1]/40 hover:bg-[#822e6a]/25 hover:shadow-[0_4px_15px_rgba(130,46,106,0.25)]"
+                    className="group relative flex items-center justify-between rounded-lg border-2 border-white/40 bg-[#1f1f66] px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-semibold text-[#fcf3e1] shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-white/60 hover:bg-[#822e6a] hover:shadow-[0_6px_20px_rgba(130,46,106,0.4)]"
                     onClick={handleSmoothAnchor("#downloads")}
                   >
                     <div className="flex items-center gap-2">
