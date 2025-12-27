@@ -149,7 +149,9 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
                   <div className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 z-20">
                     <div className="relative">
                       {/* Badge container - solid background for mobile, gradient for desktop */}
-                      <div className="relative overflow-hidden bg-gradient-to-r from-[#5456d5] via-[#822e6a] to-[#5456d5] text-white text-[10px] sm:text-xs font-black px-3 sm:px-5 py-1.5 sm:py-2 rounded-full shadow-lg sm:shadow-2xl transform rotate-3 sm:rotate-6 border-2 border-white/40 sm:border-white/30">
+                      <div className="group/badge relative overflow-hidden bg-gradient-to-r from-[#5456d5] via-[#822e6a] to-[#5456d5] text-white text-[10px] sm:text-xs font-black px-3 sm:px-5 py-1.5 sm:py-2 rounded-full shadow-lg sm:shadow-2xl transform rotate-3 sm:rotate-6 hover:rotate-0 hover:scale-105 transition-transform duration-300 border-2 border-white/40 sm:border-white/30">
+                        {/* Shine sweep effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-500 ease-out" />
                         {/* Content */}
                         <span className="relative z-10 flex items-center gap-1 sm:gap-1.5">
                           <svg

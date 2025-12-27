@@ -210,6 +210,7 @@ body {
   .animate-aurora-3,
   .animate-blob,
   .animate-gradient-x,
+  .animate-pulse-soft,
   .animate-shine,
   .animate-shine-slow {
     animation: none !important;

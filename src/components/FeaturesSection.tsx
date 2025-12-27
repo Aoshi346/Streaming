@@ -219,7 +219,9 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
             <div className="absolute -top-2 -right-1 sm:-top-3 sm:-right-2 z-30">
               <div className="relative">
                 {/* Badge container - responsive sizing */}
-                <div className="relative overflow-hidden bg-gradient-to-r from-[#f8d675] via-[#fde68a] to-[#f8d675] text-[#1f1f66] text-xs sm:text-sm md:text-base font-black px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full shadow-lg sm:shadow-2xl transform rotate-3 sm:rotate-6 border-2 border-white/60 sm:border-white/50">
+                <div className="group/badge relative overflow-hidden bg-gradient-to-r from-[#f8d675] via-[#fde68a] to-[#f8d675] text-[#1f1f66] text-xs sm:text-sm md:text-base font-black px-4 sm:px-6 py-1.5 sm:py-2.5 rounded-full shadow-lg sm:shadow-2xl transform rotate-3 sm:rotate-6 hover:rotate-0 hover:scale-105 transition-transform duration-300 border-2 border-white/60 sm:border-white/50">
+                  {/* Shine sweep effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-500 ease-out" />
                   {/* Content */}
                   <span className="relative z-10 flex items-center gap-1.5 sm:gap-2">
                     <svg
