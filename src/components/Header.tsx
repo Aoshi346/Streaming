@@ -324,8 +324,9 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
             ))}
           </nav>
           <div className="border-t border-[#5456d5]/20 px-5 py-4 text-center bg-gradient-to-r from-[#822e6a]/5 via-[#5456d5]/5 to-[#1f1f66]/5">
-            <span className="text-sm font-bold bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] bg-clip-text text-transparent">
-              FULLVISIONTV
+            <span className="text-sm bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] bg-clip-text text-transparent uppercase">
+              <span className="font-extrabold">FULL</span>
+              <span className="font-normal">VISIONTV</span>
             </span>
             <span className="text-sm text-[#5456d5]/60"> © 2025</span>
           </div>
