@@ -147,7 +147,11 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
             <h1
               ref={titleRef}
               aria-label="Películas, series y más ilimitadas"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]"
+              style={{
+                textShadow:
+                  "0 2px 10px rgba(0,0,0,0.8), 0 0 20px rgba(84, 86, 213, 0.4)",
+              }}
             >
               {(() => {
                 const title = "Películas, series y más ilimitadas";
@@ -179,7 +183,11 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
 
             <p
               ref={subtitleRef}
-              className="gsap-hero-subtitle text-sm sm:text-base md:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed px-4 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
+              className="gsap-hero-subtitle text-sm sm:text-base md:text-lg text-white max-w-2xl mx-auto leading-relaxed px-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+              style={{
+                textShadow:
+                  "0 2px 8px rgba(0,0,0,0.8), 0 0 15px rgba(84, 86, 213, 0.4)",
+              }}
             >
               Disfruta de contenido 4K, sin anuncios, en todos tus dispositivos.
               Cancela en cualquier momento.
@@ -226,10 +234,10 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
 
                 <a
                   href="#features"
-                  className="group w-full sm:w-auto rounded-lg border-2 border-white/50 bg-[#1f1f66] px-4 py-2 sm:px-6 sm:py-3 text-xs sm:text-sm font-bold text-[#fcf3e1] text-center transition-all duration-300 hover:bg-[#5456d5] hover:border-white/70 hover:text-white hover:scale-105 hover:shadow-[0_4px_20px_rgba(84,86,213,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fcf3e1]/50 shadow-xl"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center rounded-lg border-2 border-white/50 bg-[#1f1f66] px-4 py-2.5 sm:px-6 sm:py-3.5 text-xs sm:text-sm font-bold text-[#fcf3e1] text-center transition-all duration-300 hover:bg-[#5456d5] hover:border-white/70 hover:text-white hover:scale-105 hover:shadow-[0_4px_20px_rgba(84,86,213,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fcf3e1]/50 shadow-xl"
                   onClick={handleSmoothAnchor("#features")}
                 >
-                  <span className="flex items-center justify-center gap-2">
+                  <span className="flex items-center gap-2">
                     VER MÁS
                     <svg
                       className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover:translate-y-1 transition-transform duration-300"
@@ -295,7 +303,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                       <div className="flex flex-col text-left">
                         <span className="text-sm">Descarga la app</span>
                         <span className="text-xs text-white/70">
-                          Android, iOS, Windows, Mac
+                          Android, iOS, Windows, Tablets
                         </span>
                       </div>
                     </div>
