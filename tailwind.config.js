@@ -13,6 +13,9 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', "sans-serif"],
+      },
       colors: {
         brand: {
           DEFAULT: "rgb(var(--color-brand-base-rgb))",

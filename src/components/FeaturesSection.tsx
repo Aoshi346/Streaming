@@ -359,7 +359,10 @@ const FeaturesSection = forwardRef<HTMLElement>((_, ref) => {
               <div className="text-center">
                 <p className="text-xl sm:text-2xl lg:text-3xl font-black drop-shadow-lg">
                   <span className="text-white">¡Con </span>
-                  <em className="italic text-[#fde68a]">FullVisionTV</em>
+                  <span className="uppercase not-italic text-[#fde68a]">
+                    <span className="font-extrabold">Full</span>
+                    <span className="font-normal">VisionTV</span>
+                  </span>
                   <span className="text-white"> ganas </span>
                   <em className="italic text-[#fde68a]">por siempre!</em>
                   <span> 🏆</span>

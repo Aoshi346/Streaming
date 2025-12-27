@@ -14,7 +14,7 @@ export default function Logo({ className = "" }: { className?: string }) {
       />
       <span className="text-base sm:text-lg md:text-xl tracking-tight leading-none text-text-primary uppercase">
         <span className="font-extrabold">FULL</span>
-        <span className="font-bold">VISIONTV</span>
+        <span className="font-normal">VISIONTV</span>
       </span>
     </a>
   );
