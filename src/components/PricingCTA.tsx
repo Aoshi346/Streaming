@@ -1,6 +1,28 @@
 import { forwardRef } from "react";
 import { FaCheck } from "react-icons/fa";
 
+// Payment method logos
+import zelleLogo from "../assets/images/Zelle_logo.png";
+import paypalLogo from "../assets/images/PayPal_logo.webp";
+import mastercardLogo from "../assets/images/mastercard_logo.svg";
+import binanceLogo from "../assets/images/binance-logo-hd.webp";
+import pipolPayLogo from "../assets/images/pipol_pay_logo.png";
+import facebankLogo from "../assets/images/facebank_logo.webp";
+
+// Payment methods for the marquee with logo images
+const PAYMENT_METHODS = [
+  { logo: zelleLogo, name: "Zelle", size: "h-6 sm:h-8" },
+  { logo: paypalLogo, name: "PayPal", size: "h-6 sm:h-8" },
+  {
+    logo: mastercardLogo,
+    name: "Tarjeta Crédito/Débito",
+    size: "h-10 sm:h-12",
+  },
+  { logo: binanceLogo, name: "Binance USDT", size: "h-16 sm:h-24" },
+  { logo: pipolPayLogo, name: "Pipol Pay", size: "h-6 sm:h-8" },
+  { logo: facebankLogo, name: "Facebank", size: "h-6 sm:h-8" },
+];
+
 const PLANS = [
   {
     id: "standard",
@@ -279,6 +301,64 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
               <FaCheck className="text-[#fcf3e1]/70 flex-shrink-0" /> Soporte
               24/7
             </span>
+          </div>
+        </div>
+
+        {/* Payment Methods Marquee */}
+        <div className="mt-12 sm:mt-16 pt-8 border-t border-white/10 pb-8">
+          <p className="text-center text-[#fcf3e1] text-sm sm:text-base mb-8 font-semibold tracking-wide uppercase">
+            Métodos de pago aceptados
+          </p>
+          <div
+            className="relative overflow-hidden"
+            style={{
+              maskImage:
+                "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+            }}
+          >
+            {/* Scrolling track */}
+            <div className="flex animate-marquee items-center">
+              {/* First set */}
+              <div className="flex gap-12 sm:gap-20 items-center shrink-0 px-8">
+                {PAYMENT_METHODS.map((method) => (
+                  <div
+                    key={method.name}
+                    className="group flex flex-col items-center justify-center gap-2 opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <img
+                      src={method.logo}
+                      alt={method.name}
+                      className={`${method.size} w-auto object-contain filter brightness-0 invert`}
+                    />
+                    {/* Text label - appears on hover */}
+                    <span className="text-[#fcf3e1] text-[10px] sm:text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 h-4">
+                      {method.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              {/* Duplicate for seamless loop */}
+              <div className="flex gap-12 sm:gap-20 items-center shrink-0 px-8">
+                {PAYMENT_METHODS.map((method) => (
+                  <div
+                    key={`${method.name}-dup`}
+                    className="group flex flex-col items-center justify-center gap-2 opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <img
+                      src={method.logo}
+                      alt={method.name}
+                      className={`${method.size} w-auto object-contain filter brightness-0 invert`}
+                    />
+                    {/* Text label - appears on hover */}
+                    <span className="text-[#fcf3e1] text-[10px] sm:text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 h-4">
+                      {method.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

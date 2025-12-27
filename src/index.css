@@ -221,6 +221,11 @@ body {
     animation: pulse-mobile 2s ease-in-out infinite !important;
   }
 
+  /* Slow down marquee on mobile for better battery life */
+  .animate-marquee {
+    animation-duration: 35s !important;
+  }
+
   /* Simplify shadows to single layer (no multiple shadows) */
   .shadow-2xl {
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3) !important;
@@ -416,6 +421,25 @@ body {
 
 .animation-delay-150 {
   animation-delay: 150ms;
+}
+
+/* Marquee animation for payment methods - lightweight transform-based */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+/* Pause marquee on hover for accessibility */
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
 
 @layer utilities {
