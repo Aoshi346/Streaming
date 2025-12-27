@@ -22,7 +22,7 @@ const links = [
   },
   {
     href: "#faq",
-    label: "Preguntas Frecuentes",
+    label: "Información",
     icon: "M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
   },
 ];
@@ -325,7 +325,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
           </nav>
           <div className="border-t border-[#5456d5]/20 px-5 py-4 text-center bg-gradient-to-r from-[#822e6a]/5 via-[#5456d5]/5 to-[#1f1f66]/5">
             <span className="text-sm font-bold bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] bg-clip-text text-transparent">
-              FullVisionTV
+              FULLVISIONTV
             </span>
             <span className="text-sm text-[#5456d5]/60"> © 2025</span>
           </div>

@@ -1,39 +1,82 @@
-import { forwardRef, useCallback } from 'react'
-import type React from 'react'
-import { gsap } from 'gsap'
+import { forwardRef, useCallback } from "react";
+import type React from "react";
+import { gsap } from "gsap";
+import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
 
 const Footer = forwardRef<HTMLElement>((_, ref) => {
   const onLinkEnter = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    gsap.to(e.currentTarget, { y: -2, scale: 1.04, duration: 0.2, ease: 'power3.out' })
-  }, [])
+    gsap.to(e.currentTarget, {
+      y: -2,
+      scale: 1.04,
+      duration: 0.2,
+      ease: "power3.out",
+    });
+  }, []);
   const onLinkLeave = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    gsap.to(e.currentTarget, { y: 0, scale: 1, duration: 0.2, ease: 'power3.out' })
-  }, [])
+    gsap.to(e.currentTarget, {
+      y: 0,
+      scale: 1,
+      duration: 0.2,
+      ease: "power3.out",
+    });
+  }, []);
+
   return (
-    <footer ref={ref} className="mt-0 border-t border-border-subtle py-10 text-sm text-text-muted bg-background">
-      <div className="container-wrapper">
-        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-text-secondary">&copy; {new Date().getFullYear()} FullVision. Todos los derechos reservados.</p>
-          <nav className="flex flex-wrap items-center gap-4">
-            <a onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} className="group relative px-0.5 pb-1 text-text-secondary transition-colors duration-200 hover:text-text-primary" href="#">
-              Privacidad
-              <span className="pointer-events-none absolute inset-x-0 -bottom-0.5 h-[1px] origin-left scale-x-0 bg-brand-light/80 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+    <footer
+      ref={ref}
+      className="relative py-12 sm:py-16 text-white -mt-px"
+      style={{
+        background:
+          "linear-gradient(to right, #1f1f66 0%, #5456d5 50%, #822e6a 100%)",
+      }}
+    >
+      <div className="container-wrapper px-4 sm:px-6">
+        {/* Main footer content */}
+        <div className="flex flex-col items-center text-center gap-8">
+          {/* Logo/Brand */}
+          <div>
+            <h3 className="text-3xl sm:text-4xl font-bold mb-3">
+              FULLVISIONTV
+            </h3>
+            <p className="text-white/80 text-base sm:text-lg max-w-lg font-medium">
+              Tu entretenimiento premium, donde quieras y cuando quieras.
+            </p>
+          </div>
+
+          {/* Social links */}
+          <div className="flex items-center gap-5">
+            <a
+              href="#"
+              onMouseEnter={onLinkEnter}
+              onMouseLeave={onLinkLeave}
+              className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition-all duration-200"
+              aria-label="Facebook"
+            >
+              <FaFacebookF className="w-5 h-5" />
             </a>
-            <a onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} className="group relative px-0.5 pb-1 text-text-secondary transition-colors duration-200 hover:text-text-primary" href="#">
-              Términos
-              <span className="pointer-events-none absolute inset-x-0 -bottom-0.5 h-[1px] origin-left scale-x-0 bg-brand-light/80 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+
+            <a
+              href="#"
+              onMouseEnter={onLinkEnter}
+              onMouseLeave={onLinkLeave}
+              className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition-all duration-200"
+              aria-label="WhatsApp"
+            >
+              <FaWhatsapp className="w-5 h-5" />
             </a>
-            <a onMouseEnter={onLinkEnter} onMouseLeave={onLinkLeave} className="group relative px-0.5 pb-1 text-text-secondary transition-colors duration-200 hover:text-text-primary" href="#">
-              Centro de Ayuda
-              <span className="pointer-events-none absolute inset-x-0 -bottom-0.5 h-[1px] origin-left scale-x-0 bg-brand-light/80 transition-transform duration-300 ease-out group-hover:scale-x-100" />
-            </a>
-          </nav>
+          </div>
+
+          {/* Copyright */}
+          <p className="text-white/60 text-sm sm:text-base">
+            &copy; {new Date().getFullYear()} FULLVISIONTV. Todos los derechos
+            reservados.
+          </p>
         </div>
       </div>
     </footer>
-  )
-})
+  );
+});
 
-Footer.displayName = 'Footer'
+Footer.displayName = "Footer";
 
-export default Footer
+export default Footer;
