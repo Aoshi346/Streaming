@@ -79,15 +79,21 @@ const ServiceInfo = forwardRef<HTMLElement>((_, ref) => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#822e6a" />
+            <linearGradient
+              id="serviceInfoWaveGradient"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="#1f1f66" />
               <stop offset="50%" stopColor="#5456d5" />
-              <stop offset="100%" stopColor="#1f1f66" />
+              <stop offset="100%" stopColor="#822e6a" />
             </linearGradient>
           </defs>
           <path
             d="M0,40 C360,100 720,0 1080,60 C1260,90 1380,70 1440,50 L1440,120 L0,120 Z"
-            fill="url(#waveGradient)"
+            fill="url(#serviceInfoWaveGradient)"
           />
         </svg>
       </div>
