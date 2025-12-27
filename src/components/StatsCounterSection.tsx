@@ -255,21 +255,25 @@ export default function StatsCounterSection() {
     const strip = filmStripRef.current;
     if (!strip) return;
 
+    // Faster marquee on mobile since screen is smaller
+    const isMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(max-width: 768px)").matches;
+    const marqueeDuration = isMobile ? 12 : 24;
+
+    // Calculate half width for seamless loop (content is duplicated 3x)
+    const width = strip.scrollWidth / 3;
+
     const ctx = gsap.context(() => {
-      const width = strip.scrollWidth / 2 || 1;
-      gsap.fromTo(
-        strip,
-        { x: 0 },
-        {
-          x: -width,
-          duration: 24,
-          ease: "none",
-          repeat: -1,
-          modifiers: {
-            x: (value) => `${parseFloat(value) % -width}px`,
-          },
-        }
-      );
+      // Simple infinite loop - no modifiers needed
+      gsap.to(strip, {
+        x: -width,
+        duration: marqueeDuration,
+        ease: "linear",
+        repeat: -1,
+        force3D: true,
+      });
     }, filmStripRef);
 
     return () => ctx.revert();
