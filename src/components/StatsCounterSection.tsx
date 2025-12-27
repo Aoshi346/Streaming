@@ -13,6 +13,17 @@ const formatCompactNumber = (n: number) => {
   return `${thousands}k+`;
 };
 
+// Wrapper to prevent 'animate' prop from being passed to FiTv's SVG element
+function TvIcon({
+  className,
+  animate: _animate,
+}: {
+  className?: string;
+  animate?: boolean;
+}) {
+  return <FiTv className={className} />;
+}
+
 type StatCardProps = {
   to: number;
   label: string;
@@ -510,7 +521,7 @@ export default function StatsCounterSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 max-w-5xl mx-auto relative z-20">
-          <StatCard to={11000} label="LIVE TV" Icon={FiTv} />
+          <StatCard to={11000} label="LIVE TV" Icon={TvIcon} />
           <StatCard
             to={54000}
             label="MOVIES"
@@ -520,7 +531,7 @@ export default function StatsCounterSection() {
             to={14000}
             label="SERIES"
             Icon={({ animate }) => (
-              <Play animate={animate ? "path-loop" : false} loop />
+              <Play animate={animate ? "path-loop" : undefined} loop />
             )}
           />
         </div>

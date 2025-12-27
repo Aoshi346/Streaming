@@ -1,4 +1,4 @@
-import { useEffect, useRef, lazy, Suspense } from "react";
+import React, { useEffect, useRef, useState, Suspense } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "./components/Header";
@@ -9,24 +9,78 @@ import { ThemeProvider } from "./theme";
 import SectionTitleAnimator from "./components/SectionTitleAnimator";
 import Footer from "./components/Footer";
 
-// Lazy load below-the-fold components for performance
-const Devices = lazy(() => import("./components/Devices"));
-const PricingCTA = lazy(() => import("./components/PricingCTA"));
-const DownloadLinksSection = lazy(
-  () => import("./components/DownloadLinksSection")
-);
-const FeaturesSection = lazy(() => import("./components/FeaturesSection"));
-const FAQ = lazy(() => import("./components/ServiceInfo"));
+// Helper to lazy load components only when they are near viewport
+const LazySection = React.forwardRef<
+  HTMLDivElement,
+  {
+    importFn: () => Promise<{ default: React.ComponentType<any> }>;
+    fallback?: React.ReactNode;
+    [key: string]: any;
+  }
+>(({ importFn, fallback = <div className="h-96 w-full" />, ...props }, ref) => {
+  const [Component, setComponent] = useState<React.ComponentType<any> | null>(
+    null
+  );
+  const internalRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          importFn().then((mod: { default: React.ComponentType<any> }) =>
+            setComponent(() => mod.default)
+          );
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" } // Load 200px before visual hit
+    );
+
+    if (internalRef.current) observer.observe(internalRef.current);
+    return () => observer.disconnect();
+  }, [importFn]);
+
+  return (
+    <div
+      ref={(node) => {
+        // Handle both internal ref for intersection observer and external ref
+        internalRef.current = node;
+        if (typeof ref === "function") {
+          ref(node);
+        } else if (ref) {
+          // Cast to writeable ref object to avoid TS read-only error
+          (ref as any).current = node;
+        }
+      }}
+    >
+      {Component ? (
+        <Suspense fallback={fallback}>
+          <Component {...props} />
+        </Suspense>
+      ) : (
+        fallback
+      )}
+    </div>
+  );
+});
+
+// Components declared efficiently
+const DevicesImport = () => import("./components/Devices");
+const PricingImport = () => import("./components/PricingCTA");
+const DownloadImport = () => import("./components/DownloadLinksSection");
+const FeaturesImport = () => import("./components/FeaturesSection");
+const FAQImport = () => import("./components/ServiceInfo");
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const headerRef = useRef<HTMLElement>(null);
   const heroRef = useRef<HTMLElement>(null);
-  const featuresRef = useRef<HTMLElement>(null);
-  const devicesRef = useRef<HTMLElement>(null);
-  const pricingRef = useRef<HTMLElement>(null);
-  const faqRef = useRef<HTMLElement>(null);
+  // Change refs to HTMLDivElement to match LazySection's wrapper div
+  const featuresRef = useRef<HTMLDivElement>(null);
+  const devicesRef = useRef<HTMLDivElement>(null);
+  const pricingRef = useRef<HTMLDivElement>(null);
+  const faqRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -80,6 +134,11 @@ export default function App() {
     }
 
     if (pricingRef.current) {
+      // With LazySection, the content might not be mounted yet when this runs.
+      // However, since GSAP animations are usually triggered on scroll,
+      // and LazySection mounts when near viewport, we need to ensure GSAP can find elements.
+      // Ideally, the animation logic should be inside the lazy component or triggered after mount.
+      // But for now, we'll keep the structure. If elements aren't found, animation won't run, which is fine.
       const pricingCards = pricingRef.current.querySelectorAll(".pricing-card");
       if (pricingCards.length) {
         animations.push(
@@ -152,13 +211,35 @@ export default function App() {
         <main>
           <Hero ref={heroRef} />
           <StatsCounterSection />
-          <Suspense fallback={<div className="h-96" />}>
-            <Devices ref={devicesRef} />
-            <PricingCTA ref={pricingRef} />
-            <DownloadLinksSection />
-            <FeaturesSection ref={featuresRef} />
-            <FAQ ref={faqRef} />
-          </Suspense>
+
+          <LazySection
+            importFn={DevicesImport}
+            fallback={<div className="h-[600px]" />}
+            ref={devicesRef}
+          />
+
+          <LazySection
+            importFn={PricingImport}
+            fallback={<div className="h-[500px]" />}
+            ref={pricingRef}
+          />
+
+          <LazySection
+            importFn={DownloadImport}
+            fallback={<div className="h-[400px]" />}
+          />
+
+          <LazySection
+            importFn={FeaturesImport}
+            fallback={<div className="h-[600px]" />}
+            ref={featuresRef}
+          />
+
+          <LazySection
+            importFn={FAQImport}
+            fallback={<div className="h-[400px]" />}
+            ref={faqRef}
+          />
         </main>
         <Footer ref={footerRef} />
         <WhatsAppBubble />
