@@ -1,18 +1,22 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, lazy, Suspense } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import FeaturesSection from "./components/FeaturesSection";
 import StatsCounterSection from "./components/StatsCounterSection";
-import Devices from "./components/Devices";
-import DownloadLinksSection from "./components/DownloadLinksSection";
-import PricingCTA from "./components/PricingCTA";
-import FAQ from "./components/ServiceInfo";
-import Footer from "./components/Footer";
 import WhatsAppBubble from "./components/WhatsAppBubble";
 import { ThemeProvider } from "./theme";
 import SectionTitleAnimator from "./components/SectionTitleAnimator";
+import Footer from "./components/Footer";
+
+// Lazy load below-the-fold components for performance
+const Devices = lazy(() => import("./components/Devices"));
+const PricingCTA = lazy(() => import("./components/PricingCTA"));
+const DownloadLinksSection = lazy(
+  () => import("./components/DownloadLinksSection")
+);
+const FeaturesSection = lazy(() => import("./components/FeaturesSection"));
+const FAQ = lazy(() => import("./components/ServiceInfo"));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -148,11 +152,13 @@ export default function App() {
         <main>
           <Hero ref={heroRef} />
           <StatsCounterSection />
-          <Devices ref={devicesRef} />
-          <PricingCTA ref={pricingRef} />
-          <DownloadLinksSection />
-          <FeaturesSection ref={featuresRef} />
-          <FAQ ref={faqRef} />
+          <Suspense fallback={<div className="h-96" />}>
+            <Devices ref={devicesRef} />
+            <PricingCTA ref={pricingRef} />
+            <DownloadLinksSection />
+            <FeaturesSection ref={featuresRef} />
+            <FAQ ref={faqRef} />
+          </Suspense>
         </main>
         <Footer ref={footerRef} />
         <WhatsAppBubble />

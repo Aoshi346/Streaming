@@ -140,6 +140,20 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
   // We now use a CSS-only active state for the tab "pill" to simplify mobile behavior
   // and avoid JS-driven position/Flip work. Keep tabsRef for hover animations.
 
+  // Optimization: Track which images have been needed/loaded to avoid loading all 4 massive images at start
+  const [loadedImages, setLoadedImages] = useState<Record<DeviceID, boolean>>({
+    tv: true, // Always load the default one
+    mobile: false,
+    tablet: false,
+    laptop: false,
+  });
+
+  useEffect(() => {
+    if (!loadedImages[activeDeviceID]) {
+      setLoadedImages((prev) => ({ ...prev, [activeDeviceID]: true }));
+    }
+  }, [activeDeviceID, loadedImages]);
+
   // Animate preview and content with creative transitions
   useLayoutEffect(() => {
     const currentID = activeDeviceID;
@@ -488,58 +502,60 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                   >
                     {
                       // Render the matching PNG mockup asset for each device.
-                      d.id === "mobile" ? (
-                        <img
-                          src={mobileDevicePng}
-                          alt={`${d.label} frame`}
-                          width="1920"
-                          height="1080"
-                          className="w-[85%] h-[85%] object-contain drop-shadow-2xl"
-                          draggable={false}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      ) : d.id === "tv" ? (
-                        <img
-                          src={tvDevicePng}
-                          alt={`${d.label} frame`}
-                          width="1920"
-                          height="1080"
-                          className="w-full h-full object-contain drop-shadow-2xl scale-150"
-                          draggable={false}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      ) : d.id === "tablet" ? (
-                        <img
-                          src={tabletDevicePng}
-                          alt={`${d.label} frame`}
-                          width="1024"
-                          height="768"
-                          className="w-full h-full object-contain drop-shadow-2xl scale-[1.75] sm:scale-125"
-                          draggable={false}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      ) : d.id === "laptop" ? (
-                        <img
-                          src={laptopDevicePng}
-                          alt={`${d.label} frame`}
-                          width="1920"
-                          height="1080"
-                          className="w-full h-full object-contain drop-shadow-2xl"
-                          draggable={false}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      ) : (
-                        <svg
-                          className="max-h-[95%] max-w-[95%]"
-                          viewBox="0 0 100 100"
-                          preserveAspectRatio="xMidYMid meet"
-                          aria-hidden="true"
-                        />
-                      )
+                      // Only render if we have marked it as loaded to save bandwidth
+                      loadedImages[d.id] &&
+                        (d.id === "mobile" ? (
+                          <img
+                            src={mobileDevicePng}
+                            alt={`${d.label} frame`}
+                            width="1920"
+                            height="1080"
+                            className="w-[85%] h-[85%] object-contain drop-shadow-2xl"
+                            draggable={false}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : d.id === "tv" ? (
+                          <img
+                            src={tvDevicePng}
+                            alt={`${d.label} frame`}
+                            width="1920"
+                            height="1080"
+                            className="w-full h-full object-contain drop-shadow-2xl scale-150"
+                            draggable={false}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : d.id === "tablet" ? (
+                          <img
+                            src={tabletDevicePng}
+                            alt={`${d.label} frame`}
+                            width="1024"
+                            height="768"
+                            className="w-full h-full object-contain drop-shadow-2xl scale-[1.75] sm:scale-125"
+                            draggable={false}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : d.id === "laptop" ? (
+                          <img
+                            src={laptopDevicePng}
+                            alt={`${d.label} frame`}
+                            width="1920"
+                            height="1080"
+                            className="w-full h-full object-contain drop-shadow-2xl"
+                            draggable={false}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : (
+                          <svg
+                            className="max-h-[95%] max-w-[95%]"
+                            viewBox="0 0 100 100"
+                            preserveAspectRatio="xMidYMid meet"
+                            aria-hidden="true"
+                          />
+                        ))
                     }
                   </div>
                 ))}

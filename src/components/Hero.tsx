@@ -66,19 +66,9 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
           duration: 0.4,
           ease: "power2.out",
         });
-      } else {
-        // Desktop: full character animation
-        tl.from(chars, {
-          opacity: 0,
-          y: 30,
-          skewX: 8,
-          rotation: 4,
-          scale: 0.98,
-          duration: 0.55,
-          stagger: { each: 0.03, from: "start" },
-          ease: "back.out(1.2)",
-        });
       }
+      // DESKTOP LCP OPTIMIZATION: Removed complex char animation that hides text initially.
+      // Text will now be visible immediately on load for faster LCP.
 
       if (subEl)
         tl.from(
@@ -119,6 +109,8 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
           alt=""
           aria-hidden="true"
           className="absolute top-0 left-0 w-full h-full object-cover object-center -z-20"
+          width="1920"
+          height="1080"
           fetchPriority="high"
           decoding="async"
         />
