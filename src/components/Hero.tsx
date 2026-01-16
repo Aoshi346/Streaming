@@ -13,6 +13,16 @@ import { smoothScrollTo } from "../utils/smoothScroll";
 import heroBackground from "../assets/images/hero_background.webp";
 import heroBackgroundMobile from "../assets/images/hero_background_mobile-min.webp";
 
+// Movie poster imports for the cinematic reel
+import poster1 from "../assets/images/posters/poster1.png";
+import poster2 from "../assets/images/posters/poster2.png";
+import poster3 from "../assets/images/posters/poster3.png";
+import poster4 from "../assets/images/posters/poster4.png";
+import poster5 from "../assets/images/posters/poster5.png";
+import poster6 from "../assets/images/posters/poster6.png";
+
+const moviePosters = [poster1, poster2, poster3, poster4, poster5, poster6];
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = forwardRef<HTMLElement>((_, ref) => {
@@ -99,7 +109,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
     <section
       ref={sectionRef}
       id="top"
-      className="relative isolate overflow-hidden min-h-[70vh] sm:min-h-[75vh] lg:min-h-[85vh] flex items-center"
+      className="relative isolate overflow-visible min-h-[70vh] sm:min-h-[75vh] lg:min-h-[85vh] flex items-center z-20"
     >
       {/* Background Image - Responsive */}
       <picture>
@@ -126,16 +136,8 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
       </div>
 
       <div className="container-wrapper relative z-10 w-full">
-        <div className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6">
+        <div className="pt-12 pb-40 sm:pt-16 sm:pb-56 md:pt-20 md:pb-64 lg:pt-24 lg:pb-72 px-4 sm:px-6">
           <div className="max-w-4xl text-center mx-auto space-y-6 sm:space-y-8">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-muted/30 border border-border-subtle backdrop-blur-sm">
-              <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-              <span className="text-sm sm:text-base font-semibold text-white">
-                Miles de películas y series disponibles
-              </span>
-            </div>
-
             <h1
               ref={titleRef}
               aria-label="Películas, series y más ilimitadas"
@@ -187,7 +189,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
 
             {/* CTA Buttons with enhanced styling */}
             <div className="mt-6 sm:mt-8 flex flex-col items-center gap-3 px-4">
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 w-full sm:w-auto">
                 <a
                   href="#pricing"
                   className="group relative w-full sm:w-auto overflow-hidden rounded-lg sm:rounded-xl px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-base font-black text-[#fcf3e1] shadow-[0_0_20px_rgba(130,46,106,0.4),0_0_40px_rgba(84,86,213,0.2)] sm:shadow-[0_0_30px_rgba(130,46,106,0.4),0_0_60px_rgba(84,86,213,0.2)] transition-all duration-300 hover:scale-105 sm:hover:scale-110 hover:shadow-[0_0_30px_rgba(130,46,106,0.6),0_0_60px_rgba(84,86,213,0.4)] ring-2 ring-[#fcf3e1]/30 hover:ring-[#fcf3e1]/60"
@@ -225,23 +227,37 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                 </a>
 
                 <a
-                  href="#features"
-                  className="group w-full sm:w-auto inline-flex items-center justify-center rounded-lg border-2 border-white/50 bg-[#1f1f66] px-4 py-2.5 sm:px-6 sm:py-3.5 text-xs sm:text-sm font-bold text-[#fcf3e1] text-center transition-all duration-300 hover:bg-[#5456d5] hover:border-white/70 hover:text-white hover:scale-105 hover:shadow-[0_4px_20px_rgba(84,86,213,0.4)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fcf3e1]/50 shadow-xl"
-                  onClick={handleSmoothAnchor("#features")}
+                  href="https://aftv.news/513053"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-full sm:w-auto overflow-hidden rounded-lg sm:rounded-xl px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-base font-black text-[#fcf3e1] shadow-[0_0_20px_rgba(130,46,106,0.4),0_0_40px_rgba(84,86,213,0.2)] sm:shadow-[0_0_30px_rgba(130,46,106,0.4),0_0_60px_rgba(84,86,213,0.2)] transition-all duration-300 hover:scale-105 sm:hover:scale-110 hover:shadow-[0_0_30px_rgba(130,46,106,0.6),0_0_60px_rgba(84,86,213,0.4)] ring-2 ring-[#fcf3e1]/30 hover:ring-[#fcf3e1]/60"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #5456d5 0%, #822e6a 50%, #1f1f66 100%)",
+                  }}
                 >
-                  <span className="flex items-center gap-2">
-                    VER MÁS
+                  {/* Animated shimmer effect */}
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-[#fcf3e1]/20 to-transparent" />
+
+                  {/* Glow pulse background */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-[#822e6a]/30 via-transparent to-[#5456d5]/20" />
+
+                  {/* Pulsing border glow */}
+                  <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-[#5456d5] via-[#822e6a] to-[#1f1f66] opacity-60 blur-sm animate-pulse -z-10" />
+
+                  <span className="relative z-10 flex items-center justify-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+                    <span className="tracking-wider">📱 APP OFICIAL</span>
                     <svg
-                      className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover:translate-y-1 transition-transform duration-300"
+                      className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-2 transition-transform duration-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
+                      strokeWidth={2.5}
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
                       />
                     </svg>
                   </span>
@@ -366,40 +382,56 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
         </div>
       </div>
 
+      {/* Cinematic Scrolling Reel - positioned in the empty purple space above Stats title */}
+      <div className="absolute -bottom-8 sm:-bottom-12 md:-bottom-20 left-0 right-0 w-full overflow-hidden py-4 sm:py-6 z-20">
+        {/* Scrolling container - 4 copies ensure full screen coverage */}
+        <div
+          className="flex gap-8 sm:gap-12 md:gap-16"
+          style={{
+            width: "max-content",
+            animation: "scroll-left 40s linear infinite",
+          }}
+        >
+          {/* 4 sets of posters for seamless full-width coverage */}
+          {[1, 2, 3, 4].map((setNum) =>
+            moviePosters.map((poster, index) => (
+              <div
+                key={`poster-${setNum}-${index}`}
+                className="relative flex-shrink-0 w-16 h-24 sm:w-20 sm:h-28 md:w-24 md:h-36 rounded-md sm:rounded-lg overflow-hidden shadow-[0_0_15px_rgba(130,46,106,0.4)] ring-1 ring-[#fcf3e1]/20 hover:ring-[#fcf3e1]/50 hover:scale-105 transition-all duration-300"
+              >
+                <img
+                  src={poster}
+                  alt={`Movie poster ${index + 1}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                {/* Subtle gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1f1f66]/40 via-transparent to-transparent pointer-events-none" />
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+
       {/* Wave Divider - matching Stats section top wave */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
+      <div className="absolute bottom-0 left-0 right-0 z-10 translate-y-[1px]">
         <svg
-          viewBox="0 0 1440 120"
+          viewBox="0 0 1440 320"
+          className="w-full h-auto min-h-[120px]"
           preserveAspectRatio="none"
-          className="w-full h-20 sm:h-28 md:h-32"
         >
           <defs>
-            {/* New gradient palette: magenta → blue-purple → dark navy */}
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#822e6a" stopOpacity="1" />
               <stop offset="50%" stopColor="#5456d5" stopOpacity="1" />
               <stop offset="100%" stopColor="#1f1f66" stopOpacity="1" />
             </linearGradient>
-            <linearGradient
-              id="waveGradientBottom"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
-              <stop offset="0%" stopColor="#822e6a" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#5456d5" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#1f1f66" stopOpacity="0.9" />
-            </linearGradient>
           </defs>
           <path
-            d="M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60 L1440,120 L0,120 Z"
             fill="url(#waveGradient)"
-          />
-          <path
-            d="M0,80 C240,40 480,100 720,80 C960,40 1200,100 1440,80 L1440,120 L0,120 Z"
-            fill="url(#waveGradientBottom)"
-          />
+            fillOpacity="1"
+            d="M0,160L48,176C96,192,192,224,288,224C384,224,480,192,576,165.3C672,139,768,117,864,128C960,139,1056,181,1152,197.3C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
         </svg>
       </div>
     </section>
