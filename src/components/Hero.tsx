@@ -14,12 +14,12 @@ import heroBackground from "../assets/images/hero_background.webp";
 import heroBackgroundMobile from "../assets/images/hero_background_mobile-min.webp";
 
 // Movie poster imports for the cinematic reel
-import poster1 from "../assets/images/posters/poster1.png";
-import poster2 from "../assets/images/posters/poster2.png";
-import poster3 from "../assets/images/posters/poster3.png";
-import poster4 from "../assets/images/posters/poster4.png";
-import poster5 from "../assets/images/posters/poster5.png";
-import poster6 from "../assets/images/posters/poster6.png";
+import poster1 from "../assets/images/posters/poster1.webp";
+import poster2 from "../assets/images/posters/poster2.webp";
+import poster3 from "../assets/images/posters/poster3.webp";
+import poster4 from "../assets/images/posters/poster4.webp";
+import poster5 from "../assets/images/posters/poster5.webp";
+import poster6 from "../assets/images/posters/poster6.webp";
 
 const moviePosters = [poster1, poster2, poster3, poster4, poster5, poster6];
 
@@ -84,7 +84,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
         tl.from(
           subEl,
           { opacity: 0, y: 10, duration: 0.5, ease: "power2.out" },
-          "-=0.28"
+          "-=0.28",
         );
     }, sectionRef);
 
@@ -102,7 +102,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
       event.preventDefault();
       smoothScrollTo(hash, { offset: getGlobalOffset(), duration: 0.65 });
     },
-    [getGlobalOffset]
+    [getGlobalOffset],
   );
 
   return (
@@ -408,7 +408,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                 {/* Subtle gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1f1f66]/40 via-transparent to-transparent pointer-events-none" />
               </div>
-            ))
+            )),
           )}
         </div>
       </div>
