@@ -442,6 +442,25 @@ body {
   animation-play-state: paused;
 }
 
+/* Cinematic reel scrolling animation - scrolls by 25% for 4-copy seamless loop */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 40s linear infinite;
+}
+
+/* Pause scroll on hover for accessibility */
+.animate-scroll-left:hover {
+  animation-play-state: paused;
+}
+
 @layer utilities {
   .perspective-1000 {
     perspective: 1000px;
