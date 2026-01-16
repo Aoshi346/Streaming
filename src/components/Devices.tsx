@@ -7,14 +7,21 @@ import React, {
   useState,
 } from "react";
 // Replaced lucide-react icons with react-icons (already installed) to avoid adding new dependency
-import { FaTv, FaMobileAlt, FaTabletAlt, FaLaptop } from "react-icons/fa";
+import {
+  FaTv,
+  FaMobileAlt,
+  FaTabletAlt,
+  FaLaptop,
+  FaChromecast,
+} from "react-icons/fa";
 import { gsap } from "gsap";
 import mobileDevicePng from "../assets/images/phone_mockup_bg-landscape-min.webp";
 import tvDevicePng from "../assets/images/tv_mockup_bg-front-min.webp";
 import tabletDevicePng from "../assets/images/tablet_mockup-min.webp";
 import laptopDevicePng from "../assets/images/laptop_mockup_bg-front-min.webp";
+import firestickPng from "../assets/images/firestick.webp";
 
-type DeviceID = "tv" | "mobile" | "tablet" | "laptop";
+type DeviceID = "tv" | "mobile" | "streaming" | "tablet" | "laptop";
 
 interface DeviceSpec {
   id: DeviceID;
@@ -48,6 +55,13 @@ const DEVICE_SPECS: DeviceSpec[] = [
     radius: 20,
   },
   {
+    id: "streaming",
+    label: "Dispositivos",
+    icon: <FaChromecast className="h-5 w-5" />,
+    aspectRatio: "16/9",
+    radius: 12,
+  },
+  {
     id: "tablet",
     label: "Tablet",
     icon: <FaTabletAlt className="h-5 w-5" />,
@@ -68,7 +82,7 @@ const DEVICE_CONTENT: Record<DeviceID, DeviceContent> = {
     title: "Streaming en Pantalla Grande",
     description:
       "Vive tus películas y series favoritas en calidad 4K con sonido envolvente",
-    items: ["Samsung", "LG", "Sony", "Xiaomi TV", "Android TV"],
+    items: ["Samsung", "LG", "Sony", "Philips Tv", "Xiaomi TV", "Android TV"],
     color: "from-blue-600/20 to-blue-400/10",
   },
   mobile: {
@@ -92,6 +106,19 @@ const DEVICE_CONTENT: Record<DeviceID, DeviceContent> = {
     items: ["Windows", "macOS"],
     color: "from-cyan-600/20 to-cyan-400/10",
   },
+  streaming: {
+    title: "Dispositivos de Streaming",
+    description:
+      "Conecta tu dispositivo favorito y disfruta del mejor contenido en tu TV",
+    items: [
+      "Fire TV",
+      "Roku",
+      "Onn Stick",
+      "Xiaomi TV Stick",
+      "Google Chromecast",
+    ],
+    color: "from-indigo-600/20 to-indigo-400/10",
+  },
 };
 
 function parseAspect(aspect: string): number {
@@ -110,6 +137,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
   const framesRef = useRef<Record<DeviceID, HTMLDivElement | null>>({
     tv: null,
     mobile: null,
+    streaming: null,
     tablet: null,
     laptop: null,
   });
@@ -120,21 +148,21 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
       typeof window !== "undefined" && window.matchMedia
         ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
         : false,
-    []
+    [],
   );
   const hoverCapable = useMemo(
     () =>
       typeof window !== "undefined" && window.matchMedia
         ? window.matchMedia("(hover: hover) and (pointer: fine)").matches
         : false,
-    []
+    [],
   );
   const isMobile = useMemo(
     () =>
       typeof window !== "undefined" && window.matchMedia
         ? window.matchMedia("(max-width: 768px)").matches
         : false,
-    []
+    [],
   );
 
   // We now use a CSS-only active state for the tab "pill" to simplify mobile behavior
@@ -144,6 +172,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
   const [loadedImages, setLoadedImages] = useState<Record<DeviceID, boolean>>({
     tv: true, // Always load the default one
     mobile: false,
+    streaming: false,
     tablet: false,
     laptop: false,
   });
@@ -200,7 +229,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
         duration: 0.7,
         ease: "power2.inOut",
       },
-      0
+      0,
     );
 
     // Previous frame exits with 3D rotation and fade
@@ -214,7 +243,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
           duration: 0.45,
           ease: "power2.in",
         },
-        0
+        0,
       );
     }
 
@@ -235,7 +264,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
         duration: 0.65,
         ease: "power2.out",
       },
-      0.2
+      0.2,
     );
 
     // Content fades in with slight upward motion
@@ -248,7 +277,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
           duration: 0.55,
           ease: "power2.out",
         },
-        0.25
+        0.25,
       );
     }
 
@@ -319,7 +348,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
             gsap.fromTo(
               icon,
               { scale: 0.9 },
-              { scale: 1.1, duration: 0.3, ease: "back.out" }
+              { scale: 1.1, duration: 0.3, ease: "back.out" },
             );
           }
         };
@@ -379,14 +408,21 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                   tus dispositivos favoritos
                 </span>
               </h2>
-              <p className="text-sm sm:text-base md:text-lg text-[#fcf3e1]/90 font-medium leading-relaxed max-w-lg">
-                Transmite sin interrupciones en{" "}
-                <strong className="text-[#fcf3e1]">TV</strong>,{" "}
-                <strong className="text-[#fcf3e1]">móvil</strong>,{" "}
-                <strong className="text-[#fcf3e1]">tablet</strong> o{" "}
-                <strong className="text-[#fcf3e1]">laptop</strong>. Tu
-                contenido, en cualquier pantalla.
-              </p>
+              <div className="text-sm sm:text-base md:text-lg text-[#fcf3e1]/90 font-medium leading-relaxed max-w-lg space-y-2">
+                <p>
+                  Transmite sin interrupciones en{" "}
+                  <strong className="text-[#fcf3e1]">TV</strong>,{" "}
+                  <strong className="text-[#fcf3e1]">Móvil</strong>,{" "}
+                  <strong className="text-[#fcf3e1] whitespace-nowrap">
+                    Dispositivos Android
+                  </strong>
+                  , <strong className="text-[#fcf3e1]">Tablet</strong> o{" "}
+                  <strong className="text-[#fcf3e1]">Computador</strong>.
+                </p>
+                <p className="text-[#fcf3e1] font-semibold block pt-1">
+                  Tu contenido, en cualquier pantalla.
+                </p>
+              </div>
             </div>
 
             {/* Device Tabs - Mobile optimized */}
@@ -544,6 +580,17 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                             width="1920"
                             height="1080"
                             className="w-full h-full object-contain drop-shadow-2xl"
+                            draggable={false}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : d.id === "streaming" ? (
+                          <img
+                            src={firestickPng}
+                            alt={`${d.label} frame`}
+                            width="1920"
+                            height="1080"
+                            className="w-[85%] h-[85%] object-contain drop-shadow-2xl"
                             draggable={false}
                             loading="lazy"
                             decoding="async"
