@@ -1,7 +1,7 @@
 import { forwardRef, useCallback } from "react";
 import type React from "react";
 import { gsap } from "gsap";
-import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaWhatsapp, FaInstagram } from "react-icons/fa";
 
 const Footer = forwardRef<HTMLElement>((_, ref) => {
   const onLinkEnter = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -43,10 +43,11 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
             </p>
           </div>
 
-          {/* Social links */}
           <div className="flex items-center gap-5">
             <a
-              href="#"
+              href="https://www.facebook.com/share/17sfeUiuGG/"
+              target="_blank"
+              rel="noopener noreferrer"
               onMouseEnter={onLinkEnter}
               onMouseLeave={onLinkLeave}
               className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition-all duration-200"
@@ -56,7 +57,21 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
             </a>
 
             <a
-              href="#"
+              href="https://www.instagram.com/fullvisiondigital?igsh=MWVpYWR4MWpnMXh4dw=="
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={onLinkEnter}
+              onMouseLeave={onLinkLeave}
+              className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition-all duration-200"
+              aria-label="Instagram"
+            >
+              <FaInstagram className="w-5 h-5" />
+            </a>
+
+            <a
+              href="https://wa.me/13434780258?text=%C2%A1Hola!%20Escribo%20de%20*fullvisiontv.com*%20y%20me%20interesa%20el%20servicio"
+              target="_blank"
+              rel="noopener noreferrer"
               onMouseEnter={onLinkEnter}
               onMouseLeave={onLinkLeave}
               className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition-all duration-200"
