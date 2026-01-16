@@ -253,7 +253,14 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
                 </div>
 
                 {/* CTA Button - Harmonized gradient with gloss effect */}
-                <button className="relative w-full group/btn overflow-hidden rounded-xl font-bold text-white py-2.5 sm:py-3 px-4 sm:px-6 transition-all duration-300 text-sm sm:text-base bg-gradient-to-r from-purple-600 to-indigo-600 hover:brightness-110 hover:scale-105 shadow-[0_4px_25px_-5px_rgba(124,58,237,0.5)] hover:shadow-[0_8px_35px_-5px_rgba(124,58,237,0.7)] ring-1 ring-white/20 ring-inset">
+                <a
+                  href={`https://wa.me/13434780258?text=${encodeURIComponent(
+                    `¡Hola! Escribo de fullvisiontv.com y estoy interesado en adquirir su plan *${p.title.toUpperCase()}* . Indiqueme las formas de pago`,
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative w-full group/btn overflow-hidden rounded-xl font-bold text-white py-2.5 sm:py-3 px-4 sm:px-6 transition-all duration-300 text-sm sm:text-base bg-gradient-to-r from-purple-600 to-indigo-600 hover:brightness-110 hover:scale-105 shadow-[0_4px_25px_-5px_rgba(124,58,237,0.5)] hover:shadow-[0_8px_35px_-5px_rgba(124,58,237,0.7)] ring-1 ring-white/20 ring-inset block text-center"
+                >
                   {/* Shine sweep effect on hover */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
                   {/* Inner highlight for gloss effect */}
@@ -274,7 +281,7 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
                       />
                     </svg>
                   </span>
-                </button>
+                </a>
 
                 {/* Bottom accent line */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#5456d5] to-transparent opacity-60" />
