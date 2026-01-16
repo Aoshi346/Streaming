@@ -48,7 +48,7 @@ const downloadPlatforms: DownloadPlatform[] = [
   {
     id: "android-app",
     label: "APP Android",
-    sublabel: "TV Box / Fire Stick",
+    sublabel: "Dispositivos Android",
     icon: FaGooglePlay,
     link: "https://play.google.com/store/apps/details?id=com.divergentftb.xtreamplayeranddownloader",
   },
