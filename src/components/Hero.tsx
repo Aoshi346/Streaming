@@ -121,7 +121,8 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
           className="absolute top-0 left-0 w-full h-full object-cover object-center -z-20"
           width="1920"
           height="1080"
-          fetchPriority="high"
+          // @ts-expect-error - fetchpriority is valid HTML but missing from React types
+          fetchpriority="high"
           decoding="async"
         />
       </picture>

@@ -54,12 +54,6 @@
   --shadow-strong: 0 12px 36px rgba(0, 0, 0, 0.12);
 }
 
-html,
-body,
-#root {
-  height: 100%;
-}
-
 body {
   @apply antialiased;
   background-color: var(--color-background);
@@ -101,13 +95,15 @@ body {
 
 /* Very subtle grain using multiple radial gradients */
 .film-grain {
-  background-image: radial-gradient(
-      rgba(255, 255, 255, 0.02) 0.5px,
-      transparent 0.6px
-    ),
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.02) 0.5px, transparent 0.6px),
     radial-gradient(rgba(0, 0, 0, 0.03) 0.6px, transparent 0.8px);
-  background-position: 0 0, 10px 14px;
-  background-size: 6px 6px, 8px 8px;
+  background-position:
+    0 0,
+    10px 14px;
+  background-size:
+    6px 6px,
+    8px 8px;
   mix-blend-mode: overlay;
   opacity: 0.06;
 }

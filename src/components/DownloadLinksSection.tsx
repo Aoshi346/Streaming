@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Smartphone, Tablet, Laptop, Download, ArrowRight } from "lucide-react";
+import {
+  FaAndroid,
+  FaApple,
+  FaWindows,
+  FaGooglePlay,
+  FaArrowRight,
+} from "react-icons/fa";
+import { FaDownload } from "react-icons/fa6";
 
 interface DownloadPlatform {
   id: string;
@@ -11,25 +18,39 @@ interface DownloadPlatform {
 
 const downloadPlatforms: DownloadPlatform[] = [
   {
-    id: "mobile",
-    label: "App Móvil",
-    sublabel: "iPhone • Android",
-    icon: Smartphone,
-    link: "https://fullvision.com/download/mobile",
-  },
-  {
-    id: "tablet",
-    label: "Tablets",
-    sublabel: "iPad • Android Tabs",
-    icon: Tablet,
-    link: "https://fullvision.com/download/tablet",
+    id: "official-android",
+    label: "Aplicación Oficial",
+    sublabel: "Móvil / Tablet Android",
+    icon: FaAndroid,
+    link: "https://aftv.news/513053",
   },
   {
     id: "windows",
-    label: "Desktop",
-    sublabel: "Windows",
-    icon: Laptop,
-    link: "https://fullvision.com/download/windows",
+    label: "Computador Windows",
+    sublabel: "PC / Laptop",
+    icon: FaWindows,
+    link: "https://n7.isasys.net/moontools_v3.exe",
+  },
+  {
+    id: "mac",
+    label: "Mac",
+    sublabel: "Macbook / iMac",
+    icon: FaApple,
+    link: "#",
+  },
+  {
+    id: "apple",
+    label: "iOS / Apple TV",
+    sublabel: "iPad / iPhone / Apple TV",
+    icon: FaApple,
+    link: "https://apps.apple.com/us/app/smarters-player-lite/id1628995509?l=es-MX",
+  },
+  {
+    id: "android-app",
+    label: "APP Android",
+    sublabel: "TV Box / Fire Stick",
+    icon: FaGooglePlay,
+    link: "https://play.google.com/store/apps/details?id=com.divergentftb.xtreamplayeranddownloader",
   },
 ];
 
@@ -45,7 +66,7 @@ const DownloadLinksSection: React.FC = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (sectionRef.current) {
@@ -137,7 +158,7 @@ const DownloadLinksSection: React.FC = () => {
         <div className="absolute -bottom-20 left-1/2 w-96 h-96 bg-blue-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-4000" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20 max-w-6xl pt-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20 max-w-7xl pt-8">
         {/* Title Section - Reduced Spacing */}
         <div
           className={`text-center mb-10 sm:mb-14 transition-all duration-1000 transform ${
@@ -145,7 +166,7 @@ const DownloadLinksSection: React.FC = () => {
           }`}
         >
           <div className="inline-flex items-center justify-center px-4 py-1.5 mb-5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-purple-500/20">
-            <Download className="w-3.5 h-3.5 mr-2" aria-hidden="true" />
+            <FaDownload className="w-3.5 h-3.5 mr-2" aria-hidden="true" />
             Disponible en todas las plataformas
           </div>
 
@@ -164,8 +185,8 @@ const DownloadLinksSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {/* Improved Buttons Grid - Flex wrap for 5 items */}
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 max-w-6xl mx-auto">
           {downloadPlatforms.map((platform, index) => {
             const Icon = platform.icon;
             const isHovered = hoveredCard === platform.id;
@@ -178,64 +199,43 @@ const DownloadLinksSection: React.FC = () => {
                 onMouseLeave={() => setHoveredCard(null)}
                 onFocus={() => setHoveredCard(platform.id)}
                 onBlur={() => setHoveredCard(null)}
-                className={`group relative flex flex-col items-center gap-1.5 px-7 py-7 rounded-2xl border-[3px] border-[#4a5fc9] bg-[linear-gradient(135deg,#131c67_0%,#1d2570_35%,#331165_70%,#4d0c68_100%)] backdrop-blur-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] transition-all duration-300 hover:-translate-y-1.5 hover:scale-105 hover:border-[#6b7fd9] hover:shadow-[0_20px_50px_-10px_rgba(100,150,255,0.3)] min-h-[320px] ${
+                className={`group relative flex flex-col items-center justify-center gap-3 px-6 py-8 rounded-2xl border-[2px] border-[#4a5fc9] bg-[linear-gradient(135deg,#131c67_0%,#1d2570_35%,#331165_70%,#4d0c68_100%)] backdrop-blur-lg shadow-lg transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:border-[#6b7fd9] hover:shadow-[0_15px_30px_-5px_rgba(100,150,255,0.4)] min-h-[180px] w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(20%-20px)] basis-[min(100%,300px)] grow-0 ${
                   isVisible
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-12"
                 }`}
                 style={{
-                  transitionDelay: isVisible ? `${index * 150}ms` : "0ms",
+                  transitionDelay: isVisible ? `${index * 100}ms` : "0ms",
                 }}
-                aria-label={`Descargar para ${platform.label} - ${platform.sublabel}`}
               >
-                {/* Stats Card Effect 1: Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[1.1rem]" />
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[0.9rem]" />
 
-                {/* Stats Card Effect 2: Glow */}
+                {/* Icon Container */}
+                <div className="relative z-10 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#4a5fc9]/40 via-[#6b7fd9]/30 to-[#4a5fc9]/20 text-[#fcf3e1] shadow-md group-hover:shadow-[0_0_15px_rgba(107,127,217,0.5)] transition-all duration-300">
+                  <Icon className="w-7 h-7" />
+                </div>
+
+                {/* Text Content */}
+                <div className="text-center z-10 space-y-1">
+                  <h3 className="text-xl font-bold text-[#fcf3e1] leading-tight group-hover:text-white transition-colors">
+                    {platform.label}
+                  </h3>
+                  <p className="text-[#fcf3e1]/60 text-xs font-semibold uppercase tracking-wider">
+                    {platform.sublabel}
+                  </p>
+                </div>
+
+                {/* Arrow */}
                 <div
-                  className="absolute -inset-0.5 rounded-2xl bg-gradient-to-br from-purple-500/20 via-blue-500/15 to-purple-500/20 opacity-0 group-hover:opacity-40 blur-lg transition-opacity duration-300"
-                  aria-hidden
-                />
-
-                {/* Card Sheen */}
-                <div className="card-sheen z-30 opacity-30" aria-hidden>
-                  <div className="sheen group-hover:animate-shine" />
+                  className={`absolute bottom-4 right-4 z-10 text-[#fcf3e1]/40 transition-all duration-300 transform ${
+                    isHovered
+                      ? "translate-x-0 opacity-100 text-[#fcf3e1]"
+                      : "translate-x-2 opacity-0"
+                  }`}
+                >
+                  <FaArrowRight className="w-5 h-5" />
                 </div>
-
-                {/* Icon Container - Matching Stats Style */}
-                <div className="relative z-10 flex items-center justify-center w-20 h-20 mb-4 rounded-xl bg-gradient-to-br from-[#4a5fc9]/40 via-[#6b7fd9]/30 to-[#4a5fc9]/20 text-[#fcf3e1] shadow-lg ring-2 ring-[#6b7fd9]/60 group-hover:ring-[#8fa0e9]/80 group-hover:shadow-[#4a5fc9]/30 transition-all duration-300">
-                  <Icon
-                    className="w-10 h-10 text-[#fcf3e1] drop-shadow-lg"
-                    aria-hidden="true"
-                  />
-                </div>
-
-                {/* Typography */}
-                <h3 className="text-2xl font-bold text-[#fcf3e1] mb-1 tracking-tight transition-colors">
-                  {platform.label}
-                </h3>
-
-                <p className="text-[#fcf3e1]/70 text-sm font-medium mb-6 text-center uppercase tracking-widest">
-                  {platform.sublabel}
-                </p>
-
-                {/* Action Button - Reverted to Cream/White */}
-                <div className="mt-auto w-full">
-                  <div
-                    className={`flex items-center justify-center gap-2 w-full h-12 px-6 rounded-xl font-bold text-[#131c67] bg-[#fcf3e1] shadow-lg transition-all duration-300 transform group-hover:shadow-[0_0_20px_rgba(252,243,225,0.4)] group-hover:scale-[1.02] group-active:scale-95 ring-2 ring-transparent group-hover:ring-[#fcf3e1]/50`}
-                  >
-                    <span>Descargar</span>
-                    <ArrowRight
-                      className={`w-4 h-4 transition-transform duration-300 ${
-                        isHovered ? "translate-x-1" : ""
-                      }`}
-                      aria-hidden="true"
-                    />
-                  </div>
-                </div>
-
-                {/* Bottom accent line */}
-                <div className="absolute bottom-3 left-1/2 h-0.5 w-24 -translate-x-1/2 rounded-full bg-gradient-to-r from-transparent via-purple-400/60 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
             );
           })}

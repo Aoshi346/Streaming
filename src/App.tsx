@@ -8,6 +8,7 @@ import WhatsAppBubble from "./components/WhatsAppBubble";
 import { ThemeProvider } from "./theme";
 import SectionTitleAnimator from "./components/SectionTitleAnimator";
 import Footer from "./components/Footer";
+import DownloadLinksSection from "./components/DownloadLinksSection";
 
 // Helper to lazy load components only when they are near viewport
 const LazySection = React.forwardRef<
@@ -19,7 +20,7 @@ const LazySection = React.forwardRef<
   }
 >(({ importFn, fallback = <div className="h-96 w-full" />, ...props }, ref) => {
   const [Component, setComponent] = useState<React.ComponentType<any> | null>(
-    null
+    null,
   );
   const internalRef = useRef<HTMLDivElement | null>(null);
 
@@ -28,12 +29,12 @@ const LazySection = React.forwardRef<
       (entries) => {
         if (entries[0].isIntersecting) {
           importFn().then((mod: { default: React.ComponentType<any> }) =>
-            setComponent(() => mod.default)
+            setComponent(() => mod.default),
           );
           observer.disconnect();
         }
       },
-      { rootMargin: "200px" } // Load 200px before visual hit
+      { rootMargin: "200px" }, // Load 200px before visual hit
     );
 
     if (internalRef.current) observer.observe(internalRef.current);
@@ -64,10 +65,8 @@ const LazySection = React.forwardRef<
   );
 });
 
-// Components declared efficiently
 const DevicesImport = () => import("./components/Devices");
 const PricingImport = () => import("./components/PricingCTA");
-const DownloadImport = () => import("./components/DownloadLinksSection");
 const FeaturesImport = () => import("./components/FeaturesSection");
 const FAQImport = () => import("./components/ServiceInfo");
 
@@ -106,8 +105,8 @@ export default function App() {
               stagger: isMobile ? 0.05 : 0.1,
               ease: "power2.out",
               scrollTrigger: { trigger: headerRef.current, start: "top 80%" },
-            }
-          )
+            },
+          ),
         );
       }
     }
@@ -127,8 +126,8 @@ export default function App() {
               stagger: 0.15,
               ease: "power2.out",
               scrollTrigger: { trigger: heroRef.current, start: "top 80%" },
-            }
-          )
+            },
+          ),
         );
       }
     }
@@ -152,8 +151,8 @@ export default function App() {
               stagger: 0.2,
               ease: "power2.out",
               scrollTrigger: { trigger: pricingRef.current, start: "top 80%" },
-            }
-          )
+            },
+          ),
         );
       }
     }
@@ -172,8 +171,8 @@ export default function App() {
               stagger: 0.1,
               ease: "power2.out",
               scrollTrigger: { trigger: faqRef.current, start: "top 80%" },
-            }
-          )
+            },
+          ),
         );
       }
     }
@@ -192,8 +191,8 @@ export default function App() {
               stagger: 0.1,
               ease: "power2.out",
               scrollTrigger: { trigger: footerRef.current, start: "top 90%" },
-            }
-          )
+            },
+          ),
         );
       }
     }
@@ -224,10 +223,7 @@ export default function App() {
             ref={pricingRef}
           />
 
-          <LazySection
-            importFn={DownloadImport}
-            fallback={<div className="h-[400px]" />}
-          />
+          <DownloadLinksSection />
 
           <LazySection
             importFn={FeaturesImport}
