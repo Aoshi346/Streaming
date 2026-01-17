@@ -334,21 +334,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               </div>
 
               {/* Trust indicators */}
-              <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap text-xs sm:text-sm text-[#fcf3e1] mt-2">
-                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
-                  <svg
-                    className="w-3.5 h-3.5 text-[#822e6a]"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Tenemos Demo GRATIS
-                </span>
+              <div className="flex flex-col items-center justify-center gap-2 text-xs sm:text-sm text-[#fcf3e1] mt-2">
                 <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
                   <svg
                     className="w-3.5 h-3.5 text-[#822e6a]"
@@ -362,6 +348,20 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                     />
                   </svg>
                   HD & 4K disponible
+                </span>
+                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
+                  <svg
+                    className="w-3.5 h-3.5 text-[#822e6a]"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Tenemos Demo GRATIS
                 </span>
               </div>
             </div>
