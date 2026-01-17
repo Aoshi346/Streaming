@@ -70,7 +70,7 @@ const DEVICE_SPECS: DeviceSpec[] = [
   },
   {
     id: "laptop",
-    label: "Laptop",
+    label: "Computador",
     icon: <FaLaptop className="h-5 w-5" />,
     aspectRatio: "16/9",
     radius: 12,
@@ -391,9 +391,9 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="grid gap-8 sm:gap-12 lg:gap-16 lg:grid-cols-2 items-center">
+        <div className="flex flex-col xl:grid xl:grid-cols-2 gap-8 sm:gap-10 xl:gap-16 items-start xl:items-center">
           {/* Left: Tabs and Info */}
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-6 sm:space-y-8 w-full">
             {/* Header with badge */}
             <div className="space-y-3 sm:space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#fcf3e1]/20 border border-[#fcf3e1]/30 backdrop-blur-sm">
@@ -425,10 +425,10 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
               </div>
             </div>
 
-            {/* Device Tabs - Mobile optimized */}
+            {/* Device Tabs - Fully responsive */}
             <div
               ref={tabsRef}
-              className="relative inline-flex items-center gap-1.5 sm:gap-2 rounded-2xl sm:rounded-full border-2 border-[#fcf3e1]/30 bg-[#fcf3e1]/15 p-1 sm:p-1.5 backdrop-blur-lg overflow-x-auto touch-pan-x flex-nowrap whitespace-nowrap shadow-lg scrollbar-hide max-w-full"
+              className="relative inline-flex items-center gap-1 sm:gap-1.5 lg:gap-2 rounded-2xl sm:rounded-full border-2 border-[#fcf3e1]/30 bg-[#fcf3e1]/15 p-1 sm:p-1.5 backdrop-blur-lg flex-wrap sm:flex-nowrap shadow-lg"
             >
               {DEVICE_SPECS.map((d) => (
                 <button
@@ -439,13 +439,13 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                     prevIDRef.current = activeDeviceID;
                     setActiveDeviceID(d.id);
                   }}
-                  className={`relative z-10 flex items-center gap-1.5 sm:gap-2.5 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-full text-xs sm:text-sm font-bold transition-all duration-300 shrink-0 ${
+                  className={`relative z-10 flex items-center gap-1 sm:gap-1.5 lg:gap-2.5 px-2 py-1.5 sm:px-3 sm:py-2 lg:px-4 lg:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs lg:text-sm font-bold transition-all duration-300 ${
                     activeDeviceID === d.id
                       ? "text-[#1f1f66] bg-[#fcf3e1] border-2 border-[#fcf3e1] shadow-[0_0_15px_rgba(249,231,195,0.6)] scale-105"
                       : "text-[#fcf3e1]/90 hover:text-[#fcf3e1] hover:bg-[#fcf3e1]/20 active:scale-95"
                   }`}
                 >
-                  <span className="icon inline-flex text-base sm:text-lg">
+                  <span className="icon inline-flex text-sm sm:text-base lg:text-lg">
                     {d.icon}
                   </span>
                   <span className="hidden sm:inline">{d.label}</span>
@@ -485,11 +485,11 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
             </div>
           </div>
 
-          {/* Right: Device Preview */}
-          <div className="flex justify-center lg:justify-end">
+          {/* Right: Device Preview - Hidden on very small screens, shown on sm+ */}
+          <div className="hidden sm:flex justify-center xl:justify-end w-full">
             <div
               ref={previewOuterRef}
-              className="relative w-full max-w-[90vw] sm:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] overflow-visible perspective-1000"
+              className="relative w-full max-w-[400px] sm:max-w-[450px] md:max-w-[500px] lg:max-w-[550px] xl:max-w-[650px] overflow-visible perspective-1000"
               style={{ perspective: "1200px" }}
             >
               {/* Animated glow background */}
