@@ -36,7 +36,7 @@ const downloadPlatforms: DownloadPlatform[] = [
     label: "Mac",
     sublabel: "Macbook / iMac",
     icon: FaApple,
-    link: "#",
+    link: "https://n7.isasys.net/smarterspro.dmg",
   },
   {
     id: "apple",
