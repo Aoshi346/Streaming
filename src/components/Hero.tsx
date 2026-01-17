@@ -141,7 +141,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
           <div className="max-w-7xl text-center mx-auto space-y-6 sm:space-y-8">
             <h1
               ref={titleRef}
-              aria-label="Canales en vivo, películas y series disponibles"
+              aria-label="TV Online, Películas y series disponibles"
               className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]"
               style={{
                 textShadow:
@@ -149,7 +149,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               }}
             >
               {(() => {
-                const title = "Canales en vivo, películas y series disponibles";
+                const title = "TV Online, Películas y series disponibles";
                 const words = title.split(" ");
                 return words.map((word, wi) => (
                   <span
@@ -185,7 +185,6 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               }}
             >
               Disfruta de contenido 4K, sin anuncios, en todos tus dispositivos.
-              Cancela en cualquier momento.
             </p>
 
             {/* CTA Buttons with enhanced styling */}
