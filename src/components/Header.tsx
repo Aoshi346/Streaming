@@ -21,7 +21,7 @@ const links = [
     icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
   },
   {
-    href: "#faq",
+    href: "#service-info",
     label: "Información",
     icon: "M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
   },
@@ -42,7 +42,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
         (ref as React.MutableRefObject<HTMLElement | null>).current = node;
       }
     },
-    [ref]
+    [ref],
   );
 
   // Close the menu on resize / orientation changes
@@ -116,7 +116,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
         smoothScrollTo(href, { offset: getScrollOffset(), duration: 0.65 });
       }
     },
-    [getScrollOffset]
+    [getScrollOffset],
   );
 
   const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), []);
@@ -146,7 +146,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
         .fromTo(
           menuEl,
           { autoAlpha: 0, y: -8, scale: 0.98 },
-          { autoAlpha: 1, y: 0, scale: 1, duration: 0.32, ease: "power2.out" }
+          { autoAlpha: 1, y: 0, scale: 1, duration: 0.32, ease: "power2.out" },
         );
     } else {
       gsap
@@ -328,7 +328,10 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
               <span className="font-extrabold">FULL</span>
               <span className="font-normal">VISIONTV</span>
             </span>
-            <span className="text-sm text-[#5456d5]/60"> © 2025</span>
+            <span className="text-sm text-[#5456d5]/60">
+              {" "}
+              © {new Date().getFullYear()}
+            </span>
           </div>
         </div>
       </div>
