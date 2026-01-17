@@ -45,7 +45,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
 
           <div className="flex items-center gap-5">
             <a
-              href="https://www.facebook.com/share/17sfeUiuGG/"
+              href="https://m.me/61586095327647"
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={onLinkEnter}

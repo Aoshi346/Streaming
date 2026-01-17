@@ -14,7 +14,7 @@ type Props = {
 const WhatsAppBubble: React.FC<Props> = ({
   phone = "13434780258",
   message = "¡Hola! Escribo de *fullvisiontv.com* y me interesa el servicio",
-  facebookUrl = "https://www.facebook.com/share/17sfeUiuGG/",
+  facebookUrl = "https://m.me/61586095327647",
 }) => {
   const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
   const [open, setOpen] = useState(false);
