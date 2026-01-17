@@ -52,7 +52,7 @@ const PLANS = [
     accent:
       "bg-brand/8 border-brand/40 shadow-theme-strong ring-2 ring-brand-light/40",
     cta: "COMPRAR AHORA",
-    badge: "POPULAR",
+    badge: "+POPULAR",
     perks: [
       "3 Meses de Servicio",
       "X3 Pantallas FHD",
