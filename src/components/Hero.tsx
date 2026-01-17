@@ -109,7 +109,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
     <section
       ref={sectionRef}
       id="top"
-      className="relative isolate overflow-visible min-h-[70vh] sm:min-h-[75vh] lg:min-h-[85vh] flex items-center z-20"
+      className="relative isolate overflow-visible min-h-[70vh] sm:min-h-[75vh] lg:min-h-[75vh] flex items-center z-20"
     >
       {/* Background Image - Responsive */}
       <picture>
@@ -138,18 +138,18 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
 
       <div className="container-wrapper relative z-10 w-full">
         <div className="pt-12 pb-40 sm:pt-16 sm:pb-56 md:pt-20 md:pb-64 lg:pt-24 lg:pb-72 px-4 sm:px-6">
-          <div className="max-w-4xl text-center mx-auto space-y-6 sm:space-y-8">
+          <div className="max-w-7xl text-center mx-auto space-y-6 sm:space-y-8">
             <h1
               ref={titleRef}
-              aria-label="Películas, series y más ilimitadas"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]"
+              aria-label="Canales en vivo, películas y series disponibles"
+              className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]"
               style={{
                 textShadow:
                   "0 2px 10px rgba(0,0,0,0.8), 0 0 20px rgba(84, 86, 213, 0.4)",
               }}
             >
               {(() => {
-                const title = "Películas, series y más ilimitadas";
+                const title = "Canales en vivo, películas y series disponibles";
                 const words = title.split(" ");
                 return words.map((word, wi) => (
                   <span
@@ -347,7 +347,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  Sin compromisos
+                  Tenemos Demo GRATIS
                 </span>
                 <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
                   <svg
@@ -362,20 +362,6 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                     />
                   </svg>
                   HD & 4K disponible
-                </span>
-                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
-                  <svg
-                    className="w-3.5 h-3.5 text-[#822e6a]"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Cancela cuando quieras
                 </span>
               </div>
             </div>
