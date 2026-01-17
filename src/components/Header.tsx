@@ -48,7 +48,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
   // Close the menu on resize / orientation changes
   useEffect(() => {
     const handleResize = () => {
-      if (window.matchMedia("(min-width: 768px)").matches) {
+      if (window.matchMedia("(min-width: 1024px)").matches) {
         setMenuOpen(false);
       }
     };
@@ -206,7 +206,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
         <nav
           role="navigation"
           aria-label="Principal"
-          className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-base font-medium text-text-muted"
+          className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-6 xl:gap-8 text-sm lg:text-base font-medium text-text-muted"
         >
           {links.map((link) => (
             <a
@@ -227,7 +227,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="flex items-center md:hidden">
+        <div className="flex items-center lg:hidden">
           <button
             type="button"
             onClick={toggleMenu}
@@ -269,7 +269,7 @@ const Header = forwardRef<HTMLElement>((_, ref) => {
       <div
         ref={mobileMenuRef}
         id="mobile-menu"
-        className="md:hidden absolute z-20 left-0 right-0 top-full px-4 pb-4 origin-top will-change-transform"
+        className="lg:hidden absolute z-20 left-0 right-0 top-full px-4 pb-4 origin-top will-change-transform"
         aria-hidden={!menuOpen}
       >
         <div className="mx-auto max-w-3xl rounded-2xl border-2 border-[#5456d5]/40 bg-white shadow-[0_10px_40px_rgba(31,31,102,0.35)] overflow-hidden">
