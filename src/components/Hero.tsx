@@ -130,10 +130,10 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
       {/* Palette-driven gradient overlay */}
       <div className="absolute inset-0 bg-hero-gradient opacity-90 -z-10" />
 
-      {/* Animated gradient orbs for depth - reduced blur on mobile for performance */}
+      {/* Animated gradient orbs for depth - reduced opacity on mobile for better text visibility */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/4 -left-20 w-64 h-64 sm:w-96 sm:h-96 bg-brand-light/30 rounded-full blur-xl sm:blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-accent/30 rounded-full blur-xl sm:blur-3xl animate-pulse delay-700" />
+        <div className="absolute top-1/4 -left-20 w-64 h-64 sm:w-96 sm:h-96 bg-brand-light/10 sm:bg-brand-light/30 rounded-full blur-xl sm:blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 -right-20 w-64 h-64 sm:w-96 sm:h-96 bg-accent/10 sm:bg-accent/30 rounded-full blur-xl sm:blur-3xl animate-pulse delay-700" />
       </div>
 
       <div className="container-wrapper relative z-10 w-full">
@@ -188,104 +188,91 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
             </p>
 
             {/* CTA Buttons with enhanced styling */}
-            <div className="mt-6 sm:mt-8 flex flex-col items-center gap-3 px-4">
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 w-full sm:w-auto">
-                <a
-                  href="#pricing"
-                  className="group relative w-full sm:w-auto overflow-hidden rounded-lg sm:rounded-xl px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-base font-black text-[#fcf3e1] shadow-[0_0_20px_rgba(130,46,106,0.4),0_0_40px_rgba(84,86,213,0.2)] sm:shadow-[0_0_30px_rgba(130,46,106,0.4),0_0_60px_rgba(84,86,213,0.2)] transition-all duration-300 hover:scale-105 sm:hover:scale-110 hover:shadow-[0_0_30px_rgba(130,46,106,0.6),0_0_60px_rgba(84,86,213,0.4)] ring-2 ring-[#fcf3e1]/30 hover:ring-[#fcf3e1]/60"
-                  onClick={handleSmoothAnchor("#pricing")}
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #822e6a 0%, #5456d5 50%, #1f1f66 100%)",
-                  }}
-                >
-                  {/* Animated shimmer effect */}
-                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-[#fcf3e1]/20 to-transparent" />
+            <div className="mt-6 sm:mt-8 flex flex-col items-center gap-3 px-2 sm:px-4">
+              {/* All buttons in unified container */}
+              <div className="w-full max-w-xl space-y-3">
+                {/* Top row - Primary CTA buttons */}
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                  <a
+                    href="#pricing"
+                    className="group relative overflow-hidden rounded-lg sm:rounded-xl px-2 py-3 sm:px-6 sm:py-4 text-xs sm:text-base font-black text-[#FFF7C2] sm:text-[#fff9ee] shadow-lg backdrop-blur-md border border-[#822e6a]/30 bg-[#5456d5]/20 sm:bg-[#5456d5]/10 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 sm:hover:bg-[#5456d5]/20 hover:shadow-[0_0_30px_rgba(130,46,106,0.3),0_0_60px_rgba(84,86,213,0.2)]"
+                    onClick={handleSmoothAnchor("#pricing")}
+                  >
+                    {/* Glass sheen */}
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-                  {/* Glow pulse background */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-[#822e6a]/30 via-transparent to-[#5456d5]/20" />
+                    <span className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-center leading-tight">
+                      <span className="tracking-wider break-words">
+                        ✨ SUSCRÍBETE AHORA
+                      </span>
+                      <svg
+                        className="w-3.5 h-3.5 sm:w-5 sm:h-5 transform group-hover:translate-x-2 transition-transform duration-300 hidden sm:block"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2.5}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13 7l5 5m0 0l-5 5m5-5H6"
+                        />
+                      </svg>
+                    </span>
+                  </a>
 
-                  {/* Pulsing border glow */}
-                  <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-[#822e6a] via-[#5456d5] to-[#1f1f66] opacity-60 blur-sm animate-pulse -z-10" />
+                  <a
+                    href="https://aftv.news/513053"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative overflow-hidden rounded-lg sm:rounded-xl px-2 py-3 sm:px-6 sm:py-4 text-xs sm:text-base font-black text-[#FFF7C2] sm:text-[#fff9ee] shadow-lg backdrop-blur-md border border-[#822e6a]/30 bg-[#5456d5]/20 sm:bg-[#5456d5]/10 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 sm:hover:bg-[#5456d5]/20 hover:shadow-[0_0_30px_rgba(130,46,106,0.3),0_0_60px_rgba(84,86,213,0.2)]"
+                  >
+                    {/* Glass sheen */}
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-                  <span className="relative z-10 flex items-center justify-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
-                    <span className="tracking-wider">✨ SUSCRÍBETE AHORA</span>
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-2 transition-transform duration-300"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13 7l5 5m0 0l-5 5m5-5H6"
-                      />
-                    </svg>
-                  </span>
-                </a>
+                    <span className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-center leading-tight">
+                      <span className="tracking-wider break-words">
+                        📱 APP OFICIAL
+                      </span>
+                      <svg
+                        className="w-3.5 h-3.5 sm:w-5 sm:h-5 transform group-hover:translate-x-2 transition-transform duration-300 hidden sm:block"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2.5}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13 7l5 5m0 0l-5 5m5-5H6"
+                        />
+                      </svg>
+                    </span>
+                  </a>
+                </div>
 
-                <a
-                  href="https://aftv.news/513053"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative w-full sm:w-auto overflow-hidden rounded-lg sm:rounded-xl px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-base font-black text-[#fcf3e1] shadow-[0_0_20px_rgba(130,46,106,0.4),0_0_40px_rgba(84,86,213,0.2)] sm:shadow-[0_0_30px_rgba(130,46,106,0.4),0_0_60px_rgba(84,86,213,0.2)] transition-all duration-300 hover:scale-105 sm:hover:scale-110 hover:shadow-[0_0_30px_rgba(130,46,106,0.6),0_0_60px_rgba(84,86,213,0.4)] ring-2 ring-[#fcf3e1]/30 hover:ring-[#fcf3e1]/60"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #5456d5 0%, #822e6a 50%, #1f1f66 100%)",
-                  }}
-                >
-                  {/* Animated shimmer effect */}
-                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-[#fcf3e1]/20 to-transparent" />
-
-                  {/* Glow pulse background */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-[#822e6a]/30 via-transparent to-[#5456d5]/20" />
-
-                  {/* Pulsing border glow */}
-                  <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-[#5456d5] via-[#822e6a] to-[#1f1f66] opacity-60 blur-sm animate-pulse -z-10" />
-
-                  <span className="relative z-10 flex items-center justify-center gap-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
-                    <span className="tracking-wider">📱 APP OFICIAL</span>
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-2 transition-transform duration-300"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13 7l5 5m0 0l-5 5m5-5H6"
-                      />
-                    </svg>
-                  </span>
-                </a>
-              </div>
-
-              <div className="w-full max-w-xl space-y-2">
-                <div className="grid gap-2 sm:grid-cols-2">
+                {/* Bottom row - Secondary info buttons */}
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   <a
                     href="#devices"
-                    className="group relative flex items-center justify-between rounded-lg border-2 border-white/40 bg-[#1f1f66] px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-semibold text-[#fcf3e1] shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-white/60 hover:bg-[#5456d5] hover:shadow-[0_6px_20px_rgba(84,86,213,0.4)]"
+                    className="group relative flex items-center justify-between rounded-lg border border-[#822e6a]/30 bg-[#5456d5]/20 sm:bg-[#5456d5]/10 backdrop-blur-md px-2 py-2 sm:px-4 sm:py-3 text-xs font-semibold text-[#FFF7C2] sm:text-[#fff9ee] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 sm:hover:bg-[#5456d5]/20 hover:shadow-[0_4px_20px_rgba(84,86,213,0.2)]"
                     onClick={handleSmoothAnchor("#devices")}
                   >
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#5456d5]/30 text-[#fcf3e1] text-sm">
+                    <div className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
+                      <span className="inline-flex h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 items-center justify-center rounded-md bg-[#5456d5]/20 text-[#fff9ee] text-sm backdrop-blur-md border border-white/10">
                         <FaLaptop aria-hidden />
                       </span>
-                      <div className="flex flex-col text-left">
-                        <span className="text-sm">
+                      <div className="flex flex-col text-left min-w-0 flex-1 sm:flex-initial">
+                        <span className="text-[10px] sm:text-sm leading-tight break-words sm:truncate">
                           Dispositivos Compatibles
                         </span>
-                        <span className="text-xs text-white/70">
+                        <span className="text-[9px] sm:text-xs text-[#fff9ee]/80 hidden sm:block truncate">
                           TV, móvil, tablet y más
                         </span>
                       </div>
                     </div>
                     <svg
-                      className="h-5 w-5 text-[#fcf3e1]/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#fcf3e1]"
+                      className="h-5 w-5 flex-shrink-0 text-[#fff9ee]/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#fff9ee] hidden sm:block"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -301,22 +288,24 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
 
                   <a
                     href="#downloads"
-                    className="group relative flex items-center justify-between rounded-lg border-2 border-white/40 bg-[#1f1f66] px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-semibold text-[#fcf3e1] shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-white/60 hover:bg-[#822e6a] hover:shadow-[0_6px_20px_rgba(130,46,106,0.4)]"
+                    className="group relative flex items-center justify-between rounded-lg border border-[#822e6a]/30 bg-[#5456d5]/20 sm:bg-[#5456d5]/10 backdrop-blur-md px-2 py-2 sm:px-4 sm:py-3 text-xs font-semibold text-[#FFF7C2] sm:text-[#fff9ee] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 sm:hover:bg-[#5456d5]/20 hover:shadow-[0_4px_20px_rgba(130,46,106,0.2)]"
                     onClick={handleSmoothAnchor("#downloads")}
                   >
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#822e6a]/30 text-[#fcf3e1] text-sm">
+                    <div className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
+                      <span className="inline-flex h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 items-center justify-center rounded-md bg-[#822e6a]/20 text-[#fff9ee] text-sm backdrop-blur-md border border-white/10">
                         <FaDownload aria-hidden />
                       </span>
-                      <div className="flex flex-col text-left">
-                        <span className="text-sm">Descarga la app</span>
-                        <span className="text-xs text-white/70">
+                      <div className="flex flex-col text-left min-w-0 flex-1 sm:flex-initial">
+                        <span className="text-[10px] sm:text-sm leading-tight break-words sm:truncate">
+                          Descarga la app
+                        </span>
+                        <span className="text-[9px] sm:text-xs text-[#fff9ee]/80 hidden sm:block truncate">
                           Android, iOS, Windows, Tablets
                         </span>
                       </div>
                     </div>
                     <svg
-                      className="h-5 w-5 text-[#fcf3e1]/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#fcf3e1]"
+                      className="h-5 w-5 flex-shrink-0 text-[#fff9ee]/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#fff9ee] hidden sm:block"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
