@@ -364,7 +364,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
           className="flex gap-8 sm:gap-12 md:gap-16"
           style={{
             width: "max-content",
-            animation: "scroll-left 40s linear infinite",
+            animation: "scroll-left 28s linear infinite",
           }}
         >
           {/* 4 sets of posters for seamless full-width coverage */}
@@ -372,7 +372,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
             moviePosters.map((poster, index) => (
               <div
                 key={`poster-${setNum}-${index}`}
-                className="relative flex-shrink-0 w-16 h-24 sm:w-20 sm:h-28 md:w-24 md:h-36 rounded-md sm:rounded-lg overflow-hidden shadow-[0_0_15px_rgba(130,46,106,0.4)] ring-1 ring-[#fcf3e1]/20 hover:ring-[#fcf3e1]/50 hover:scale-105 transition-all duration-300"
+                className="relative flex-shrink-0 w-24 h-32 sm:w-28 sm:h-36 md:w-32 md:h-44 rounded-md sm:rounded-lg overflow-hidden shadow-[0_0_15px_rgba(130,46,106,0.4)] ring-1 ring-[#fcf3e1]/20 hover:ring-[#fcf3e1]/50 hover:scale-105 transition-all duration-300"
               >
                 <img
                   src={poster}
