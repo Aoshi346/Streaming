@@ -322,10 +322,10 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
               </div>
 
               {/* Trust indicators */}
-              <div className="flex flex-col items-center justify-center gap-2 text-xs sm:text-sm text-[#fcf3e1] mt-2">
-                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
+              <div className="flex flex-col items-center justify-center gap-2.5 text-sm sm:text-base text-[#fcf3e1] mt-3">
+                <span className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#1f1f66]/60 sm:bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
                   <svg
-                    className="w-3.5 h-3.5 text-[#822e6a]"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-[#822e6a]"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -337,9 +337,9 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                   </svg>
                   HD & 4K disponible
                 </span>
-                <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
+                <span className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#1f1f66]/60 sm:bg-[#1f1f66]/40 backdrop-blur-sm border border-[#5456d5]/30">
                   <svg
-                    className="w-3.5 h-3.5 text-[#822e6a]"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-[#822e6a]"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
