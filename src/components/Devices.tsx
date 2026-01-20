@@ -557,7 +557,7 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
                             alt={`${d.label} frame`}
                             width="1920"
                             height="1080"
-                            className="w-full h-full object-contain drop-shadow-2xl scale-150"
+                            className="w-full h-full object-contain drop-shadow-2xl scale-125"
                             draggable={false}
                             loading="lazy"
                             decoding="async"
