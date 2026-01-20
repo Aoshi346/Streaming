@@ -485,8 +485,8 @@ const Devices = forwardRef<HTMLElement>((_, ref) => {
             </div>
           </div>
 
-          {/* Right: Device Preview - Hidden on very small screens, shown on sm+ */}
-          <div className="hidden sm:flex justify-center xl:justify-end w-full">
+          {/* Right: Device Preview - Visible on all screens */}
+          <div className="flex justify-center xl:justify-end w-full mt-8 sm:mt-0">
             <div
               ref={previewOuterRef}
               className="relative w-full max-w-[400px] sm:max-w-[450px] md:max-w-[500px] lg:max-w-[550px] xl:max-w-[650px] overflow-visible perspective-1000"
