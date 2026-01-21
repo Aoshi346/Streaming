@@ -195,13 +195,13 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                 <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   <a
                     href="#pricing"
-                    className="group relative overflow-hidden rounded-lg sm:rounded-xl px-2 py-3 sm:px-6 sm:py-4 text-xs sm:text-base font-black text-[#FFF7C2] sm:text-[#fff9ee] shadow-lg backdrop-blur-md border border-[#822e6a]/30 bg-[#5456d5]/20 sm:bg-[#5456d5]/10 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 sm:hover:bg-[#5456d5]/20 hover:shadow-[0_0_30px_rgba(130,46,106,0.3),0_0_60px_rgba(84,86,213,0.2)]"
+                    className="group relative overflow-hidden rounded-lg sm:rounded-xl px-1.5 py-2.5 sm:px-6 sm:py-4 text-[10px] sm:text-base font-black text-[#fff9ee] shadow-lg backdrop-blur-md border border-[#822e6a]/30 bg-gradient-to-br from-[#300c49] to-[#1e1e64] md:bg-none md:bg-[#5456d5]/10 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 md:hover:bg-[#5456d5]/20 hover:shadow-[0_0_30px_rgba(130,46,106,0.3),0_0_60px_rgba(84,86,213,0.2)]"
                     onClick={handleSmoothAnchor("#pricing")}
                   >
                     {/* Glass sheen */}
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-                    <span className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-center leading-tight">
+                    <span className="relative z-10 flex flex-row items-center justify-center gap-1 sm:gap-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-center leading-tight">
                       <span className="tracking-wider break-words">
                         ✨ SUSCRÍBETE AHORA
                       </span>
@@ -225,12 +225,12 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                     href="https://aftv.news/513053"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative overflow-hidden rounded-lg sm:rounded-xl px-2 py-3 sm:px-6 sm:py-4 text-xs sm:text-base font-black text-[#FFF7C2] sm:text-[#fff9ee] shadow-lg backdrop-blur-md border border-[#822e6a]/30 bg-[#5456d5]/20 sm:bg-[#5456d5]/10 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 sm:hover:bg-[#5456d5]/20 hover:shadow-[0_0_30px_rgba(130,46,106,0.3),0_0_60px_rgba(84,86,213,0.2)]"
+                    className="group relative overflow-hidden rounded-lg sm:rounded-xl px-1.5 py-2.5 sm:px-6 sm:py-4 text-[10px] sm:text-base font-black text-[#fff9ee] shadow-lg backdrop-blur-md border border-[#822e6a]/30 bg-gradient-to-br from-[#300c49] to-[#1e1e64] md:bg-none md:bg-[#5456d5]/10 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 md:hover:bg-[#5456d5]/20 hover:shadow-[0_0_30px_rgba(130,46,106,0.3),0_0_60px_rgba(84,86,213,0.2)]"
                   >
                     {/* Glass sheen */}
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-                    <span className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-center leading-tight">
+                    <span className="relative z-10 flex flex-row items-center justify-center gap-1 sm:gap-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] sm:drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-center leading-tight">
                       <span className="tracking-wider break-words">
                         📱 APP OFICIAL
                       </span>
@@ -255,10 +255,10 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                 <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   <a
                     href="#devices"
-                    className="group relative flex items-center justify-between rounded-lg border border-[#822e6a]/30 bg-[#5456d5]/20 sm:bg-[#5456d5]/10 backdrop-blur-md px-2 py-2 sm:px-4 sm:py-3 text-xs font-semibold text-[#FFF7C2] sm:text-[#fff9ee] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 sm:hover:bg-[#5456d5]/20 hover:shadow-[0_4px_20px_rgba(84,86,213,0.2)]"
+                    className="group relative flex items-center justify-between rounded-lg border border-[#822e6a]/30 bg-gradient-to-br from-[#300c49] to-[#1e1e64] md:bg-none md:bg-[#5456d5]/10 backdrop-blur-md px-1.5 py-2 sm:px-4 sm:py-3 text-[10px] font-semibold text-[#fff9ee] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 md:hover:bg-[#5456d5]/20 hover:shadow-[0_4px_20px_rgba(84,86,213,0.2)]"
                     onClick={handleSmoothAnchor("#devices")}
                   >
-                    <div className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
+                    <div className="flex items-center gap-2 w-full sm:w-auto justify-start">
                       <span className="inline-flex h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 items-center justify-center rounded-md bg-[#5456d5]/20 text-[#fff9ee] text-sm backdrop-blur-md border border-white/10">
                         <FaLaptop aria-hidden />
                       </span>
@@ -288,16 +288,19 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
 
                   <a
                     href="#downloads"
-                    className="group relative flex items-center justify-between rounded-lg border border-[#822e6a]/30 bg-[#5456d5]/20 sm:bg-[#5456d5]/10 backdrop-blur-md px-2 py-2 sm:px-4 sm:py-3 text-xs font-semibold text-[#FFF7C2] sm:text-[#fff9ee] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 sm:hover:bg-[#5456d5]/20 hover:shadow-[0_4px_20px_rgba(130,46,106,0.2)]"
+                    className="group relative flex items-center justify-between rounded-lg border border-[#822e6a]/30 bg-gradient-to-br from-[#300c49] to-[#1e1e64] md:bg-none md:bg-[#5456d5]/10 backdrop-blur-md px-1.5 py-2 sm:px-4 sm:py-3 text-[10px] font-semibold text-[#fff9ee] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:border-[#822e6a]/50 hover:bg-[#5456d5]/30 md:hover:bg-[#5456d5]/20 hover:shadow-[0_4px_20px_rgba(130,46,106,0.2)]"
                     onClick={handleSmoothAnchor("#downloads")}
                   >
-                    <div className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
+                    <div className="flex items-center gap-2 w-full sm:w-auto justify-start">
                       <span className="inline-flex h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 items-center justify-center rounded-md bg-[#822e6a]/20 text-[#fff9ee] text-sm backdrop-blur-md border border-white/10">
                         <FaDownload aria-hidden />
                       </span>
                       <div className="flex flex-col text-left min-w-0 flex-1 sm:flex-initial">
                         <span className="text-[10px] sm:text-sm leading-tight break-words sm:truncate">
-                          Descarga la app
+                          <span className="sm:hidden">Centro de Descargas</span>
+                          <span className="hidden sm:inline">
+                            Descarga la app
+                          </span>
                         </span>
                         <span className="text-[9px] sm:text-xs text-[#fff9ee]/80 hidden sm:block truncate">
                           Android, iOS, Windows, Tablets
