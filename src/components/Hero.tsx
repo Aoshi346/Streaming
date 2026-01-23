@@ -297,10 +297,7 @@ const Hero = forwardRef<HTMLElement>((_, ref) => {
                       </span>
                       <div className="flex flex-col text-left min-w-0 flex-1 sm:flex-initial">
                         <span className="text-[10px] sm:text-sm leading-tight break-words sm:truncate">
-                          <span className="sm:hidden">Centro de Descargas</span>
-                          <span className="hidden sm:inline">
-                            Descarga la app
-                          </span>
+                          Centro de Descargas
                         </span>
                         <span className="text-[9px] sm:text-xs text-[#fff9ee]/80 hidden sm:block truncate">
                           Android, iOS, Windows, Tablets
