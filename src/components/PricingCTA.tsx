@@ -2,12 +2,12 @@ import { forwardRef } from "react";
 import { FaCheck } from "react-icons/fa";
 
 // Payment method logos
-import zelleLogo from "../assets/images/Zelle_logo.png";
-import paypalLogo from "../assets/images/PayPal_logo.webp";
-import mastercardLogo from "../assets/images/mastercard_logo.svg";
-import binanceLogo from "../assets/images/binance-logo-hd.webp";
-import pipolPayLogo from "../assets/images/pipol_pay_logo.png";
-import facebankLogo from "../assets/images/facebank_logo.webp";
+import zelleLogo from "../assets/images/payments/Zelle_logo.png";
+import paypalLogo from "../assets/images/payments/PayPal_logo.webp";
+import mastercardLogo from "../assets/images/payments/mastercard_logo.svg";
+import binanceLogo from "../assets/images/payments/binance-logo-hd.webp";
+import pipolPayLogo from "../assets/images/payments/pipol_pay_logo.png";
+import facebankLogo from "../assets/images/payments/facebank_logo.webp";
 
 // Payment methods for the marquee with logo images
 const PAYMENT_METHODS = [

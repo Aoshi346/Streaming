@@ -10,8 +10,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaDownload, FaLaptop } from "react-icons/fa";
 import { smoothScrollTo } from "../utils/smoothScroll";
-import heroBackground from "../assets/images/hero_background.webp";
-import heroBackgroundMobile from "../assets/images/hero_background_mobile-min.webp";
+import heroBackground from "../assets/images/hero/hero_background.webp";
+import heroBackgroundMobile from "../assets/images/hero/hero_background_mobile-min.webp";
 
 // Movie poster imports for the cinematic reel
 import poster1 from "../assets/images/posters/poster1.webp";

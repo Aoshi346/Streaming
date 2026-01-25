@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // icons are replaced with brand logo
-import fullvisionLogo from "../assets/images/fullvision_logo_color.svg";
+import fullvisionLogo from "../assets/images/logos/fullvision_logo_color.svg";
 import FeatureCard, { FeatureVariant } from "./FeatureCard";
 
 gsap.registerPlugin(ScrollTrigger);

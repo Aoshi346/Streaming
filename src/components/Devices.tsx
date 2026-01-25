@@ -15,11 +15,11 @@ import {
   FaChromecast,
 } from "react-icons/fa";
 import { gsap } from "gsap";
-import mobileDevicePng from "../assets/images/phone_mockup_bg-landscape-min.webp";
-import tvDevicePng from "../assets/images/tv_mockup_bg-front-min.webp";
-import tabletDevicePng from "../assets/images/tablet_mockup-min.webp";
-import laptopDevicePng from "../assets/images/laptop_mockup_bg-front-min.webp";
-import firestickPng from "../assets/images/firestick.webp";
+import mobileDevicePng from "../assets/images/devices/phone_mockup_bg-landscape-min.webp";
+import tvDevicePng from "../assets/images/devices/tv_mockup_bg-front-min.webp";
+import tabletDevicePng from "../assets/images/devices/tablet_mockup-min.webp";
+import laptopDevicePng from "../assets/images/devices/laptop_mockup_bg-front-min.webp";
+import firestickPng from "../assets/images/devices/firestick.webp";
 
 type DeviceID = "tv" | "mobile" | "streaming" | "tablet" | "laptop";
 
