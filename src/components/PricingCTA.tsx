@@ -254,9 +254,7 @@ const PricingCTA = forwardRef<HTMLElement>((_, ref) => {
 
                 {/* CTA Button - Harmonized gradient with gloss effect */}
                 <a
-                  href={`https://wa.me/13434780258?text=${encodeURIComponent(
-                    `¡Hola! Escribo de fullvisiontv.com y estoy interesado en adquirir su plan *${p.title.toUpperCase()}* . Indiqueme las formas de pago`,
-                  )}`}
+                  href={`http://localhost:8000/checkout/?plan=${p.id}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="relative w-full group/btn overflow-hidden rounded-xl font-bold text-white py-2.5 sm:py-3 px-4 sm:px-6 transition-all duration-300 text-sm sm:text-base bg-gradient-to-r from-purple-600 to-indigo-600 hover:brightness-110 hover:scale-105 shadow-[0_4px_25px_-5px_rgba(124,58,237,0.5)] hover:shadow-[0_8px_35px_-5px_rgba(124,58,237,0.7)] ring-1 ring-white/20 ring-inset block text-center"
